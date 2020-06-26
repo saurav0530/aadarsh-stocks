@@ -1,0 +1,46 @@
+.form{
+    padding-left: 38.5%;
+}
+.form [type=email],.form [type=password]{
+    border : 3px solid black;
+    height : 1.8rem;
+    width : 26rem;
+    border-radius : 8px;
+    margin-bottom: 1em;
+    background-color: silver;
+}
+.form button{
+    position: relative;
+    left : 8%;
+    margin-top: 1em;
+    background-color: sienna;
+    border : 3px solid black;
+    border-radius : 8px;
+    height : 2.3rem;
+    width : 15rem;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: black;
+}
+.form h4{
+    position: relative;
+    left: 10.8%;
+    font-size: 1.5rem;
+}
+input[placeholder]{
+    font-weight: bolder;
+    padding-left: 2%;
+}
+.form input:active, button:active{
+    border : 3px dotted black;
+}
+.form input::invalid{
+    border : 3px dotted red;
+}
+.form input::valid{
+    border: 3px solid black;
+}
+.form select,.form label{
+    position:relative;
+    left: 4.6%
+}

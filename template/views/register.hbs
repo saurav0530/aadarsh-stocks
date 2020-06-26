@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/css/register_style.css">
+    <title>Aadarsh Stock</title>
+</head>
+<body>
+    
+    <section class = 'header'>
+        {{>header}}
+    </section>
+    <section class = "main-content">
+       <br><br><br><br><br><br>
+       <div class = "form">
+           <h4>SignUp Portal</h4>
+            <br><br><br><input type="text" class = "register-first-name" placeholder = "First Name" required>  <input type="text" class = "register-last-name" placeholder = "Last-Name" required>
+            <br><input type="tel" class = "register-mobile" placeholder="Mobile"required>
+            <br><input type="email" class = "register-email" name="email" id="email" placeholder="Email"required>
+            <br><input type="password" class = "register-password" placeholder="Password" required>  <input type="password" class = "register-confirm-password" placeholder="Confirm Password"required>
+            <br><button type="submit" class = "register-submit">Create Account</button>
+       </div>
+       
+
+        
+        
+        
+    </section>
+    <section class = "footer">
+        {{>footer}}
+    </section>
+
+
+    <script src='/build/bundle.js'></script>
+</body>
+</html>

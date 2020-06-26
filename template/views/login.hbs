@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/css/login_style.css">
+    <title>Aadarsh Stock</title>
+</head>
+<body>
+    
+    <section class = 'header'>
+        {{>header}}
+    </section>
+    <section class = "main-content">
+       <br><br><br><br><br><br><br><br><br>
+       <div class = "form">
+           <h4>Login Portal</h4><br><br>
+            <label for="choice">Select the type of login : </label>
+                <select name="choice" id="choice">
+                <option value="1">User</option>
+                <option value="2">Employee</option>
+
+        </select>
+
+
+
+
+               <!-- <input type="radio" name="choice" value="1" id = "user" class="userlogin">
+                <label for="user" class="userlogin">User</label>
+                <input type="radio" name="choice" value="2" id="employee" class="employeelogin">
+                <label for="employee" class="employeelogin">Administrator</label> -->
+                
+        <br><br><br>
+            <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername">
+            <br>
+            <input type="password" name ="password" placeholder="Password" class="loginPassword">
+            <br><button type="submit" class = "loginSubmit">Login</button>
+       </div>
+       
+        
+        
+        
+    </section>
+    <section class = "footer">
+        {{>footer}}
+    </section>
+    <script src='/build/bundle.js'></script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+input[placeholder]{
+    font-weight: bolder;
+    padding-left: 2%;
+}
+.form{
+    padding-left: 31.5%;
+}
+.form input{
+    border : 3px solid black;
+    height : 1.8rem;
+    width : 20rem;
+    border-radius : 8px;
+    margin-bottom: 1em;
+    background-color: silver;
+}
+.form button{
+    position: relative;
+    left : 17.5%;
+    margin-top: 1em;
+    background-color: sienna;
+    border : 3px solid black;
+    border-radius : 8px;
+    height : 2.3rem;
+    width : 15rem;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: black;
+}
+.form h4{
+    position: relative;
+    left: 19%;
+    font-size: 1.5rem;
+}
+input:active button:active{
+    border : 3px dotted black;
+}
+input::invalid{
+    border : 3px dotted red;
+}
+input::valid{
+    border: 3px solid black;
+}
+.signup-successful{
+    padding-left : 37%;
+    padding-top: 6%;
+}
+.signup-successful h4{
+    padding-left: 5.5%;
+    font-weight: bold;
+    font-size: 2rem;
+}
+.signup-successful strong{
+    font-size: 1.2rem;
+    position: relative;
+    top : 20%;
+}
+.signup-successful a{
+    margin-left: 14%;
+    font-weight: bold;
+    font-size: 1rem;
+}
