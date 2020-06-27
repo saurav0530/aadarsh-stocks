@@ -31,3 +31,9 @@ var html =
 
         </div>
 `
+
+
+document.querySelector('.stock-display .stock-display-items .cut').addEventListener('click', ()=>{
+    console.log( "Bye")
+    document.querySelector( '.stock-display-items' ).parentNode.removeChild(document.querySelector( '.stock-display-items' ))
+})

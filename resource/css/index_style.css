@@ -1,3 +1,7 @@
+*{
+    margin : 0;
+    padding : 0;
+}
 body{
     background-image: radial-gradient(white,rgba(17, 2, 2, 0.8));
     display : flex;
@@ -121,9 +125,9 @@ h4{
 }
 .main-content .authenticationBody .welcomeNote{
     position: relative;
-    top : 40%;
-    padding-left: 39.8%;
-    font-size: 1.5rem;
+    top : 10vh;
+    left : 35.2vw;
+    font-size: 2vw;
 }
 .main-content .authenticationBody a{
     color: blue;
@@ -133,6 +137,15 @@ h4{
     border-radius: 4px;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
-    top : 43%;
-    left: 45.4%;
+    top : 13vh;
+    left: 42.5vw;
+    font-size: 1vw;
 }
+/* select{
+    border : 2px solid black;
+    border-radius: 7px;
+    height : 2rem;
+    padding-left: 7%;
+    padding-right: 3%;
+    background-color: aliceblue;
+} */

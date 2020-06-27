@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "node src/app.js",
-    "construct": "webpack"
+    "construct": "webpack",
+    "style" : "nodemon src/app.js -e hbs,css"
   },
   "author": "Saurav Kumar",
   "license": "ISC",

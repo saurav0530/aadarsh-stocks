@@ -1,3 +1,11 @@
+.header select{
+    border : 2px solid black;
+    border-radius: 7px;
+    height : 2rem;
+    padding-left: 7%;
+    padding-right: 3%;
+    background-color: aliceblue;
+}
 .form{
     padding-left: 38.5%;
 }
@@ -43,4 +51,75 @@ input[placeholder]{
 .form select,.form label{
     position:relative;
     left: 4.6%
+}
+.form select{
+    border : 3px solid black;
+    height: 1.7rem;
+    width : auto;
+    border-radius:5px 
+}
+.stock-display-input input{
+    border : 3px solid black;
+    border-radius : 8px;
+    height : 2.3rem;
+    width : 14.18rem;
+    display: inline-block;
+    background-color: aqua;
+}
+.stock-display-input input[placeholder]{
+    font-weight: bolder;
+    padding-left: 1%;
+}
+.add-to-database,.add-row{
+    border : 3px solid black;
+    border-radius : 8px;
+    height : 2.3rem;
+    width : 14.33rem;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.add-to-database{
+    position: relative;
+    left: 43%;
+    width: 14%;
+}
+.add-row{
+    position: relative;
+    left: 43%;
+    width: 14%;
+}
+.stock-entry-date h4{
+    margin-left: 35%;
+}
+.stock-entry-date input{
+    border : 2px solid black;
+    border-radius: 4px;
+    height : 1.6rem;
+}
+.para1-stock{
+    margin-left: 26.6vw;
+    height: 20vh;
+    width: 20vw;
+    background-color: aqua;
+}
+.para2-stock{
+    height: 20vh;
+    width: 20vw;
+    background-color: aqua;
+    text-overflow: ellipsis;
+}
+.account-details{
+    padding-left: 32vw;
+    width : 38vw;
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-auto-rows: minmax(4vh,auto);
+}
+.account-details strong{
+    font-size: 2.5vh;
+}
+.account-details-header{
+    padding-left: 38vw;
+    font-size: 5vh;
+    text-decoration: underline;
 }
