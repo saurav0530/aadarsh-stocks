@@ -1,3 +1,8 @@
+input[placeholder]{
+    font-size: 2vh;
+    font-weight: bolder;
+    padding-left: 2vw;
+}
 .header select{
     border : 2px solid black;
     border-radius: 7px;
@@ -7,56 +12,60 @@
     background-color: aliceblue;
 }
 .form{
-    padding-left: 38.5%;
+    padding-left: 38vw;
 }
 .form [type=email],.form [type=password]{
     border : 3px solid black;
-    height : 1.8rem;
-    width : 26rem;
-    border-radius : 8px;
+    height : 5vh;
+    width : 20.9vw;
+    border-radius : 2vw;
     margin-bottom: 1em;
-    background-color: silver;
+    background-color: #f5f5dc;
 }
 .form button{
     position: relative;
-    left : 8%;
+    left : 5vw;
     margin-top: 1em;
-    background-color: sienna;
+    background-image: linear-gradient(yellow,red);
     border : 3px solid black;
-    border-radius : 8px;
-    height : 2.3rem;
-    width : 15rem;
+    border-radius : 2vw;
+    height : 5vh;
+    width : 12.1vw;
     font-weight: bolder;
     font-size: 1.2rem;
     color: black;
 }
 .form h4{
     position: relative;
-    left: 10.8%;
-    font-size: 1.5rem;
+    left: 5.7vw;
+    font-size: 1.6vw;
+    color: rgba(97, 5, 105, 1);;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-shadow: 0.1vw 0.1vh 01vh aqua;
 }
 input[placeholder]{
     font-weight: bolder;
     padding-left: 2%;
 }
-.form input:active, button:active{
-    border : 3px dotted black;
-}
-.form input::invalid{
-    border : 3px dotted red;
-}
-.form input::valid{
-    border: 3px solid black;
-}
 .form select,.form label{
     position:relative;
-    left: 4.6%
+    left: 0.71vw;
+}
+.form label{
+    font-size: 1vw;
+    font-family: arial;
+    font-weight: bold;
 }
 .form select{
     border : 3px solid black;
-    height: 1.7rem;
-    width : auto;
-    border-radius:5px 
+    height: 4vh;
+    border-radius : 2vw;
+    width : 9.3vw;
+    padding-left:1vw;
+    background-color: #f5f5dc;
+    font-size : 2vh;
+    font-weight:bold;
+    color : teal;
 }
 .stock-display-input input{
     border : 3px solid black;
@@ -82,19 +91,29 @@ input[placeholder]{
     position: relative;
     left: 43%;
     width: 14%;
+    background-image: linear-gradient(yellow,red);
+    border-radius : 1.5vw;
+    font-size : 1.1vw;
 }
 .add-row{
     position: relative;
     left: 43%;
     width: 14%;
+    background-image: linear-gradient(yellow,red);
+    border-radius : 1.5vw;
+    font-size : 1.1vw;
 }
 .stock-entry-date h4{
-    margin-left: 35%;
+    margin-left: 32vw;
+    font-size : 1.2vw;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .stock-entry-date input{
     border : 2px solid black;
-    border-radius: 4px;
-    height : 1.6rem;
+    border-radius: 2vw;
+    height : 3.2vh;
+    width:7vw;
+    padding-left:1.65vw;
 }
 .para1-stock{
     margin-left: 26.6vw;
@@ -123,3 +142,34 @@ input[placeholder]{
     font-size: 5vh;
     text-decoration: underline;
 }
+#loginChoice{
+    position: relative;
+    top : -0.9vh;
+    height : 4vh;
+    border-radius: 2vw;
+    font-weight :bold;
+    font-size:0.8vw;
+}
+input:active,select:focus{
+    border: 3px dashed black;
+    outline: 0;
+}
+.form input::invalid{
+    border : 3px dotted red;
+}
+/* input::selection{
+    outline-style: hidden;
+} */
+.data-added-successfully{
+    margin-left : 39vw;
+    position : relative;
+    top : 40vh;
+    font-size : 1.5vw;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.para1,.para2,.stock-display-items{
+    font-size : 1.1vw;
+}
+
+
+

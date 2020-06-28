@@ -1,26 +1,27 @@
 input[placeholder]{
+    font-size: 2vh;
     font-weight: bolder;
-    padding-left: 2%;
+    padding-left: 2vw;
 }
 .form{
-    padding-left: 31.5%;
+    margin-left: 38.5vw;
 }
 .form input{
     border : 3px solid black;
-    height : 1.8rem;
-    width : 20rem;
-    border-radius : 8px;
+    height : 5vh;
+    width : 20vw;
+    border-radius : 2vw;
     margin-bottom: 1em;
-    background-color: silver;
+    background-color: #f5f5dc;
 }
 .form button{
     position: relative;
-    left : 17.5%;
+    left : 4.6vw;
     margin-top: 1em;
-    background-color: sienna;
+    background-image: linear-gradient(yellow,red);
     border : 3px solid black;
-    border-radius : 8px;
-    height : 2.3rem;
+    border-radius : 2vw;
+    height : 5vh;
     width : 15rem;
     font-weight: bolder;
     font-size: 1.2rem;
@@ -28,8 +29,11 @@ input[placeholder]{
 }
 .form h4{
     position: relative;
-    left: 19%;
-    font-size: 1.5rem;
+    left: 5vw;
+    font-size: 1.8vw;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgba(97, 5, 105, 1);
+    text-shadow: 0.1vw 0.1vh 01vh aqua;
 }
 input:active button:active{
     border : 3px dotted black;

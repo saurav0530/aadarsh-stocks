@@ -56,7 +56,7 @@ var dataInputFunction = function() {
         <input type="search"  id="stock-input-remarks" placeholder = " Remarks ">
     </div>
     <br>
-    <button class = "add-row" style = "background-image : radial-gradient(aqua,sienna)">Add stock</button>
+    <button class = "add-row" >Add stock</button>
     <br><br>
     <div class = "stock-display">
         
@@ -74,7 +74,7 @@ var dataInputFunction = function() {
     <input type = "text" class = "para1-stock" placeholder="Para 1(required)" style = "padding-left : 2vw;border : 3px solid black;border-radius : 4px;"></textarea>
     <input type = "text" class = "para2-stock" placeholder="Para 2(required)" style = "padding-left : 2vw;border : 3px solid black;border-radius : 4px;"></textarea>
 
-    <br><br><button class = "add-to-database" style = "background-image : radial-gradient(aqua,sienna)">Add to Database</button><br><br>
+    <br><br><button class = "add-to-database" >Add to Database</button><br><br>
     `
     
     document.querySelector( '.main-content' ).innerHTML = ' '
@@ -93,7 +93,7 @@ var stockDisplayFunction = function( res ){
     var html = 
     `
     <div class = "stock-display-para">
-        <strong style="text-decoration: underline;">EDITOR'S NOTE :</strong>
+        <strong style="text-decoration: underline;font-size : 1.2vw;">EDITOR'S NOTE :</strong>
         <br><br><p class = "para1" style="text-align: justify;">1. ${res[0].para1}</p><br><br>
         <p class = "para1" style="text-align: justify;">2. ${res[0].para2}<p><br><br>
     </div>
