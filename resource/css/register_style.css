@@ -63,3 +63,7 @@ input::valid{
     font-weight: bold;
     font-size: 1rem;
 }
+input:focus,button:focus{
+    border : 3px dashed black;
+    outline : 0;
+}

@@ -71,8 +71,8 @@ var dataInputFunction = function() {
         <strong class = "stock-display-headers">Remarks</strong>
     </div><br><br>
 
-    <input type = "text" class = "para1-stock" placeholder="Para 1(required)" style = "padding-left : 2vw;border : 3px solid black;border-radius : 4px;"></textarea>
-    <input type = "text" class = "para2-stock" placeholder="Para 2(required)" style = "padding-left : 2vw;border : 3px solid black;border-radius : 4px;"></textarea>
+    <input type = "text" class = "para1-stock" placeholder="Para 1(required)" >
+    <input type = "text" class = "para2-stock" placeholder="Para 2(required)" >
 
     <br><br><button class = "add-to-database" >Add to Database</button><br><br>
     `
@@ -133,6 +133,27 @@ var stockDisplayFunction = function( res ){
     }
 }
 
+
+// 4. Clearing input fields
+
+var clearStockInputField = function (){
+    if( document.querySelector('#stock-input-stockName').value != undefined )
+        document.querySelector('#stock-input-stockName').textContent = ''
+    if( document.querySelector('#stock-input-stopLoss').value != undefined )
+        document.querySelector('#stock-input-stopLoss').textContent = ''
+    if( document.querySelector('#stock-input-target').value != undefined )
+        document.querySelector('#stock-input-target').textContent = ''
+    if( document.querySelector('#stock-input-buyAbove').value != undefined )
+        document.querySelector('#stock-input-buyAbove').textContent = ''
+    if( document.querySelector('#stock-input-currentPrice').value != undefined )
+        document.querySelector('#stock-input-currentPrice').textContent = ''
+    if( document.querySelector('#stock-input-recentHigh').value != undefined )
+        document.querySelector('#stock-input-recentHigh').textContent = ''
+    if( document.querySelector('#stock-input-recentLow').value != undefined )    
+        document.querySelector('#stock-input-recentLow').textContent = ''
+    if( document.querySelector('#stock-input-remarks').value != undefined )
+        document.querySelector('#stock-input-remarks').textContent = ''
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -210,6 +231,7 @@ export var adminLoginProcess = function ( data ){
                 `
                 document.querySelector( '.stock-display' ).insertAdjacentHTML("beforeend",html)
                 newStockData.push(temp)
+                clearStockInputField()
             })
             var addedStock = document.querySelector( '.add-to-database' ).addEventListener('click', ()=> {
                 var stockDate = newStockData[0].stockDate
@@ -225,6 +247,7 @@ export var adminLoginProcess = function ( data ){
                 }
                 serverData.stocksData.push( stock )
                 console.log( serverData.stocksData )
+                clearStockParaInput()
                 return stock
             })
             

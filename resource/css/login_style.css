@@ -4,18 +4,17 @@ input[placeholder]{
     padding-left: 2vw;
 }
 .header select{
-    border : 2px solid black;
+    border : 2px solid rgb(255, 225, 50);
     border-radius: 7px;
-    height : 2rem;
     padding-left: 7%;
     padding-right: 3%;
-    background-color: aliceblue;
+    background-color: antiquewhite;
 }
 .form{
     padding-left: 38vw;
 }
 .form [type=email],.form [type=password]{
-    border : 3px solid black;
+    border : 3px solid green;
     height : 5vh;
     width : 20.9vw;
     border-radius : 2vw;
@@ -27,7 +26,7 @@ input[placeholder]{
     left : 5vw;
     margin-top: 1em;
     background-image: linear-gradient(yellow,red);
-    border : 3px solid black;
+    border : 3px solid green;
     border-radius : 2vw;
     height : 5vh;
     width : 12.1vw;
@@ -57,7 +56,7 @@ input[placeholder]{
     font-weight: bold;
 }
 .form select{
-    border : 3px solid black;
+    border : 3px solid brown;
     height: 4vh;
     border-radius : 2vw;
     width : 9.3vw;
@@ -68,10 +67,10 @@ input[placeholder]{
     color : teal;
 }
 .stock-display-input input{
-    border : 3px solid black;
+    border : 3px solid brown;
     border-radius : 8px;
     height : 2.3rem;
-    width : 14.18rem;
+    width : 11.9vw;
     display: inline-block;
     background-color: aqua;
 }
@@ -80,7 +79,7 @@ input[placeholder]{
     padding-left: 1%;
 }
 .add-to-database,.add-row{
-    border : 3px solid black;
+    border : 3px solid brown;
     border-radius : 8px;
     height : 2.3rem;
     width : 14.33rem;
@@ -109,23 +108,23 @@ input[placeholder]{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .stock-entry-date input{
-    border : 2px solid black;
+    border : 3px solid rgb(119, 5, 5);
     border-radius: 2vw;
     height : 3.2vh;
     width:7vw;
     padding-left:1.65vw;
 }
-.para1-stock{
-    margin-left: 26.6vw;
-    height: 20vh;
-    width: 20vw;
-    background-color: aqua;
-}
-.para2-stock{
+.para1-stock,.para2-stock{
+    padding-left : 2vw;
+    border : 3px solid brown;
+    border-radius : 0.8vw;
     height: 20vh;
     width: 20vw;
     background-color: aqua;
     text-overflow: ellipsis;
+}
+.para1-stock{
+    margin-left: 26.6vw;
 }
 .account-details{
     padding-left: 32vw;
@@ -144,22 +143,12 @@ input[placeholder]{
 }
 #loginChoice{
     position: relative;
-    top : -0.9vh;
-    height : 4vh;
-    border-radius: 2vw;
+    top : -8.7px;
+    height : 38px;
+    border-radius: 19px;
     font-weight :bold;
     font-size:0.8vw;
 }
-input:active,select:focus{
-    border: 3px dashed black;
-    outline: 0;
-}
-.form input::invalid{
-    border : 3px dotted red;
-}
-/* input::selection{
-    outline-style: hidden;
-} */
 .data-added-successfully{
     margin-left : 39vw;
     position : relative;
@@ -169,6 +158,13 @@ input:active,select:focus{
 }
 .para1,.para2,.stock-display-items{
     font-size : 1.1vw;
+}
+input[placeholder]:focus,select:focus,button:focus{
+    border: 3px dashed green;
+    outline: 0;
+}
+input::invalid{
+    border : 3px dotted red;
 }
 
 
