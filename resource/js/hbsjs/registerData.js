@@ -41,5 +41,3 @@ var submitRegisterForm = function () {
 }
 
 export { registerClass,submitRegisterForm }
-
-console.log("registerData")

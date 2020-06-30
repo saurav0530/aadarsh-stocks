@@ -58,7 +58,7 @@ document.querySelector( '.loginSubmit').addEventListener('click',(event) => {
         }
     }
     else if( loginDataInput.userType === "2" ){
-        console.log(2)
+        // console.log(2)
         databaseUserData = serverData.adminList
         adminCheck = databaseUserData.filter( (data) =>  (loginDataInput.username === data.email)&&(loginDataInput.userPassword === data.password))
         if( adminCheck[0] !== undefined )

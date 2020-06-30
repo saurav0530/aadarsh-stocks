@@ -7,7 +7,7 @@ input[placeholder]{
     margin-left: 38.5vw;
 }
 .form input{
-    border : 3px solid black;
+    border : 3px solid brown;
     height : 5vh;
     width : 20vw;
     border-radius : 2vw;
@@ -19,10 +19,10 @@ input[placeholder]{
     left : 4.6vw;
     margin-top: 1em;
     background-image: linear-gradient(yellow,red);
-    border : 3px solid black;
+    border : 3px solid brown;
     border-radius : 2vw;
     height : 5vh;
-    width : 15rem;
+    width : 11.4vw;
     font-weight: bolder;
     font-size: 1.2rem;
     color: black;
@@ -35,14 +35,14 @@ input[placeholder]{
     color: rgba(97, 5, 105, 1);
     text-shadow: 0.1vw 0.1vh 01vh aqua;
 }
-input:active button:active{
-    border : 3px dotted black;
+input:active,button:active{
+    border : 3px dotted green;
 }
 input::invalid{
     border : 3px dotted red;
 }
 input::valid{
-    border: 3px solid black;
+    border: 3px solid brown;
 }
 .signup-successful{
     padding-left : 37%;
@@ -64,6 +64,6 @@ input::valid{
     font-size: 1rem;
 }
 input:focus,button:focus{
-    border : 3px dashed black;
+    border : 3px dashed brown;
     outline : 0;
 }

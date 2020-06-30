@@ -13,14 +13,37 @@ export var loginFunction = function() {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // *****************************************   CHILD-FUNCTIONS   *********************************************//
-// 1. Taking each row input from admin in daily stock data feed
-var stockDataInput = function(){
+
+// 1. Clearing input fields
+
+var clearStockInputField = function (){
+    if( document.querySelector('#stock-input-stockName').value != undefined )
+        document.querySelector('#stock-input-stockName').value = ''
+    if( document.querySelector('#stock-input-stopLoss').value != undefined )
+        document.querySelector('#stock-input-stopLoss').value = ''
+    if( document.querySelector('#stock-input-target').value != undefined )
+        document.querySelector('#stock-input-target').value = ''
+    if( document.querySelector('#stock-input-buyAbove').value != undefined )
+        document.querySelector('#stock-input-buyAbove').value = ''
+    if( document.querySelector('#stock-input-currentPrice').value != undefined )
+        document.querySelector('#stock-input-currentPrice').value = ''
+    if( document.querySelector('#stock-input-recentHigh').value != undefined )
+        document.querySelector('#stock-input-recentHigh').value = ''
+    if( document.querySelector('#stock-input-recentLow').value != undefined )    
+        document.querySelector('#stock-input-recentLow').value = ''
+    if( document.querySelector('#stock-input-remarks').value != undefined )
+        document.querySelector('#stock-input-remarks').value = ''
+}
+
+// 2. Taking each row input from admin in daily stock data feed
+var stockDataInput = function( id ){
     var stockDate,temp
     //document.querySelector('#stock-entry-date').addEventListener('change', () => {
     //    stockDate = 
     //})
-        
+           
     temp = {
+        id : id,
         stockDate : document.querySelector('#stock-entry-date').value,
         stockName : document.querySelector( '#stock-input-stockName ').value,
         buyAbove : document.querySelector( '#stock-input-buyAbove ').value,
@@ -32,10 +55,10 @@ var stockDataInput = function(){
         remarks : document.querySelector( '#stock-input-remarks ').value
     }
     
-
+    clearStockInputField()
     return temp
 }  
-// 2. Making Data Input Button in Admin login function
+// 3. Making Data Input Button in Admin login function
 var dataInputFunction = function() {
     var html = 
     `
@@ -80,7 +103,7 @@ var dataInputFunction = function() {
     document.querySelector( '.main-content' ).innerHTML = ' '
     document.querySelector( '.main-content' ).insertAdjacentHTML( 'afterbegin',html )
 }
-// 3. Stock display function
+// 4. Stock display function
 var stockDisplayFunction = function( res ){
     var para = document.querySelector( '.stock-display-para' )
     var stockdisplay = document.querySelector( '.stock-display' )
@@ -93,7 +116,7 @@ var stockDisplayFunction = function( res ){
     var html = 
     `
     <div class = "stock-display-para">
-        <strong style="text-decoration: underline;font-size : 1.2vw;">EDITOR'S NOTE :</strong>
+        <strong style="text-decoration: underline;font-size : 1.2vw;text-shadow: 0.1vw 0.1vh 01vh aqua;">EDITOR'S NOTE :</strong>
         <br><br><p class = "para1" style="text-align: justify;">1. ${res[0].para1}</p><br><br>
         <p class = "para1" style="text-align: justify;">2. ${res[0].para2}<p><br><br>
     </div>
@@ -133,28 +156,59 @@ var stockDisplayFunction = function( res ){
     }
 }
 
-
-// 4. Clearing input fields
-
-var clearStockInputField = function (){
-    if( document.querySelector('#stock-input-stockName').value != undefined )
-        document.querySelector('#stock-input-stockName').textContent = ''
-    if( document.querySelector('#stock-input-stopLoss').value != undefined )
-        document.querySelector('#stock-input-stopLoss').textContent = ''
-    if( document.querySelector('#stock-input-target').value != undefined )
-        document.querySelector('#stock-input-target').textContent = ''
-    if( document.querySelector('#stock-input-buyAbove').value != undefined )
-        document.querySelector('#stock-input-buyAbove').textContent = ''
-    if( document.querySelector('#stock-input-currentPrice').value != undefined )
-        document.querySelector('#stock-input-currentPrice').textContent = ''
-    if( document.querySelector('#stock-input-recentHigh').value != undefined )
-        document.querySelector('#stock-input-recentHigh').textContent = ''
-    if( document.querySelector('#stock-input-recentLow').value != undefined )    
-        document.querySelector('#stock-input-recentLow').textContent = ''
-    if( document.querySelector('#stock-input-remarks').value != undefined )
-        document.querySelector('#stock-input-remarks').textContent = ''
+// 5. Making delete icon work
+var deleteButton = function( event,newStockData ){
+    var ele = event.target.className.split(' ')[1]
+    var selector = document.querySelector(`.${ele}`)
+    var stockIndex = ele.split('w')[1],index
+    console.log(ele,selector,stockIndex)
+    while( selector != undefined ){
+            selector.parentNode.removeChild(selector)
+            selector = document.querySelector( `.${ele}` )
+    }
+    for( var i=0; i<newStockData.length;i++ )
+    {
+        if(newStockData[i].id == stockIndex)
+            index = i
+    }
+    newStockData.splice(index,1)
+    console.log(newStockData)
+    console.log(serverData.stocksData)
 }
+// 6. newStockData Initializer
+var initializeNewStockData = function ( changedDate ){
+    var temp = serverData.stocksData, store
+    if( temp.length == 0)
+        return []
+    else{
 
+        for( var i=0; i<temp.length ;i++ ){
+        if( temp[i].stockDate == changedDate ){
+            store = temp[i].stockData
+            console.log(serverData.stocksData.splice(i,1))
+        }
+        }
+        for( var i=0; i<store.length ;i++ ){
+            var length = store[i].id
+            var html = 
+                    `
+                    <h8 class = "stock-display-items row${length}">${store[i].stockName}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].buyAbove}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].target}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].stopLoss}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].currentPrice}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].recentHigh}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].recentLow}</h8>
+                    <h8 class = "stock-display-items row${length}">${store[i].remarks}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
+                    `
+            document.querySelector('.stock-display').insertAdjacentHTML("beforeend",html)
+        }
+        console.log(temp)
+        return store
+    }
+    
+    
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //1. Admin Login Function
@@ -213,11 +267,23 @@ export var adminLoginProcess = function ( data ){
 
         }
         else if( choice == 3){
-            var newStockData=[]
+            var newStockData
             dataInputFunction()
+            document.querySelector( '.stock-entry-date').addEventListener('change',() => {
+                var changedDate = document.querySelector( '#stock-entry-date').value
+                newStockData = initializeNewStockData( changedDate )
+                 
+                console.log(newStockData)
+            })
             document.querySelector( '.add-row' ).addEventListener('click', ()=> {
-                var temp = stockDataInput()
-                var length = newStockData.length
+                var id    
+                if( newStockData.length == 0 )
+                    id = 0
+                else 
+                    id = newStockData[newStockData.length -1].id 
+
+                var temp = stockDataInput( id+1 )
+                var length = temp.id
                 var html = 
                 `
                 <h8 class = "stock-display-items row${length}">${temp.stockName}</h8>
@@ -227,12 +293,19 @@ export var adminLoginProcess = function ( data ){
                 <h8 class = "stock-display-items row${length}">${temp.currentPrice}</h8>
                 <h8 class = "stock-display-items row${length}">${temp.recentHigh}</h8>
                 <h8 class = "stock-display-items row${length}">${temp.recentLow}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.remarks}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "row${length}"></h8>
+                <h8 class = "stock-display-items row${length}">${temp.remarks}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
                 `
                 document.querySelector( '.stock-display' ).insertAdjacentHTML("beforeend",html)
                 newStockData.push(temp)
-                clearStockInputField()
+                console.log( newStockData )
             })
+            
+            document.querySelector( '.stock-display' ).addEventListener( 'click', (event) => {
+                deleteButton( event,newStockData )
+            })
+                         
+
+
             var addedStock = document.querySelector( '.add-to-database' ).addEventListener('click', ()=> {
                 var stockDate = newStockData[0].stockDate
                 var para1 = document.querySelector('.para1-stock').value
@@ -247,7 +320,6 @@ export var adminLoginProcess = function ( data ){
                 }
                 serverData.stocksData.push( stock )
                 console.log( serverData.stocksData )
-                clearStockParaInput()
                 return stock
             })
             
