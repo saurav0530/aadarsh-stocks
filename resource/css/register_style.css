@@ -1,28 +1,31 @@
 input[placeholder]{
-    font-size: 2vh;
+    font-size: 20px;
     font-weight: bolder;
-    padding-left: 2vw;
+    padding-left: 30px;
 }
 .form{
-    margin-left: 38.5vw;
+    width : 400px;
+    margin: auto;
+    position:relative;
+    top : 6.5rem;
 }
 .form input{
     border : 3px solid brown;
-    height : 5vh;
-    width : 20vw;
-    border-radius : 2vw;
+    height : 42px;
+    width : 394px;
+    border-radius : 21px;
     margin-bottom: 1em;
     background-color: #f5f5dc;
 }
 .form button{
     position: relative;
-    left : 4.6vw;
+    left : 110px;
     margin-top: 1em;
     background-image: linear-gradient(yellow,red);
     border : 3px solid brown;
-    border-radius : 2vw;
-    height : 5vh;
-    width : 11.4vw;
+    border-radius : 21px;
+    height : 42px;
+    width : 200px;
     font-weight: bolder;
     font-size: 1.2rem;
     color: black;
