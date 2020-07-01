@@ -305,6 +305,8 @@ export var adminLoginProcess = function ( data ){
                     document.querySelector('.add-to-database').addEventListener('click', ()=>{
                         var tempStockData = {
                             stockDate : changedDate,
+                            para1 : document.querySelector('.para1-stock').value,
+                            para2 : document.querySelector('.para2-stock').value,
                             stockData : newStockData
                         }
                         serverData.stocksData.push(tempStockData)
@@ -349,6 +351,8 @@ export var adminLoginProcess = function ( data ){
                     document.querySelector('.add-to-database').addEventListener('click', ()=>{
                         var tempStockData = {
                             stockDate : changedDate,
+                            para1 : document.querySelector('.para1-stock').value,
+                            para2 : document.querySelector('.para2-stock').value,
                             stockData : newStockData
                         }
                         serverData.stocksData[updateChoice.index] = tempStockData
