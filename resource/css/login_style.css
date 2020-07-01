@@ -15,21 +15,21 @@ input[placeholder]{
 }
 .form [type=email],.form [type=password]{
     border : 3px solid green;
-    height : 5vh;
-    width : 20.9vw;
-    border-radius : 2vw;
+    height : 42px;
+    width : 394px;
+    border-radius : 21px;
     margin-bottom: 1em;
     background-color: #f5f5dc;
 }
 .form button{
     position: relative;
-    left : 5vw;
-    margin-top: 1em;
+    left : 5.9vw;
+    margin-top: 4px;
     background-image: linear-gradient(yellow,red);
     border : 3px solid green;
-    border-radius : 2vw;
-    height : 5vh;
-    width : 12.1vw;
+    border-radius : 21px;
+    height : 42px;
+    width : 200px;
     font-weight: bolder;
     font-size: 1.2rem;
     color: black;

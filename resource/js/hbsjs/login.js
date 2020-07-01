@@ -1,15 +1,17 @@
 import * as serverData from '../data'
 export var loginFunction = function() {
-
-    var e = document.querySelector( '#choice' )
-    var loginUserType = e.value
-    var loginUsernameInput = document.querySelector( '.loginUsername' ).value 
-    var loginPasswordInput = document.querySelector( '.loginPassword' ).value
-    return {
-        username : loginUsernameInput,
-        userType : loginUserType,
-        userPassword : loginPasswordInput
+    if(document.querySelector('.form')!= null){
+        var e = document.querySelector( '#choice' )
+        var loginUserType = e.value
+        var loginUsernameInput = document.querySelector( '.loginUsername' ).value 
+        var loginPasswordInput = document.querySelector( '.loginPassword' ).value
+        return {
+            username : loginUsernameInput,
+            userType : loginUserType,
+            userPassword : loginPasswordInput
+        }
     }
+    
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // *****************************************   CHILD-FUNCTIONS   *********************************************//
@@ -35,12 +37,24 @@ var clearStockInputField = function (){
         document.querySelector('#stock-input-remarks').value = ''
 }
 
-// 2. Taking each row input from admin in daily stock data feed
+// 2. Input data to be displayed in a row
+var printInputData = function ( temp,length ){
+    var html = 
+                `
+                <h8 class = "stock-display-items row${length}">${temp.stockName}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.buyAbove}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.target}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.stopLoss}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.currentPrice}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.recentHigh}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.recentLow}</h8>
+                <h8 class = "stock-display-items row${length}">${temp.remarks}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
+                `
+                document.querySelector( '.stock-display' ).insertAdjacentHTML("beforeend",html)
+}
+// 3. Taking each row input from admin in daily stock data feed
 var stockDataInput = function( id ){
     var stockDate,temp
-    //document.querySelector('#stock-entry-date').addEventListener('change', () => {
-    //    stockDate = 
-    //})
            
     temp = {
         id : id,
@@ -54,12 +68,12 @@ var stockDataInput = function( id ){
         recentLow : document.querySelector( '#stock-input-recentLow ').value,
         remarks : document.querySelector( '#stock-input-remarks ').value
     }
-    
+    printInputData(temp,temp.id)
     clearStockInputField()
     return temp
 }  
-// 3. Making Data Input Button in Admin login function
-var dataInputFunction = function() {
+// 4. Making Data Input Button in Admin login function
+var dataInputPlatform = function() {
     var html = 
     `
     <br><br><br><br>
@@ -103,7 +117,7 @@ var dataInputFunction = function() {
     document.querySelector( '.main-content' ).innerHTML = ' '
     document.querySelector( '.main-content' ).insertAdjacentHTML( 'afterbegin',html )
 }
-// 4. Stock display function
+// 5. Stock display function
 var stockDisplayFunction = function( res ){
     var para = document.querySelector( '.stock-display-para' )
     var stockdisplay = document.querySelector( '.stock-display' )
@@ -156,58 +170,46 @@ var stockDisplayFunction = function( res ){
     }
 }
 
-// 5. Making delete icon work
-var deleteButton = function( event,newStockData ){
-    var ele = event.target.className.split(' ')[1]
-    var selector = document.querySelector(`.${ele}`)
-    var stockIndex = ele.split('w')[1],index
-    console.log(ele,selector,stockIndex)
+// 6. Making delete icon work
+var deleteButton = function( id,tempData ){
+    var selector = document.querySelector(`.row${id}`)
     while( selector != undefined ){
             selector.parentNode.removeChild(selector)
-            selector = document.querySelector( `.${ele}` )
+            selector = document.querySelector( `.row${id}` )
     }
-    for( var i=0; i<newStockData.length;i++ )
-    {
-        if(newStockData[i].id == stockIndex)
-            index = i
+    for( var i=0;i<tempData.length;i++){
+        if( tempData[i].id == id )
+            return i
     }
-    newStockData.splice(index,1)
-    console.log(newStockData)
-    console.log(serverData.stocksData)
 }
-// 6. newStockData Initializer
-var initializeNewStockData = function ( changedDate ){
-    var temp = serverData.stocksData, store
-    if( temp.length == 0)
-        return []
-    else{
+// 7. Adding new stock to database
+var addStockDataToDatabase = function ( changedDate ){
+   
+}
+// 8. Update the existing data
+var updateExistingStock = function(){
 
-        for( var i=0; i<temp.length ;i++ ){
-        if( temp[i].stockDate == changedDate ){
-            store = temp[i].stockData
-            console.log(serverData.stocksData.splice(i,1))
+}
+// 9. Check whether to update or add stock
+var checkUpdateorAddStock = function( entryDate ){
+    var tempServerData = serverData.stocksData
+    if( tempServerData.length == 0 )
+        return -10
+    else{
+        var stocksDataLength = tempServerData.length,test = 0
+        for( var i=0; i<stocksDataLength ; i++ ){
+            if( entryDate == tempServerData[i].stockDate ){
+                test++
+                return {
+                    index : i
+                }
+            }
         }
-        }
-        for( var i=0; i<store.length ;i++ ){
-            var length = store[i].id
-            var html = 
-                    `
-                    <h8 class = "stock-display-items row${length}">${store[i].stockName}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].buyAbove}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].target}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].stopLoss}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].currentPrice}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].recentHigh}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].recentLow}</h8>
-                    <h8 class = "stock-display-items row${length}">${store[i].remarks}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
-                    `
-            document.querySelector('.stock-display').insertAdjacentHTML("beforeend",html)
-        }
-        console.log(temp)
-        return store
+        if(test == 0)
+            return -10
     }
     
-    
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,7 +219,6 @@ export var adminLoginProcess = function ( data ){
     var el = document.querySelector( '.error' )
     if(el)
         el.parentElement.removeChild(el);
-    console.log(" Login successfull ! ")
 
     var html = 
     `<select name="loginChoice" id="loginChoice">
@@ -246,7 +247,6 @@ export var adminLoginProcess = function ( data ){
 
     document.querySelector( '#loginChoice' ).addEventListener('change', () => {
         var choice = document.querySelector( '#loginChoice' ).value
-        console.log(choice)
         if( choice == 2 ){
             document.querySelector( '.main-content' ).innerHTML = ' '
             var html2 =
@@ -267,61 +267,99 @@ export var adminLoginProcess = function ( data ){
 
         }
         else if( choice == 3){
-            var newStockData
-            dataInputFunction()
-            document.querySelector( '.stock-entry-date').addEventListener('change',() => {
-                var changedDate = document.querySelector( '#stock-entry-date').value
-                newStockData = initializeNewStockData( changedDate )
-                 
-                console.log(newStockData)
-            })
-            document.querySelector( '.add-row' ).addEventListener('click', ()=> {
-                var id    
-                if( newStockData.length == 0 )
-                    id = 0
-                else 
-                    id = newStockData[newStockData.length -1].id 
-
-                var temp = stockDataInput( id+1 )
-                var length = temp.id
-                var html = 
-                `
-                <h8 class = "stock-display-items row${length}">${temp.stockName}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.buyAbove}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.target}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.stopLoss}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.currentPrice}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.recentHigh}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.recentLow}</h8>
-                <h8 class = "stock-display-items row${length}">${temp.remarks}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
-                `
-                document.querySelector( '.stock-display' ).insertAdjacentHTML("beforeend",html)
-                newStockData.push(temp)
-                console.log( newStockData )
-            })
-            
-            document.querySelector( '.stock-display' ).addEventListener( 'click', (event) => {
-                deleteButton( event,newStockData )
-            })
-                         
-
-
-            var addedStock = document.querySelector( '.add-to-database' ).addEventListener('click', ()=> {
-                var stockDate = newStockData[0].stockDate
-                var para1 = document.querySelector('.para1-stock').value
-                var para2 = document.querySelector('.para2-stock').value
-                document.querySelector( '.main-content' ).innerHTML= ' '
-                document.querySelector( '.main-content' ).insertAdjacentHTML('afterbegin',`<strong class = "data-added-successfully">Stock Data added successfully !<strong>`)
-                var stock = {
-                    stockDate : stockDate,
-                    stockData : newStockData,
-                    para1 : para1,
-                    para2 : para2
+            dataInputPlatform()
+            document.querySelector( '#stock-entry-date' ).addEventListener( 'change' ,()=>{
+                var changedDate = document.querySelector('#stock-entry-date').value
+                var updateChoice = checkUpdateorAddStock( changedDate ),id
+                if( updateChoice == -10 )
+                {
+                    var newStockData = []
+                    // Click and keypress for adding row 
+                    document.querySelector('.add-row').addEventListener('click', () =>{
+                        if(newStockData.length == 0)
+                            id = 0;
+                        else
+                            id = newStockData[newStockData.length - 1].id
+                        var tempRow = stockDataInput(id+1)
+                        newStockData.push(tempRow)
+                    })
+                    window.addEventListener('keypress', (event) =>{
+                        if(event.keyCode == 13 || event.which == 13){
+                            if(newStockData.length == 0)
+                                id = 0;
+                            else
+                                id = newStockData[newStockData.length - 1].id
+                            var tempRow = stockDataInput(id+1)
+                            newStockData.push(tempRow)
+                        }
+                        
+                    })
+                    // Delete button
+                    document.querySelector('.stock-display').addEventListener('click', (event)=>{
+                        var delID = event.target.className.split(' ')[1].split('w')[1]
+                        var eleIndex = deleteButton( delID,newStockData )
+                        newStockData.splice(eleIndex,1)
+                        console.log(newStockData) 
+                    })
+                    // Click for add data to database
+                    document.querySelector('.add-to-database').addEventListener('click', ()=>{
+                        var tempStockData = {
+                            stockDate : changedDate,
+                            stockData : newStockData
+                        }
+                        serverData.stocksData.push(tempStockData)
+                        console.log(serverData.stocksData)
+                        document.querySelector( '.main-content' ).innerHTML= ' '
+                        document.querySelector( '.main-content' ).insertAdjacentHTML('afterbegin',`<strong class = "data-added-successfully">Stock Data added successfully !<strong>`)
+                    })
                 }
-                serverData.stocksData.push( stock )
-                console.log( serverData.stocksData )
-                return stock
+                else{
+                    var newStockData = serverData.stocksData[updateChoice.index].stockData
+                    for( var i=0;i<newStockData.length;i++){
+                        printInputData( newStockData[i],newStockData[i].id )
+                    }
+                    // Click and keypress for adding row 
+                    document.querySelector('.add-row').addEventListener('click', () =>{
+                        if(newStockData.length == 0)
+                            id = 0;
+                        else
+                            id = newStockData[newStockData.length - 1].id
+                        var tempRow = stockDataInput(id+1)
+                        newStockData.push(tempRow)
+                    })
+                    window.addEventListener('keypress', (event) =>{
+                        if(event.keyCode == 13 || event.which == 13){
+                            if(newStockData.length == 0)
+                                id = 0;
+                            else
+                                id = newStockData[newStockData.length - 1].id
+                            var tempRow = stockDataInput(id+1)
+                            newStockData.push(tempRow)
+                        }
+                        
+                    })
+                    // Delete button
+                    document.querySelector('.stock-display').addEventListener('click', (event)=>{
+                        var delID = event.target.className.split(' ')[1].split('w')[1]
+                        var eleIndex = deleteButton( delID,newStockData )
+                        newStockData.splice(eleIndex,1)
+                        console.log(newStockData) 
+                    })
+                    // Click for add data to database
+                    document.querySelector('.add-to-database').addEventListener('click', ()=>{
+                        var tempStockData = {
+                            stockDate : changedDate,
+                            stockData : newStockData
+                        }
+                        serverData.stocksData[updateChoice.index] = tempStockData
+                        console.log(serverData.stocksData)
+                        document.querySelector( '.main-content' ).innerHTML= ' '
+                        document.querySelector( '.main-content' ).insertAdjacentHTML('afterbegin',`<strong class = "data-added-successfully">Stock Data added successfully !<strong>`)
+                    })
+                }
+               
             })
+
             
         }
         else if( choice == 4 )
@@ -403,7 +441,20 @@ export var userLoginProcess = function ( data ){
             })
         }
         else if( choice == 3 ){
-
+            document.querySelector( '.main-content' ).innerHTML = ' '
+            var html =
+            `<br><br><br><br><br>
+            <h6 class ="account-details-header">Account Details<h6>
+            <br><br><br><br><br><br><br><br>
+            <div class = "account-details">
+            <strong> Name </strong><strong>: ${data.name} </strong>
+            <strong> Mobile </strong><strong>: ${data.mobile}</strong>
+            <strong> E-mail </strong><strong>: ${data.email}</strong>
+            <strong> Password </strong><strong>: ${data.password}</strong>
+            <strong> User-Type </strong><strong>: Data-user</strong>
+            </div>
+            ` 
+            document.querySelector( '.main-content' ).insertAdjacentHTML( 'beforeend',html )
         }
         if( choice == 4 )
         {
