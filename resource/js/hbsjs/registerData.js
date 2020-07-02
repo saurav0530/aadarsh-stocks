@@ -20,12 +20,15 @@ var submitRegisterForm = function () {
         if( data.password === data.confirmPassword)
         {
             document.querySelector( '.main-content' ).innerHTML = ' ';
-            var html = `<div class= "signup-successful"><h4>SignUp Successful</h4>
-                        <br><strong>Name : ${data.name}</strong>
-                        <br><strong>E-mail    : ${data.email}</strong>
-                        <br><strong>Mobile    : ${data.mobile}</strong>
-                        <br><br><br><p>Congrats! You have successfully registered.</p>
-                        <br><br><a href = "/login">Go to login page<a></div>`
+            var html = `<div class = "successInfoh4">
+                        <h4>SignUp Successful</h4><br><br><br></div>
+                        <div class= "signup-successful">
+                        <strong>Name      </strong><strong>: ${data.name}  </strong>
+                        <strong>E-mail    </strong><strong>: ${data.email} </strong>
+                        <strong>Mobile    </strong><strong>: ${data.mobile}</strong></div>
+                        <div class = "successInfo">
+                        <br><br><br><br><p>Congrats! You have successfully registered.</p>
+                        <br><br><a href = "/login">Go to login<a></div>`
             
             document.querySelector( '.main-content' ).insertAdjacentHTML('afterbegin',html)
             return data

@@ -128,7 +128,7 @@ var stockDisplayFunction = function( res ){
     }
     if( res.length != 0 ){
     var html = 
-    `
+    `<br><br><br>
     <div class = "stock-display-para">
         <strong style="text-decoration: underline;font-size : 1.2vw;text-shadow: 0.1vw 0.1vh 01vh aqua;">EDITOR'S NOTE :</strong>
         <br><br><p class = "para1" style="text-align: justify;">1. ${res[0].para1}</p><br><br>
@@ -233,7 +233,7 @@ export var adminLoginProcess = function ( data ){
     
     document.querySelector( '.main-content' ).innerHTML = ' '
             var html2 =
-                `<div class = 'stock-view-date'>
+                `<br><br><div class = 'stock-view-date'>
                     <h4>Select date for viewing past stock suggestions : </h4>
                     <input type="date" name="stock-view-date" id="stock-view-date">
                 </div>
@@ -250,7 +250,7 @@ export var adminLoginProcess = function ( data ){
         if( choice == 2 ){
             document.querySelector( '.main-content' ).innerHTML = ' '
             var html2 =
-                `<div class = 'stock-view-date'>
+                `<br><br><div class = 'stock-view-date'>
                     <h4>Select date for viewing past stock suggestions : </h4>
                     <input type="date" name="stock-view-date" id="stock-view-date">
                 </div>
