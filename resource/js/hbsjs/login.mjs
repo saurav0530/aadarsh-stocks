@@ -1,4 +1,4 @@
-import * as serverData from '../data'
+import * as serverData from '../data.mjs'
 export var loginFunction = function() {
     if(document.querySelector('.form')!= null){
         var e = document.querySelector( '#choice' )

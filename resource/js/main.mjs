@@ -1,6 +1,6 @@
-import * as register from './hbsjs/registerData'
-import * as serverData from './data'
-import * as adminLoginData from './hbsjs/login'
+import * as register from './hbsjs/registerData.mjs'
+import * as serverData from './data.mjs'
+import * as adminLoginData from './hbsjs/login.mjs'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

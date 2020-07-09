@@ -114,7 +114,7 @@ input[placeholder]{
     border-radius: 17.5px;
     height : 35px;
     width : 150px;
-    padding-left: calc((100% - 830px)/2);
+    padding-left: 60px;
 }
 .para1-stock,.para2-stock{
     border : 3px solid brown;
