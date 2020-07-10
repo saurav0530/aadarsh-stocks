@@ -14,26 +14,19 @@
        <br><br><br><br><br><br><br><br><br>
        <div class = "form">
            <h4>Login Portal</h4><br><br><br>
-            <label for="choice">Select the type of login : </label>
+            <form action="/login" method="post">
+                <label for="choice">Select the type of login : </label>
                 <select name="choice" id="choice">
                 <option value="1">User</option>
                 <option value="2">Administrator</option>
-
-        </select>
-
-
-
-
-               <!-- <input type="radio" name="choice" value="1" id = "user" class="userlogin">
-                <label for="user" class="userlogin">User</label>
-                <input type="radio" name="choice" value="2" id="employee" class="employeelogin">
-                <label for="employee" class="employeelogin">Administrator</label> -->
-                
-        <br><br>
-            <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername">
-            <br>
-            <input type="password" name ="password" placeholder="Password" class="loginPassword">
-            <br><button type="submit" class = "loginSubmit">Login</button>
+                </select>                
+                <br><br>
+                <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername"><br>
+                <input type="password" name ="password" placeholder="Password" class="loginPassword"><br>
+                <button type="submit" class = "loginSubmit">Login</button>
+            </form>
+            <br><br>
+            <strong class="message" style = "color :red;">{{message}}</strong>
        </div>
        
         

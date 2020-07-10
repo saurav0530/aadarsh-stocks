@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/css/login_style.css">
+    <title>Aadarsh-Stocks</title>
+</head>
+<body>
+    <section class="header">
+        <strong class="title"><a href="/">AADARSH-STOCKS</a></strong>
+        <strong class = "authentication">
+            <form action="/login/home" method="post">
+                <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
+                    <option value="1">Welcome, {{user.firstName}}</option>
+                    <option value="2"><a href="/register">Stock Data</a></option>
+                    <option value="3">Data Input</option>
+                    <option value="4">Account Details</option>
+                    <option value="5"><strong class="logout">Logout<strong></option>
+                </select>
+            </form>
+        </strong>
+    </section>
+    
+    
+    <section class="main-content">
+            <br><br><br><br>
+            <div class = 'stock-entry-date'>
+                <form action="/login/dataInput" method="post">
+                    <h4>Select date corresponding to stock data entry : </h4>
+                    <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()">
+                </form>
+            </div>
+            <br><br>
+            <form action="/login/dataInput" method="post">
+                <div class = "stock-display-input" >
+                    <input type="search" name = "stockName" id="stock-input-stockName" placeholder = " Stock-name ">
+                    <input type="search" name = "buyAbove" id="stock-input-buyAbove" placeholder = " Buy above ">
+                    <input type="search" name = "target" id="stock-input-target" placeholder = " Target ">
+                    <input type="search" name = "stopLoss" id="stock-input-stopLoss" placeholder = " Stop Loss ">
+                    <input type="search" name = "currentPrice" id="stock-input-currentPrice" placeholder = " Current Price ">
+                    <input type="search" name = "recentHigh" id="stock-input-recentHigh" placeholder = " Recent High ">
+                    <input type="search" name = "recentLow" id="stock-input-recentLow" placeholder = " Recent Low ">
+                    <input type="search" name = "remarks" id="stock-input-remarks" placeholder = " Remarks ">
+                </div>
+                    <br><button class = "add-row" >Add stock</button>
+            </form>
+            <br><br>
+            <div class = "stock-display">
+                
+                
+                <strong class = "stock-display-headers">Stock Name</strong>
+                <strong class = "stock-display-headers">Buy above</strong>
+                <strong class = "stock-display-headers">Target</strong>
+                <strong class = "stock-display-headers">Stop Loss</strong>
+                <strong class = "stock-display-headers">Current Price</strong>
+                <strong class = "stock-display-headers">Recent High</strong>
+                <strong class = "stock-display-headers">Recent Low</strong>
+                <strong class = "stock-display-headers">Remarks</strong>
+            </div><br><br>
+
+            <input type = "text" class = "para1-stock" placeholder="Para 1(required)" >
+            <input type = "text" class = "para2-stock" placeholder="Para 2(required)" >
+
+            <br><br><button class = "add-to-database" >Add to Database</button><br><br>
+    </section>
+
+
+    <section class="footer">
+        {{>footer}}
+    </section>
+    
+</body>
+</html>

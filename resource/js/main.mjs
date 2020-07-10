@@ -1,4 +1,4 @@
-import * as register from './hbsjs/registerData.mjs'
+import * as register from './hbsjs/register.mjs'
 import * as serverData from './data.mjs'
 import * as adminLoginData from './hbsjs/login.mjs'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

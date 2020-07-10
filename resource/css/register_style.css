@@ -86,3 +86,11 @@ input:focus,button:focus{
     border : 3px dashed brown;
     outline : 0;
 }
+.message{
+    font-size : 20px;
+    margin-left : calc((100% - 180px)/2);
+}
+.messageLink{
+    font-size : 17px;
+    margin-left : calc((100% - 60px)/2)
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/css/login_style.css">
+    <title>Aadarsh-Stocks</title>
+</head>
+<body>
+    <section class="header">
+        <strong class="title"><a href="/">AADARSH-STOCKS</a></strong>
+        <strong class = "authentication">
+            <form action="/login/home" method="post">
+                <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
+                    <option value="1">Welcome, {{user.firstName}}</option>
+                    <option value="2"><a href="/register">Stock Data</a></option>
+                    <option value="3">Data Input</option>
+                    <option value="4">Account Details</option>
+                    <option value="5"><strong class="logout">Logout<strong></option>
+                </select>
+            </form>
+        </strong>
+    </section>
+    
+    
+    <section class="main-content">
+            <br><br><br><br><br>
+            <h6 class ="account-details-header">Account Details<h6>
+            <br><br><br><br><br><br><br><br>
+            <div class = "account-details">
+            <strong> Name </strong><strong>: {{user.firstName}} {{user.lastName}} </strong>
+            <strong> Mobile </strong><strong>: {{user.mobile}}</strong>
+            <strong> E-mail </strong><strong>: {{user.email}}</strong>
+            <strong> Password </strong><strong>: {{user.password}}</strong>
+            <strong> User-Type </strong><strong>: {{user.access}}</strong>
+            </div>
+    </section>
+
+
+    <section class="footer">
+        {{>footer}}
+    </section>
+    
+</body>
+</html>

@@ -174,6 +174,10 @@ input[placeholder]:focus,select:focus,button:focus{
 input::invalid{
     border : 3px dotted red;
 }
+.message{
+    font-size : 25px;
+    margin-left : calc((100% - 324px)/2)
+}
 
 
 
