@@ -24,7 +24,7 @@ body{
 /*  footer : rgba(167, 54, 54, 0.8)
     header : rgb(241, 101, 36);
 */
-.title a{
+.title .headerTitle{
     position: relative;
     left : 90px;
     top : 12px;
@@ -141,11 +141,11 @@ body{
 }
 .main-content .authenticationBody .welcomeNote{
     font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 40px;
-    width : 543px;
-    margin-left : calc((100% - 543px)/2);
+    font-size: 55px;
+    width : 262px;
+    margin-left : calc((100% - 262px)/2);
     position: relative;
-    top : 150px;
+    top : 220px;
 }
 .main-content .authenticationBody a{
     color: black;
@@ -198,4 +198,20 @@ div.indexAuthentication{
 }
 button:hover,select:hover{
     cursor: pointer;
+}
+.pricing{
+    /* color: rgb(6, 61, 179);
+    text-decoration: none;
+    padding: 4px 10px ;
+    border-bottom : 2px solid rgba(3, 17, 17, 0.5);
+    border-top : 2px solid rgba(7, 14, 14, 0.5);
+    border-radius: 4px;
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 0.1vw 0.1vh 1.8vh white;
+    font-size : 18px;
+    position: absolute;
+    right : 60px;
+    top : 13px; */
+    display: none;
 }
