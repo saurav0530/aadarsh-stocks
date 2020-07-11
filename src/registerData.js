@@ -32,7 +32,8 @@ router.post('/',( req,res ) =>{
         email : req.body.registerEmail,
         password : req.body.registerPassword,
         mobile : req.body.registerMobile,
-        access : "User"
+        access : "User",
+        admin : false
     }
     var testFunc1 = function(data){
         mongodbData.writeFunc( 'users', data )
@@ -43,8 +44,6 @@ router.post('/',( req,res ) =>{
         })
     }
     var testFunc2 = function(){
-        console.log("Sorry")
-        req.flash('danger',' E-mail already taken! User another email. ')
         res.render('register',{
             message : "! E-mail already taken !",
             color : "red",

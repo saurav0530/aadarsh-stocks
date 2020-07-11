@@ -1,6 +1,8 @@
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
 
+// 'mongodb://localhost:27017'
+// 'mongodb+srv://sauravadmin:Saurav9113@aadarshstocksdatabase.kdbyg.mongodb.net/<dbname>?retryWrites=true&w=majority'
 const connectionURL = 'mongodb+srv://sauravadmin:Saurav9113@aadarshstocksdatabase.kdbyg.mongodb.net/<dbname>?retryWrites=true&w=majority'
 const databaseName = 'aadarshDatabase'
 

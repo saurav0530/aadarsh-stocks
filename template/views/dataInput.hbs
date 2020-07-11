@@ -25,22 +25,22 @@
     <section class="main-content">
             <br><br><br><br>
             <div class = 'stock-entry-date'>
-                <form action="/login/dataInput" method="post">
+                <form action="/login/dataInput/date" method="post">
                     <h4>Select date corresponding to stock data entry : </h4>
                     <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()">
                 </form>
             </div>
             <br><br>
-            <form action="/login/dataInput" method="post">
+            <form action="/login/dataInput/data" method="post">
                 <div class = "stock-display-input" >
-                    <input type="search" name = "stockName" id="stock-input-stockName" placeholder = " Stock-name ">
-                    <input type="search" name = "buyAbove" id="stock-input-buyAbove" placeholder = " Buy above ">
-                    <input type="search" name = "target" id="stock-input-target" placeholder = " Target ">
-                    <input type="search" name = "stopLoss" id="stock-input-stopLoss" placeholder = " Stop Loss ">
-                    <input type="search" name = "currentPrice" id="stock-input-currentPrice" placeholder = " Current Price ">
-                    <input type="search" name = "recentHigh" id="stock-input-recentHigh" placeholder = " Recent High ">
-                    <input type="search" name = "recentLow" id="stock-input-recentLow" placeholder = " Recent Low ">
-                    <input type="search" name = "remarks" id="stock-input-remarks" placeholder = " Remarks ">
+                    <input type="search" name = "stockName" id="stock-input-stockName" placeholder = " Stock-name " required>
+                    <input type="search" name = "buyAbove" id="stock-input-buyAbove" placeholder = " Buy above " required>
+                    <input type="search" name = "target" id="stock-input-target" placeholder = " Target " required>
+                    <input type="search" name = "stopLoss" id="stock-input-stopLoss" placeholder = " Stop Loss " required>
+                    <input type="search" name = "currentPrice" id="stock-input-currentPrice" placeholder = " Current Price " required>
+                    <input type="search" name = "recentHigh" id="stock-input-recentHigh" placeholder = " Recent High " required>
+                    <input type="search" name = "recentLow" id="stock-input-recentLow" placeholder = " Recent Low " required>
+                    <input type="search" name = "remarks" id="stock-input-remarks" placeholder = " Remarks " required>
                 </div>
                     <br><button class = "add-row" >Add stock</button>
             </form>
@@ -57,17 +57,40 @@
                 <strong class = "stock-display-headers">Recent Low</strong>
                 <strong class = "stock-display-headers">Remarks</strong>
             </div><br><br>
-
-            <input type = "text" class = "para1-stock" placeholder="Para 1(required)" >
-            <input type = "text" class = "para2-stock" placeholder="Para 2(required)" >
-
-            <br><br><button class = "add-to-database" >Add to Database</button><br><br>
+            <form action="/login/dataInput/stockData" method="post">
+                <input type = "text" name = "para1Stock"class = "para1-stock" placeholder="Para 1(required)" >
+                <input type = "text" name = "para2Stock"class = "para2-stock" placeholder="Para 2(required)" >
+                <br><br><button class = "add-to-database" >Add to Database</button><br><br>
+            </form>
+            
     </section>
 
 
     <section class="footer">
         {{>footer}}
     </section>
-    
+    <script>
+        // Event-listener for clearing input field
+            document.querySelector('.add-row').addEventListener('click',()=>{
+                setTimeout(()=>{
+                        if( document.querySelector('#stock-input-stockName').value != undefined )
+                            document.querySelector('#stock-input-stockName').value = ''
+                        if( document.querySelector('#stock-input-stopLoss').value != undefined )
+                            document.querySelector('#stock-input-stopLoss').value = ''
+                        if( document.querySelector('#stock-input-target').value != undefined )
+                            document.querySelector('#stock-input-target').value = ''
+                        if( document.querySelector('#stock-input-buyAbove').value != undefined )
+                            document.querySelector('#stock-input-buyAbove').value = ''
+                        if( document.querySelector('#stock-input-currentPrice').value != undefined )
+                            document.querySelector('#stock-input-currentPrice').value = ''
+                        if( document.querySelector('#stock-input-recentHigh').value != undefined )
+                            document.querySelector('#stock-input-recentHigh').value = ''
+                        if( document.querySelector('#stock-input-recentLow').value != undefined )    
+                            document.querySelector('#stock-input-recentLow').value = ''
+                        if( document.querySelector('#stock-input-remarks').value != undefined )
+                            document.querySelector('#stock-input-remarks').value = ''
+                },1000)
+            })
+    </script>
 </body>
 </html>

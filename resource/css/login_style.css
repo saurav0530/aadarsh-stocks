@@ -178,6 +178,11 @@ input::invalid{
     font-size : 25px;
     margin-left : calc((100% - 324px)/2)
 }
+.errorMessage{
+    font-size : 18px;
+    color : red;
+    margin-left : calc((100% - 250px)/2)
+}
 
 
 

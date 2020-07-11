@@ -45,9 +45,9 @@ router.get('/home',(req,res)=>{
 })
 
 router.post('/home',(req,res)=>{
+    console.log(res.app.locals.user)
     if( res.app.locals.user )
     {
-        console.log(req.body)
         if(req.body.loginChoice == 2)
         {
             res.redirect('/login/stockData')
@@ -68,34 +68,96 @@ router.post('/home',(req,res)=>{
     }    
 })
 
+/////////////////////////////////////    Stock-Display    /////////////////////////////////////////
+
 router.get('/stockData',(req,res) =>{
     if( res.app.locals.user )
     {
-        res.render('stockData')
+        if(res.app.locals.stockData)
+        {
+            res.render('stockData',res.app.locals.stockData)
+            res.app.locals.stockData = null
+        }
+        else
+            res.render('stockData')
     }
     else 
         res.redirect('/')
 })
 
+router.post('/stockData',(req,res)=>{
+    mongodbData.mongoConnect().then(client =>{
+        var db = client.db('aadarshDatabase')
+        db.collection('stock').findOne({date : req.body.stockViewDate},(err,stock)=>{
+            if(err)
+                return console.log(err)
+            
+            if(stock){
+                res.app.locals.stockData = stock
+                res.redirect("/login/stockData")
+            }else{
+                res.render('stockData',{
+                    message : "No stocks available for this date."
+                })
+            }
+        })
+    }).catch(err => console.log(err))
+})
+
+///////////////////////////////////////    Data Input    //////////////////////////////////////////
+
 router.get('/dataInput',(req,res) =>{
-    if( res.app.locals.user )
+    if( res.app.locals.user && res.app.locals.user.admin )
     {
         res.render('dataInput')
     }
     else 
         res.redirect('/')
 })
-router.post('/dataInput',(req,res)=>{
+router.post('/dataInput/date',(req,res)=>{
 
     res.app.locals.stock = {
         date : "",
-        data : "",
+        data : [],
         para1 : "",
         para2 : ""
     }
     res.app.locals.stock.date = req.body.stockEntryDate
     console.log(req.body)
 })
+router.post('/dataInput/date',(req,res)=>{
+    console.log(req.body)
+})
+router.post('/dataInput/data',(req,res)=>{
+    var data = {
+        stockName : req.body.stockName,
+        buyAbove : req.body.buyAbove,
+        target : req.body.target,
+        stopLoss : req.body.stopLoss,
+        currentPrice : req.body.currentPrice,
+        recentHigh : req.body.recentHigh,
+        recentLow : req.body.recentLow,
+        remarks : req.body.remarks,
+    }
+    res.app.locals.stock.data.push(data)
+    console.log(res.app.locals.stock)
+})
+router.post('/dataInput/stockData',(req,res)=>{
+    res.app.locals.stock.para1 = req.body.para1Stock
+    res.app.locals.stock.para2 = req.body.para2Stock
+
+    var data = res.app.locals.stock
+    res.app.locals.stock = null
+
+    mongodbData.mongoConnect().then(client =>{
+        var db = client.db('aadarshDatabase')
+        db.collection('stock').insertOne(data)
+    }).catch(err => console.log(err))
+    
+    res.redirect('/login/dataInput')
+})
+
+///////////////////////////////////////    Account-Details    //////////////////////////////////////////
 
 router.get('/accountDetails',(req,res) =>{
     if( res.app.locals.user )
@@ -106,6 +168,6 @@ router.get('/accountDetails',(req,res) =>{
         res.redirect('/')
 })
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 module.exports = router
