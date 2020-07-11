@@ -183,6 +183,13 @@ input::invalid{
     color : red;
     margin-left : calc((100% - 250px)/2)
 }
-
+.stockViewDate{
+    font-size : 19px;
+    margin-left : calc((100% - 143px)/2);
+    border : 3px solid brown;
+    padding : 3px 12px;
+    border-radius : 10px;
+    color : green;
+}
 
 

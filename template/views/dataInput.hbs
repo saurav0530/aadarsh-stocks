@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="/img/web.png" type="image/icon type">
     <link rel="stylesheet" href="/css/index_style.css">
     <link rel="stylesheet" href="/css/login_style.css">
     <title>Aadarsh-Stocks</title>
@@ -31,6 +32,9 @@
                 </form>
             </div>
             <br><br>
+            {{#if stock.date}}
+                <strong class="stockViewDate">Date : {{stock.date}}</strong><br><br>
+            {{/if}}
             <form action="/login/dataInput/data" method="post">
                 <div class = "stock-display-input" >
                     <input type="search" name = "stockName" id="stock-input-stockName" placeholder = " Stock-name " required>
@@ -56,10 +60,22 @@
                 <strong class = "stock-display-headers">Recent High</strong>
                 <strong class = "stock-display-headers">Recent Low</strong>
                 <strong class = "stock-display-headers">Remarks</strong>
+                {{#if stock.data}}
+                    {{#each stock.data}}
+                        <h8 class = "stock-display-items row${length}">{{this.stockName}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.buyAbove}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.target}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.stopLoss}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.currentPrice}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.recentHigh}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.recentLow}}</h8>
+                        <h8 class = "stock-display-items row${length}">{{this.remarks}}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
+                    {{/each}}
+                {{/if}}
             </div><br><br>
             <form action="/login/dataInput/stockData" method="post">
-                <input type = "text" name = "para1Stock"class = "para1-stock" placeholder="Para 1(required)" >
-                <input type = "text" name = "para2Stock"class = "para2-stock" placeholder="Para 2(required)" >
+                <input type = "text" name = "para1Stock"class = "para1-stock" placeholder="Para 1(required)" value="{{stock.para1}}">
+                <input type = "text" name = "para2Stock"class = "para2-stock" placeholder="Para 2(required)" value="{{stock.para2}}">
                 <br><br><button class = "add-to-database" >Add to Database</button><br><br>
             </form>
             

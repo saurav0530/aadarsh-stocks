@@ -50,16 +50,25 @@ router.post('/',( req,res ) =>{
             link : " "
         })
     }
-    mongodbData.mongoConnect().then((client)=>{
-        var db = client.db('aadarshDatabase')
-        db.collection('users').findOne({email : newUser.email}).then((data)=>{
-            if(data){
-                testFunc2()
-            }else{
-                testFunc1(newUser)
-            }
-        }).catch((err) => console.log(err))
-    }).catch((err) => console.log(err,"connection error"))
+    if(newUser.registerPassword == req.body.registerPassword2){
+        mongodbData.mongoConnect().then((client)=>{
+            var db = client.db('aadarshDatabase')
+            db.collection('users').findOne({email : newUser.email}).then((data)=>{
+                if(data){
+                    testFunc2()
+                }else{
+                    testFunc1(newUser)
+                }
+            }).catch((err) => console.log(err))
+        }).catch((err) => console.log(err,"connection error"))
+    }else{
+        res.render('register',{
+            message : "Password didn't match...",
+            color : "red",
+            link : " "
+        })
+    }
+        
 })
 
 module.exports = router

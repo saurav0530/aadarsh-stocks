@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="/img/web.png" type="image/icon type">
     <link rel="stylesheet" href="/css/index_style.css">
     <link rel="stylesheet" href="/css/login_style.css">
     <title>Aadarsh-Stocks</title>
@@ -25,7 +26,48 @@
     
     
     <section class="main-content">
+        <br><br>
+        <div class = 'stock-view-date'>
+            <form action="/login/stockData" method="post">
+                <h4>Select date for viewing past stock suggestions : </h4>
+                <input type="date" name="stockViewDate" id="stock-view-date" onchange="this.form.submit()">
+            </form>
+            <br><strong class="errorMessage">{{message}}</strong>
+            <br><br>
+        </div>
         
+        {{#if stockData}}
+                <strong class="stockViewDate">Date : {{stockData.date}}</strong><br><br>
+            <div class = "stock-display-para">
+                <strong style="text-decoration: underline;font-size : 30px;text-shadow: 0.1vw 0.1vh 01vh aqua;">EDITOR'S NOTE :</strong>
+                <br><br><p class = "para1" style="text-align: justify;">1. {{stockData.para1}} </p><br><br>
+                <p class = "para1" style="text-align: justify;">2. {{stockData.para2}}<p><br><br>
+            </div>
+            <div class = "stock-display">
+                <strong class = "stock-display-headers">Stock Name</strong>
+                <strong class = "stock-display-headers">Buy above</strong>
+                <strong class = "stock-display-headers">Target</strong>
+                <strong class = "stock-display-headers">Stop Loss</strong>
+                <strong class = "stock-display-headers">Current Price</strong>
+                <strong class = "stock-display-headers">Recent High</strong>
+                <strong class = "stock-display-headers">Recent Low</strong>
+                <strong class = "stock-display-headers">Remarks</strong>
+                {{#if stockData.data}}
+                    {{#each stockData.data}}
+                        <h8 class = "stock-display-items">{{this.stockName}}</h8>
+                        <h8 class = "stock-display-items">{{this.buyAbove}}</h8>
+                        <h8 class = "stock-display-items">{{this.target}}</h8>
+                        <h8 class = "stock-display-items">{{this.stopLoss}}</h8>
+                        <h8 class = "stock-display-items">{{this.currentPrice}}</h8>
+                        <h8 class = "stock-display-items">{{this.recentHigh}}</h8>
+                        <h8 class = "stock-display-items">{{this.recentLow}}</h8>
+                        <h8 class = "stock-display-items">{{this.remarks}}</h8>
+                    {{/each}}  
+                {{/if}}
+        {{/if}}
+
+
+        </div>
     </section>
 
 

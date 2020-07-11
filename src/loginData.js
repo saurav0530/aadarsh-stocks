@@ -115,19 +115,35 @@ router.get('/dataInput',(req,res) =>{
         res.redirect('/')
 })
 router.post('/dataInput/date',(req,res)=>{
+    // making localstorage null
+    res.app.locals.stock = undefined
+    res.app.locals.update = undefined
 
-    res.app.locals.stock = {
-        date : "",
-        data : [],
-        para1 : "",
-        para2 : ""
-    }
-    res.app.locals.stock.date = req.body.stockEntryDate
-    console.log(req.body)
+    mongodbData.mongoConnect().then(client =>{
+        var db = client.db('aadarshDatabase')
+        db.collection('stock').findOne({date : req.body.stockEntryDate},(err,stock)=>{
+            if(err)
+                return console.log(err)
+            
+            if(stock){
+                res.app.locals.stock = stock
+                res.app.locals.update = true
+                res.render('dataInput')
+            }else{
+                res.app.locals.stock = {
+                    date : "",
+                    data : [],
+                    para1 : "",
+                    para2 : ""
+                }
+                res.app.locals.update = false
+                res.app.locals.stock.date = req.body.stockEntryDate
+                res.render('dataInput')
+            }
+        })
+    }).catch(err => console.log(err))
 })
-router.post('/dataInput/date',(req,res)=>{
-    console.log(req.body)
-})
+
 router.post('/dataInput/data',(req,res)=>{
     var data = {
         stockName : req.body.stockName,
@@ -140,7 +156,8 @@ router.post('/dataInput/data',(req,res)=>{
         remarks : req.body.remarks,
     }
     res.app.locals.stock.data.push(data)
-    console.log(res.app.locals.stock)
+    //console.log(res.app.locals.stock)
+    res.render('dataInput')
 })
 router.post('/dataInput/stockData',(req,res)=>{
     res.app.locals.stock.para1 = req.body.para1Stock
@@ -148,12 +165,18 @@ router.post('/dataInput/stockData',(req,res)=>{
 
     var data = res.app.locals.stock
     res.app.locals.stock = null
-
-    mongodbData.mongoConnect().then(client =>{
-        var db = client.db('aadarshDatabase')
-        db.collection('stock').insertOne(data)
-    }).catch(err => console.log(err))
-    
+    if(res.app.locals.update){
+        mongodbData.mongoConnect().then(client =>{
+            var db = client.db('aadarshDatabase')
+            db.collection('stock').updateOne({date : data.date},{$set : data})
+        }).catch(err => console.log(err))
+    }
+    else{
+        mongodbData.mongoConnect().then(client =>{
+            var db = client.db('aadarshDatabase')
+            db.collection('stock').insertOne(data)
+        }).catch(err => console.log(err))
+    }  
     res.redirect('/login/dataInput')
 })
 
