@@ -164,8 +164,8 @@ a.reg{
     margin-right : 20px;
 }
 div.indexAuthentication{
-    width: max-content;
-    margin: auto;
+    width: 244px;
+    margin-left : calc((100% - 244px)/2);
     position : relative;
     top : 400px;
 }
