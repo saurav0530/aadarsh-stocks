@@ -7,6 +7,6 @@
 .main-content .disclaimer-content{
     font-size : 20px;
     font-weight : bold;
-    margin-left : calc((100% - 760px)/2);
-    padding-top: 18%;
+    margin-left : calc((100% - 850px)/2);
+    padding-top: 5%;
 }
