@@ -1,8 +1,10 @@
 .main-content .contacts-title{
-    padding-left : 47%;
-    margin-top: 20%;
+    font-size : 30px;
+    width : 155px;
+    margin-left : calc((100% - 155px)/2)
 }
 .main-content .contacts-content{
-    padding-left : 42.5%;
-    padding-top: 13%;
+    padding-left : calc((100% - 300px)/2);
+    padding-top: 19%;
+    font-size : 20px;
 }

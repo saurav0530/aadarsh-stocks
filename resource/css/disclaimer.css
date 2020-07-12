@@ -1,8 +1,12 @@
 .main-content .disclaimer-title{
-    padding-left : 47%;
+    font-size : 30px;
+    font-weight : bolder;
+    margin-left : calc((100% - 195px)/2);
     margin-top: 20%;
 }
 .main-content .disclaimer-content{
-    padding-left : 30%;
-    padding-top: 12%;
+    font-size : 20px;
+    font-weight : bold;
+    margin-left : calc((100% - 760px)/2);
+    padding-top: 18%;
 }
