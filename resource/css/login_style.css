@@ -71,7 +71,7 @@ input[placeholder]{
     border : 3px solid brown;
     border-radius : 8px;
     height : 40px;
-    width : 229px;
+    width : calc((100% - 30px)/8);
     display: inline-block;
     background-color: aqua;
 }
