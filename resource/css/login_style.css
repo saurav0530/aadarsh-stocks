@@ -183,9 +183,9 @@ input::invalid{
 }
 .stockViewDate{
     font-size : 19px;
-    width : 147px;
-    margin-left : calc((100% - 147px)/2);
-    border : 3px solid brown;
+    width : 155px;
+    margin-left : calc((100% - 155px)/2);
+    border-bottom : 3px solid brown;
     padding : 4px 12px;
     border-radius : 10px;
     color : green;
