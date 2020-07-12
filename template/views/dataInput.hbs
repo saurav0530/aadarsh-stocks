@@ -49,9 +49,8 @@
                     <br><button class = "add-row" >Add stock</button>
             </form>
             <br><br>
-            <div class = "stock-display">
-                
-                
+            <div class="stockDisplayBox">
+            <div class = "stock-display">               
                 <strong class = "stock-display-headers">Stock Name</strong>
                 <strong class = "stock-display-headers">Buy above</strong>
                 <strong class = "stock-display-headers">Target</strong>
@@ -72,6 +71,7 @@
                         <h8 class = "stock-display-items row${length}">{{this.remarks}}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
                     {{/each}}
                 {{/if}}
+            </div>
             </div><br><br>
             <form action="/login/dataInput/stockData" method="post">
                 <input type = "text" name = "para1Stock"class = "para1-stock" placeholder="Para 1(required)" value="{{stock.para1}}">

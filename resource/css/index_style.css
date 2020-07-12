@@ -70,19 +70,20 @@ body{
     background-repeat: repeat-y;
     background-size: 100vw 100vh; */
     background-image: linear-gradient(skyblue,white,skyblue);
-    min-height: 87.7vh;
+    min-height: 91vh;
 }
 
 #stock-view-date{
     border : 2px solid black;
-    border-radius: 2vw;
-    height : 3.2vh;
-    padding-left:1.65vw;
+    border-radius: 15px;
+    height : 30px;
+    padding-left:30px;
 }
 .stock-display-para{
     font-weight: bold;
     padding-left: 1%;
     padding-right: 1%;
+    padding-top : 100px;
 }
 .stock-view-date h4{
     display: inline-block;
@@ -92,6 +93,7 @@ body{
 }
 .stock-view-date{
     width : 690px;
+    height : 35px;
     margin : auto;
     position : relative;
     top : 30px;
@@ -113,10 +115,15 @@ body{
     text-shadow: 0.1vw 0.1vh 1.8vh white;
     font-size : 18px;
 }
+.stockDisplayBox{
+    width : 100%;
+    overflow-x: scroll;
+    background-color : black;
+}
 .stock-display{
     display: grid;
     grid-auto-rows: minmax(30px,auto);
-    grid-template-columns: repeat(8,1fr);
+    grid-template-columns: repeat(8,231.6px);
     border: 2px solid black;
     grid-gap : 1px;
     background-color: black;
@@ -144,16 +151,16 @@ body{
     font-size: 55px;
     width : 262px;
     margin-left : calc((100% - 262px)/2);
-    position: relative;
-    top : 220px;
+    /* position: relative;
+    top : 220px; */
 }
 .main-content .authenticationBody a{
     color: black;
     text-decoration: none;
-    padding: 10px 15px ;
+    padding: 10px 55px ;
     border : 3px solid black;
-    background-image : linear-gradient(yellow,chocolate);
-    border-radius: 10px;
+    background-color : greenyellow;
+    border-radius: 40px;
     font-size : 20px;
     font-weight : 950;
     font-family: Arial, Helvetica, sans-serif;
@@ -161,13 +168,13 @@ body{
     
 }
 a.reg{
-    margin-right : 20px;
+    margin-left : -12px;
 }
 div.indexAuthentication{
-    width: 244px;
-    margin-left : calc((100% - 244px)/2);
-    position : relative;
-    top : 400px;
+    width: 200px;
+    margin-left : calc((100% - 200px)/2);
+    /* position : relative;
+    top : 400px; */
 }
 /* select{
     border : 2px solid black;
@@ -193,8 +200,8 @@ div.indexAuthentication{
 }
 .disclaimer-index{
     margin-left : calc((100% - 730px)/2);
-    position : relative;
-    top : 600px;
+    /* position : relative;
+    top : 600px; */
 }
 button:hover,select:hover{
     cursor: pointer;
@@ -215,3 +222,7 @@ button:hover,select:hover{
     top : 13px; */
     display: none;
 }
+select option{
+    font-weight : bolder;
+    font-size : 18px;
+ }

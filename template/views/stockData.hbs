@@ -38,10 +38,11 @@
         {{#if stockData}}
                 <strong class="stockViewDate">Date : {{stockData.date}}</strong><br><br>
             <div class = "stock-display-para">
-                <strong style="text-decoration: underline;font-size : 30px;text-shadow: 0.1vw 0.1vh 01vh aqua;">EDITOR'S NOTE :</strong>
+                <strong style="text-decoration: underline;font-size : 30px;text-shadow: 0.1vw 0.1vh 01vh white;">EDITOR'S NOTE :</strong>
                 <br><br><p class = "para1" style="text-align: justify;">1. {{stockData.para1}} </p><br><br>
                 <p class = "para1" style="text-align: justify;">2. {{stockData.para2}}<p><br><br>
             </div>
+            <div class="stockDisplayBox">
             <div class = "stock-display">
                 <strong class = "stock-display-headers">Stock Name</strong>
                 <strong class = "stock-display-headers">Buy above</strong>
@@ -63,10 +64,10 @@
                         <h8 class = "stock-display-items">{{this.remarks}}</h8>
                     {{/each}}  
                 {{/if}}
+            </div>
+            </div>
         {{/if}}
 
-
-        </div>
     </section>
 
 

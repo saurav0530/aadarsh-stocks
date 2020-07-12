@@ -49,7 +49,7 @@ input[placeholder]{
 }
 .form select,.form label{
     position:relative;
-    left: 0.71vw;
+    left: 20px;
 }
 .form label{
     font-size: 19.5px;
@@ -63,7 +63,7 @@ input[placeholder]{
     width : 169.15px;
     padding-left:8px;
     background-color: #f5f5dc;
-    font-size : 2vh;
+    font-size : 20px;
     font-weight:bold;
     color : teal;
 }
@@ -152,7 +152,7 @@ input[placeholder]{
     height : 38px;
     border-radius: 19px;
     font-weight :bold;
-    font-size: 18px;
+    font-size: 20px;
 }
 .data-added-successfully{
     margin-left : 750px;
@@ -165,7 +165,7 @@ input[placeholder]{
     font-size : 22px;
 }
 .para1,.para2{
-    text-shadow: 0.1vw 0.1vh 01vh aqua;
+    text-shadow: 0.1vw 0.1vh 01vh white;
 }
 input[placeholder]:focus,select:focus,button:focus{
     border: 3px dashed green;
@@ -190,6 +190,8 @@ input::invalid{
     padding : 3px 12px;
     border-radius : 10px;
     color : green;
+    position : relative;
+    top : 70px;
 }
 
 
