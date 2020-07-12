@@ -50,7 +50,7 @@ router.post('/',( req,res ) =>{
             link : " "
         })
     }
-    if(newUser.registerPassword == req.body.registerPassword2){
+    if(newUser.password == req.body.registerPassword2){
         mongodbData.mongoConnect().then((client)=>{
             var db = client.db('aadarshDatabase')
             db.collection('users').findOne({email : newUser.email}).then((data)=>{
@@ -62,6 +62,7 @@ router.post('/',( req,res ) =>{
             }).catch((err) => console.log(err))
         }).catch((err) => console.log(err,"connection error"))
     }else{
+        console.log(newUser.registerPassword ,req.body.registerPassword2)
         res.render('register',{
             message : "Password didn't match...",
             color : "red",
