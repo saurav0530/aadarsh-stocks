@@ -30,7 +30,7 @@ router.post('/',(req,res)=>{
                 res.redirect('/login/home')
             }else{
                 res.render('login',{
-                    message : "Invalid username or password"
+                    message : "Invalid Credentials"
                 })
             }
         })
@@ -94,6 +94,7 @@ router.post('/stockData',(req,res)=>{
             
             if(stock){
                 res.app.locals.stockData = stock
+                console.log(stock)
                 res.redirect("/login/stockData")
             }else{
                 res.render('stockData',{
@@ -150,7 +151,6 @@ router.post('/dataInput/data',(req,res)=>{
         buyAbove : req.body.buyAbove,
         target : req.body.target,
         stopLoss : req.body.stopLoss,
-        currentPrice : req.body.currentPrice,
         recentHigh : req.body.recentHigh,
         recentLow : req.body.recentLow,
         remarks : req.body.remarks,

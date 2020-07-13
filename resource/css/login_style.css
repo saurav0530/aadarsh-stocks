@@ -71,7 +71,7 @@ input[placeholder]{
     border : 3px solid brown;
     border-radius : 8px;
     height : 40px;
-    width : calc((100% - 30px)/8);
+    width : calc((100% - 25px)/7);
     display: inline-block;
     background-color: aqua;
 }
@@ -164,6 +164,7 @@ input[placeholder]{
 .para1,.para2{
     font-size : 22px;
     text-shadow: 0.1vw 0.1vh 01vh white;
+    word-wrap: break-word;
 }
 input[placeholder]:focus,select:focus,button:focus{
     border: 3px dashed green;
@@ -174,7 +175,7 @@ input::invalid{
 }
 .message{
     font-size : 25px;
-    margin-left : calc((100% - 324px)/2)
+    margin-left : calc((100% - 205px)/2)
 }
 .errorMessage{
     font-size : 18px;
@@ -183,8 +184,8 @@ input::invalid{
 }
 .stockViewDate{
     font-size : 19px;
-    width : fit-content;
-    margin-left : calc((100% - 155px)/2);
+    width : 145px;
+    margin-left : calc((100% - 167px)/2);
     border-bottom : 3px solid brown;
     padding : 4px 12px;
     border-radius : 10px;

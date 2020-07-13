@@ -95,8 +95,6 @@ body{
     width : 690px;
     height : 35px;
     margin : auto;
-    position : relative;
-    top : 30px;
 }
 .authentication{
     position: absolute;
@@ -123,7 +121,7 @@ body{
 .stock-display{
     display: grid;
     grid-auto-rows: minmax(30px,auto);
-    grid-template-columns: repeat(8,minmax(231.6px,max-content));
+    grid-template-columns: repeat(7,minmax(265px,max-content));
     border: 2px solid black;
     grid-gap : 1px;
     background-color: black;

@@ -33,7 +33,6 @@
                 <input type="date" name="stockViewDate" id="stock-view-date" onchange="this.form.submit()">
             </form>
             <br><strong class="errorMessage">{{message}}</strong>
-            <br><br>
         </div>
         
         {{#if stockData}}
@@ -48,7 +47,6 @@
                 <strong class = "stock-display-headers">Buy above</strong>
                 <strong class = "stock-display-headers">Target</strong>
                 <strong class = "stock-display-headers">Stop Loss</strong>
-                <strong class = "stock-display-headers">Current Price</strong>
                 <strong class = "stock-display-headers">Recent High</strong>
                 <strong class = "stock-display-headers">Recent Low</strong>
                 <strong class = "stock-display-headers">Remarks</strong>
@@ -58,7 +56,6 @@
                         <h8 class = "stock-display-items">{{this.buyAbove}}</h8>
                         <h8 class = "stock-display-items">{{this.target}}</h8>
                         <h8 class = "stock-display-items">{{this.stopLoss}}</h8>
-                        <h8 class = "stock-display-items">{{this.currentPrice}}</h8>
                         <h8 class = "stock-display-items">{{this.recentHigh}}</h8>
                         <h8 class = "stock-display-items">{{this.recentLow}}</h8>
                         <h8 class = "stock-display-items">{{this.remarks}}</h8>

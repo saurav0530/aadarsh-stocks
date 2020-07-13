@@ -30,8 +30,7 @@
                     <h4>Select date corresponding to stock data entry : </h4>
                     <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()">
                 </form>
-            </div>
-            <br><br>
+            </div><br>
             {{#if stock.date}}
                 <strong class="stockViewDate">Date : {{stock.date}}</strong><br><br><br>
             {{/if}}
@@ -41,7 +40,6 @@
                     <input type="search" name = "buyAbove" id="stock-input-buyAbove" placeholder = " Buy above " required>
                     <input type="search" name = "target" id="stock-input-target" placeholder = " Target " required>
                     <input type="search" name = "stopLoss" id="stock-input-stopLoss" placeholder = " Stop Loss " required>
-                    <input type="search" name = "currentPrice" id="stock-input-currentPrice" placeholder = " Current Price " required>
                     <input type="search" name = "recentHigh" id="stock-input-recentHigh" placeholder = " Recent High " required>
                     <input type="search" name = "recentLow" id="stock-input-recentLow" placeholder = " Recent Low " required>
                     <input type="search" name = "remarks" id="stock-input-remarks" placeholder = " Remarks " required>
@@ -55,7 +53,6 @@
                 <strong class = "stock-display-headers">Buy above</strong>
                 <strong class = "stock-display-headers">Target</strong>
                 <strong class = "stock-display-headers">Stop Loss</strong>
-                <strong class = "stock-display-headers">Current Price</strong>
                 <strong class = "stock-display-headers">Recent High</strong>
                 <strong class = "stock-display-headers">Recent Low</strong>
                 <strong class = "stock-display-headers">Remarks</strong>
@@ -65,7 +62,6 @@
                         <h8 class = "stock-display-items row${length}">{{this.buyAbove}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.target}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.stopLoss}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.currentPrice}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.recentHigh}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.recentLow}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.remarks}}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
@@ -97,8 +93,6 @@
                             document.querySelector('#stock-input-target').value = ''
                         if( document.querySelector('#stock-input-buyAbove').value != undefined )
                             document.querySelector('#stock-input-buyAbove').value = ''
-                        if( document.querySelector('#stock-input-currentPrice').value != undefined )
-                            document.querySelector('#stock-input-currentPrice').value = ''
                         if( document.querySelector('#stock-input-recentHigh').value != undefined )
                             document.querySelector('#stock-input-recentHigh').value = ''
                         if( document.querySelector('#stock-input-recentLow').value != undefined )    
