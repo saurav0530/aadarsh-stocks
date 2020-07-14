@@ -4,12 +4,28 @@
     <link rel="icon" href="/img/web.png" type="image/icon type">
     <link rel="stylesheet" href="/css/index_style.css">
     <link rel="stylesheet" href="/css/contacts.css">
+    <link rel="stylesheet" href="/css/login_style.css">
     <title>Aadarsh Stock</title>
 </head>
 <body>
     
     <section class = 'header'>
-        {{>header}}
+        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="#" class="pricing">Pricing</a></strong>
+        {{#if user}}
+        <strong class = "authentication">
+            <form action="/login/home" method="post">
+                <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
+                    <option value="1">Welcome, {{user.firstName}}</option>
+                    <option value="2"><a href="/register">Stock Data</a></option>
+                    {{#if user.admin}}
+                        <option value="3">Data Input</option>
+                    {{/if}}
+                    <option value="4">Account Details</option>
+                    <option value="5"><strong class="logout">Logout<strong></option>
+                </select>
+            </form>
+        </strong>
+        {{/if}}
     </section>
     <section class = "main-content">
         <br><br><br>

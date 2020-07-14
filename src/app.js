@@ -1,26 +1,30 @@
 const path = require( 'path' )
 const express = require( 'express' )
 const hbs = require('hbs')
-const flash = require('connect-flash')
+const flash = require('express-flash')
 const session = require('express-session')
+const passport = require('passport')
 
 
 const app = express()
 
 // Express Session Middleware
+/////////////////////////////////////////////
+//Experimental middleware
+app.use(flash()) 
+// app.set('trust proxy', 1)
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true
-  }));
+    // cookie: { secure: true }
+}));
+app.use(passport.initialize())
+app.use(passport.session())
 
-// Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
 
+
+////////////////////////////////////////////
 
 //PORT FOR SERVER
 const port = process.env.PORT || 4000
@@ -46,17 +50,19 @@ app.use( express.static(resourcePath))
 // });
 
 
-app.get('', (req,res) => {
+app.get('',checkNotAuthenticated, (req,res) => {
     res.render('index',{
         appName : "AADARSH STOCK"
     })
 })
 
 app.get('/disclaimer', (req,res) => {
-    res.render('disclaimer')
+    var user = req.user
+    res.render('disclaimer',{user})
 })
 app.get('/contacts', (req,res) => {
-    res.render('contacts')
+    var user = req.user
+    res.render('contacts',{user})
 })
 ///////// Exported server side javascript codes /////////
 
@@ -68,15 +74,27 @@ app.use('/login', login)
 
 /////////////////////////////////////////////////////////
 
-// app.get('*', (req,res) => {
-//     res.render('404',{
-//         error : " Error 404",
-//         message : "Please try again with proper address",
-//         seeOffMessage : "Thanks for visiting us!"
-//     })
-// })
-
-
+app.get('*', (req,res) => {
+    res.render('404',{
+        error : " Error 404",
+        message : "Please try again with proper address",
+        seeOffMessage : "Thanks for visiting us!"
+    })
+})
+/////////////////////////////////////////////////////////
+function checkAuthenticated( req,res,next ){
+    if( req.isAuthenticated() ){
+        return next()
+    }
+    res.redirect('/login')
+}
+function checkNotAuthenticated( req,res,next ){
+    if( req.isAuthenticated() ){
+        return res.redirect('/login/home')
+    }
+    next()
+}
+//////////////////////////////////////////////////////////
 
 
 app.listen(port,()=>{

@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs')
 const path = require('path')
 const mongodbData = require('./mongo')
 const bodyParser = require('body-parser')
+const passport = require('passport')
+
+const initializePassport = require('./passport.config')
+initializePassport(passport)
 
 
 // parse application/x-www-form-urlencoded
@@ -13,79 +17,70 @@ router.use(bodyParser.urlencoded({ extended: false }))
 router.use(bodyParser.json())
 
 
-router.get('/',(req,res) =>{
+router.get('/',checkNotAuthenticated,(req,res) =>{
     res.render('login',{
         message : " "
     })
 })
-router.post('/',(req,res)=>{
-    const {choice,username,password} = req.body
-    var userType = ( choice == 1 )?'users':'admin'
-    mongodbData.mongoConnect().then(client =>{
-        var db = client.db('aadarshDatabase')
-        db.collection(userType).findOne({email : username,password:password}).then( user =>{
-            if(user){
-                res.app.locals.user = user
-                //console.log(res.locals)
-                res.redirect('/login/home')
-            }else{
-                res.render('login',{
-                    message : "Invalid Credentials"
-                })
-            }
-        })
-    })
-})
-router.get('/home',(req,res)=>{
-    if( res.app.locals.user )
-        res.render('loginLayout')
-        
-    else 
-        res.redirect('/')
+// router.post('/',(req,res)=>{
+//     const {choice,username,password} = req.body
+//     var userType = ( choice == 1 )?'users':'admin'
+//     mongodbData.mongoConnect().then(client =>{
+//         var db = client.db('aadarshDatabase')
+//         db.collection(userType).findOne({email : username,password:password}).then( user =>{
+//             if(user){
+//                 res.app.locals.user = user
+//                 //console.log(res.locals)
+//                 res.redirect('/login/home')
+//             }else{
+//                 res.render('login',{
+//                     message : "Invalid Credentials"
+//                 })
+//             }
+//         })
+//     })
+// })
+router.post('/',passport.authenticate('local',{
+    successRedirect : '/login/home',
+    failureRedirect : '/register',
+    failureFlash : true
+}))
+router.get('/home',checkAuthenticated,(req,res)=>{
+    if( req.user ){
+        user = req.user
+        res.render('loginLayout',{user})
+    }
 })
 
-router.post('/home',(req,res)=>{
-    console.log(res.app.locals.user)
-    if( res.app.locals.user )
+router.post('/home',checkAuthenticated,(req,res)=>{
+    if(req.body.loginChoice == 2)
     {
-        if(req.body.loginChoice == 2)
-        {
-            res.redirect('/login/stockData')
-        }
-        else if(req.body.loginChoice == 3)
-        {
-            res.redirect('/login/dataInput')    
-        }
-        else if(req.body.loginChoice == 4)
-        {
-            res.redirect('/login/accountDetails')
-        }
-        else if(req.body.loginChoice == 5)
-        {
-            res.app.locals.user = null
-            res.redirect('/')
-        }
-    }    
+        res.redirect('/login/stockData')
+    }
+    else if(req.body.loginChoice == 3)
+    {
+        res.redirect('/login/dataInput')    
+    }
+    else if(req.body.loginChoice == 4)
+    {
+        res.redirect('/login/accountDetails')
+    }
+    else if(req.body.loginChoice == 5)
+    {
+        req.logOut()
+        res.redirect('/')
+    } 
 })
 
 /////////////////////////////////////    Stock-Display    /////////////////////////////////////////
 
-router.get('/stockData',(req,res) =>{
-    if( res.app.locals.user )
-    {
-        if(res.app.locals.stockData)
-        {
-            res.render('stockData',res.app.locals.stockData)
-            res.app.locals.stockData = null
-        }
-        else
-            res.render('stockData')
-    }
-    else 
-        res.redirect('/')
+router.get('/stockData',checkAuthenticated,(req,res) =>{
+    var user = req.user
+    res.render('stockData',{user})
 })
 
-router.post('/stockData',(req,res)=>{
+router.post('/stockData',checkAuthenticated,(req,res)=>{
+    var user = req.user
     mongodbData.mongoConnect().then(client =>{
         var db = client.db('aadarshDatabase')
         db.collection('stock').findOne({date : req.body.stockViewDate},(err,stock)=>{
@@ -93,9 +88,8 @@ router.post('/stockData',(req,res)=>{
                 return console.log(err)
             
             if(stock){
-                res.app.locals.stockData = stock
-                console.log(stock)
-                res.redirect("/login/stockData")
+                var stockData = stock
+                res.render('stockData',{stockData,user})
             }else{
                 res.render('stockData',{
                     message : "No stocks available for this date."
@@ -107,16 +101,12 @@ router.post('/stockData',(req,res)=>{
 
 ///////////////////////////////////////    Data Input    //////////////////////////////////////////
 
-router.get('/dataInput',(req,res) =>{
-    if( res.app.locals.user && res.app.locals.user.admin )
-    {
-        res.render('dataInput')
-    }
-    else 
-        res.redirect('/')
+router.get('/dataInput',checkAuthenticated,(req,res) =>{
+    var user = req.user
+    res.render('dataInput',{user})
 })
-router.post('/dataInput/date',(req,res)=>{
-    // making localstorage null
+router.post('/dataInput/date',checkAuthenticated,(req,res)=>{
+    var user = req.user
     res.app.locals.stock = undefined
     res.app.locals.update = undefined
 
@@ -129,7 +119,7 @@ router.post('/dataInput/date',(req,res)=>{
             if(stock){
                 res.app.locals.stock = stock
                 res.app.locals.update = true
-                res.render('dataInput')
+                res.render('dataInput',{user})
             }else{
                 res.app.locals.stock = {
                     date : "",
@@ -139,13 +129,14 @@ router.post('/dataInput/date',(req,res)=>{
                 }
                 res.app.locals.update = false
                 res.app.locals.stock.date = req.body.stockEntryDate
-                res.render('dataInput')
+                res.render('dataInput',{user})
             }
         })
     }).catch(err => console.log(err))
 })
 
 router.post('/dataInput/data',(req,res)=>{
+    var user = req.user
     var data = {
         stockName : req.body.stockName,
         buyAbove : req.body.buyAbove,
@@ -157,7 +148,7 @@ router.post('/dataInput/data',(req,res)=>{
     }
     res.app.locals.stock.data.push(data)
     //console.log(res.app.locals.stock)
-    res.render('dataInput')
+    res.render('dataInput',{user})
 })
 router.post('/dataInput/stockData',(req,res)=>{
     res.app.locals.stock.para1 = req.body.para1Stock
@@ -182,14 +173,23 @@ router.post('/dataInput/stockData',(req,res)=>{
 
 ///////////////////////////////////////    Account-Details    //////////////////////////////////////////
 
-router.get('/accountDetails',(req,res) =>{
-    if( res.app.locals.user )
-    {
-        res.render('accountDetails')
-    }
-    else 
-        res.redirect('/')
+router.get('/accountDetails',checkAuthenticated,(req,res) =>{
+    var user = req.user
+    res.render('accountDetails',{user})
 })
+
+function checkAuthenticated( req,res,next ){
+    if( req.isAuthenticated() ){
+        return next()
+    }
+    res.redirect('/login')
+}
+function checkNotAuthenticated( req,res,next ){
+    if( req.isAuthenticated() ){
+        return res.redirect('/login/home')
+    }
+    next()
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 

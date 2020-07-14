@@ -12,18 +12,13 @@
         {{>header}}
     </section>
     <section class = "main-content">
-       <br><br><br><br><br><br><br><br><br>
+       <br><br><br><br><br><br>
        <div class = "form">
-           <h4>Login Portal</h4><br><br><br>
-            <form action="/login" method="post">
-                <label for="choice">Select the type of login : </label>
-                <select name="choice" id="choice">
-                <option value="1">User</option>
-                <option value="2">Administrator</option>
-                </select>                
+           <h4>Login Portal</h4><br><br><br><br>
+            <form action="/login" method="post">           
                 <br><br>
                 <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername"><br>
-                <input type="password" name ="password" placeholder="Password" class="loginPassword"><br>
+                <input type="password" name ="password" placeholder="Password" class="loginPassword"><br><br><br>
                 <button type="submit" class = "loginSubmit">Login</button>
             </form>
             <br><br>
@@ -37,7 +32,6 @@
     <section class = "footer">
         {{>footer}}
     </section>
-    <script type="module" src='/js/main.mjs'></script>
 
 </body>
 </html>
