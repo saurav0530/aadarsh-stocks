@@ -13,7 +13,7 @@
         <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="#" class="pricing">Pricing</a></strong>
         {{#if user}}
         <strong class = "authentication">
-            <form action="/login/home" method="post">
+            <form action="/home" method="post">
                 <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
                     <option value="1">Welcome, {{user.firstName}}</option>
                     <option value="2"><a href="/register">Stock Data</a></option>

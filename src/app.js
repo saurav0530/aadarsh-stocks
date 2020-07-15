@@ -72,6 +72,9 @@ app.use('/register', register)
 const login = require('../src/loginData')
 app.use('/login', login)
 
+const home = require('../src/home')
+app.use('/home', home)
+
 /////////////////////////////////////////////////////////
 
 app.get('*', (req,res) => {
@@ -90,7 +93,7 @@ function checkAuthenticated( req,res,next ){
 }
 function checkNotAuthenticated( req,res,next ){
     if( req.isAuthenticated() ){
-        return res.redirect('/login/home')
+        return res.redirect('/home')
     }
     next()
 }

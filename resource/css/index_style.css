@@ -36,7 +36,7 @@ body{
 }
 .footer{
     height : 60px;
-    background-color: rgb(216, 107, 107);
+    background-color: tomato;
     position: relative;
     left : 0px;
     right : 0px;
@@ -117,11 +117,13 @@ body{
     width : 100%;
     overflow-x: scroll;
     background-color : black;
+    border-left : 1px solid black;
+    border-right : 1px solid black; 
 }
 .stock-display{
     display: grid;
     grid-auto-rows: minmax(30px,auto);
-    grid-template-columns: repeat(7,minmax(265px,max-content));
+    grid-template-columns: 365px 300px 250px 270px 350px 350px 600px;
     border: 2px solid black;
     word-break : break-word;
     grid-gap : 1px;

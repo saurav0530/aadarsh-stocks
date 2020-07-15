@@ -10,7 +10,7 @@
     <section class="header">
         <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="#" class="pricing">Pricing</a></strong>
         <strong class = "authentication">
-            <form action="/login/home" method="post">
+            <form action="/home" method="post">
                 <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
                     <option value="1">Welcome, {{user.firstName}}</option>
                     <option value="2"><a href="/register">Stock Data</a></option>
@@ -26,16 +26,16 @@
     <section class="main-content">
             <br><br><br><br>
             <div class = 'stock-entry-date'>
-                <form action="/login/dataInput/date" method="post">
+                <form action="/home/dataInput/date" method="post">
                     <h4>Select date corresponding to stock data entry : </h4>
-                    <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()">
+                    <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()"><br><br>
                 </form>
             </div>
             {{#if stock.date}}
                 <strong></strong><br>
                 <strong class="stockViewDate">Date : {{stock.date}}</strong><br><br><br>
             {{/if}}
-            <form action="/login/dataInput/data" method="post">
+            <form action="/home/dataInput/data" method="post">
                 <div class = "stock-display-input" >
                     <input type="search" name = "stockName" id="stock-input-stockName" placeholder = " Stock-name " required>
                     <input type="search" name = "buyAbove" id="stock-input-buyAbove" placeholder = " Buy above " required>
@@ -45,9 +45,8 @@
                     <input type="search" name = "recentLow" id="stock-input-recentLow" placeholder = " Recent Low " required>
                     <input type="search" name = "remarks" id="stock-input-remarks" placeholder = " Remarks " required>
                 </div>
-                    <br><button class = "add-row" >Add stock</button>
+                    <br><button class = "add-row" >Add stock</button><br><br>
             </form>
-            <br><br>
             <div class="stockDisplayBox">
             <div class = "stock-display">               
                 <strong class = "stock-display-headers">Stock Name</strong>
@@ -70,7 +69,19 @@
                 {{/if}}
             </div>
             </div><br><br>
-            <form action="/login/dataInput/stockData" method="post">
+            <form action="/home/dataInput/link" method="post">
+                <input type="url" name="link" id="link" placeholder="Link">
+                <button type="submit" id="submitLink">Add Link</button>
+            </form><br>
+            <div class="linkDisplay">
+                {{#if stock.link}}
+                    {{#each stock.link}}
+                        <strong class="linkDis">Link{{@index}} : <a href="{{this}}"></a>{{this}}</strong><br>
+                    {{/each}}
+                {{/if}}
+            </div>
+            <br><br>
+            <form action="/home/dataInput/stockData" method="post">
                 <input type = "text" name = "para1Stock"class = "para1-stock" placeholder="Para 1(required)" value="{{stock.para1}}">
                 <input type = "text" name = "para2Stock"class = "para2-stock" placeholder="Para 2(required)" value="{{stock.para2}}">
                 <br><br><button class = "add-to-database" >Add to Database</button><br><br>
