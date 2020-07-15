@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 
 const initializePassport = require('./passport.config')
+const { ObjectId } = require('mongodb')
 initializePassport(passport)
 
 
@@ -180,8 +181,34 @@ router.post('/dataInput/stockData',(req,res)=>{
 
 router.get('/accountDetails',checkAuthenticated,(req,res) =>{
     var user = req.user
-    res.render('accountDetails',{user})
+    res.render('accountDetails',{user,message : "",color:"red"})
 })
+
+////////////////////////////////////////////// Change Password /////////////////////////////////////////
+router.get('/changePassword',checkAuthenticated,(req,res)=>{
+    var user = req.user
+    res.render('changePassword',{user})
+})
+router.post('/changePassword',checkAuthenticated,async (req,res) =>{
+    var user = req.user
+    if( req.user.password == req.body.password1 ){
+        if( req.body.password2==req.body.password3 ){
+            await mongodbData.mongoConnect().then(async client =>{
+                var db = client.db('aadarshDatabase')
+                await db.collection('users').updateOne({_id :ObjectId(req.user._id)},{$set : {password : req.body.password2}})
+                res.render('changePassword',{user,message : "Changed successfully",color:"green"})
+            }).catch(err => console.log(err))
+        }
+        else{
+            res.render('changePassword',{user,message : "Confirm didn't match",color:"red"})
+        }
+    }
+    else{
+        res.render('changePassword',{user,message : "Invalid Old Password",color:"red"})
+    }
+})
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function checkAuthenticated( req,res,next ){
     if( req.isAuthenticated() ){

@@ -30,8 +30,9 @@
                     <h4>Select date corresponding to stock data entry : </h4>
                     <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()">
                 </form>
-            </div><br>
+            </div>
             {{#if stock.date}}
+                <strong></strong><br>
                 <strong class="stockViewDate">Date : {{stock.date}}</strong><br><br><br>
             {{/if}}
             <form action="/login/dataInput/data" method="post">
