@@ -102,8 +102,13 @@ router.post('/stockData',checkAuthenticated,(req,res)=>{
 ///////////////////////////////////////    Data Input    //////////////////////////////////////////
 
 router.get('/dataInput',checkAuthenticated,(req,res) =>{
-    var user = req.user
-    res.render('dataInput',{user})
+    if(req.user.admin){
+        var user = req.user
+        res.render('dataInput',{user})
+    }else{
+        res.redirect('/login/home')
+    }
+    
 })
 router.post('/dataInput/date',checkAuthenticated,(req,res)=>{
     var user = req.user
