@@ -3,6 +3,8 @@ const router = express.Router()
 const mongodbData = require('./mongo')
 const bodyParser = require('body-parser')
 const { ObjectId } = require('mongodb')
+const pay = require('./payment')
+const paytmPay = require('./payment')
 
 
 // parse application/x-www-form-urlencoded
@@ -26,6 +28,10 @@ router.post('/',checkAuthenticated,(req,res)=>{
     else if(req.body.loginChoice == 3)
     {
         res.redirect('/home/dataInput')    
+    }
+    else if(req.body.loginChoice == 6)
+    {
+        res.redirect('/home/pricing')
     }
     else if(req.body.loginChoice == 4)
     {
@@ -153,6 +159,72 @@ router.post('/dataInput/stockData',(req,res)=>{
     res.redirect('/home/dataInput')
 })
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////        Pricing        //////////////////////////////////////////
+router.get('/pricing',checkAdmin,(req,res)=>{
+    var user = req.user
+    res.render('pricing',{user})
+})
+
+router.get('/payment/:id',checkAdmin,(req,res)=>{
+    var user = req.user
+    console.log(req.params.id)
+    paytmPay(res,req.params.id,req.user.mobile,req.user.email)
+})
+router.post('/paymentStatus',checkAdmin,async (req,res)=>{
+    console.log(req.body)
+    if(req.body.RESPMSG == 'Txn Success'){
+        var dispBody ={
+            orderid : req.body.ORDERID,
+            txnid : req.body.TXNID,
+            txndate : req.body.TXNDATE,
+            bnkid : req.body.BANKTXNID,
+            bnkname : req.body.GATEWAYNAME,
+            status : req.body.STATUS,
+            message : req.body.RESPMSG
+        }
+        var user = req.user
+        res.render('message',{
+            user,
+            dispBody,
+            sucmssg : "/home"
+        })
+        mongodbData.mongoConnect().then(async client =>{
+            var db = client.db('aadarshDatabase')
+            await db.collection('users').findOne({_id : ObjectId(req.user._id)}).then( async user =>{
+                if(user)
+                {
+                    console.log(user.payment)
+                    user.payment.push(req.body)
+                    await db.collection('users').updateOne({_id : ObjectId(req.user._id)},{$set : {
+                        payment : user.payment
+                    }
+                })
+            }
+            }).catch(error => console.log(error))
+        })
+    }
+    else{
+        var dispBody ={
+            txnid : req.body.TXNID,
+            txndate : req.body.TXNDATE,
+            bnkid : req.body.BANKTXNID,
+            bnkname : req.body.BANKNAME,
+            status : req.body.STATUS,
+            message : req.body.RESPMSG
+
+        }
+        var user = req.user
+        res.render('message',{
+            user,
+            dispBody,
+            mssg : "/home/pricing"
+        })
+    }
+    
+})
+
+
 ///////////////////////////////////////    Account-Details    //////////////////////////////////////////
 
 router.get('/accountDetails',checkAuthenticated,(req,res) =>{
@@ -197,6 +269,15 @@ function checkNotAuthenticated( req,res,next ){
         return res.redirect('/home')
     }
     next()
+}
+function checkAdmin( req,res,next ){
+    if( req.user && req.user.admin )
+        return next()
+    else if( req.user ){
+        return res.redirect('/home')
+    }else{
+        res.redirect('/login')
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -4,11 +4,12 @@
     <link rel="icon" href="/img/web.png" type="image/icon type">
     <link rel="stylesheet" href="/css/index_style.css">
     <link rel="stylesheet" href="/css/login_style.css">
+    <link rel="stylesheet" href="/css/pricing_style.css">
     <title>Aadarsh-Stocks</title>
 </head>
 <body>
     <section class="header">
-        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="/home/pricing" class="pricing">Pricing</a></strong>
+        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a></strong>
         <strong class = "authentication">
             <form action="/home" method="post">
                 <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
@@ -25,20 +26,24 @@
         </strong>
     </section>
     
-    
     <section class="main-content">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <form action="/home/pricing" method="post">
+            <div class="pricingTable">
+                <strong class = "serialNumber">S.No.</strong>
+                <strong class= "planName">Plan Name</strong>
+                <strong class = "pricingPlans">Plans</strong>
+                <strong class = "Subscribe">Links</strong>
+                <strong class = "serialNumber-items">1.</strong>
+                <strong class = "planName-items">Monthly</strong>
+                <strong class = "pricingPlans-items">Rs. 10</strong>
+                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="http://localhost:4000/home/payment/10" >Subscribe</a></strong>
+                <strong class = "serialNumber-items">2.</strong>
+                <strong class= "planName-items">Bi-monthly</strong>
+                <strong class = "pricingPlans-items">Rs. 15</strong>
+                <strong class = "Subscribe-items"><a href="http://localhost:4000/home/payment/15">Subscribe</a></strong>
 
-        <div class="changePassword">
-            <h4>Change Password Portal</h4><br><br><br><br>
-            <form action="/home/changePassword" method="post">
-                <input type="password" name="password1" id="password1" placeholder="Old Password"><br>
-                <input type="password" name="password2" id="password2" placeholder="New Password"><br>
-                <input type="password" name="password3" id="password3" placeholder="Confirm Password"><br><br>
-                <button type="submit" class = "changePasswordSubmit">Change Password</button>
-            </form>
-        </div><br><br>
-        <strong id="cpmessage" style = "color : {{color}}">{{message}}</strong>
+            </div>
+        </form>
     </section>
 
 

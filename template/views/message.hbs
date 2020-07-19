@@ -4,6 +4,7 @@
     <link rel="icon" href="/img/web.png" type="image/icon type">
     <link rel="stylesheet" href="/css/index_style.css">
     <link rel="stylesheet" href="/css/login_style.css">
+    <link rel="stylesheet" href="/css/message_style.css">
     <title>Aadarsh-Stocks</title>
 </head>
 <body>
@@ -25,20 +26,26 @@
         </strong>
     </section>
     
-    
     <section class="main-content">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-        <div class="changePassword">
-            <h4>Change Password Portal</h4><br><br><br><br>
-            <form action="/home/changePassword" method="post">
-                <input type="password" name="password1" id="password1" placeholder="Old Password"><br>
-                <input type="password" name="password2" id="password2" placeholder="New Password"><br>
-                <input type="password" name="password3" id="password3" placeholder="Confirm Password"><br><br>
-                <button type="submit" class = "changePasswordSubmit">Change Password</button>
-            </form>
-        </div><br><br>
-        <strong id="cpmessage" style = "color : {{color}}">{{message}}</strong>
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <div>
+        <h4 class = "transaction">Transaction-status</h4><br><br><br>
+        <div class="txnmssg">
+            <strong>Order ID</strong><strong>:</strong><h4> {{dispBody.orderid}}</h4>
+            <strong>Status</strong><strong>:</strong><h4> {{dispBody.status}}</h4>
+            <strong>Time </strong><strong>:</strong><h4> {{dispBody.txndate}}</h4>
+            <strong>Txn ID </strong><strong>:</strong><h4> {{dispBody.txnid}}</h4>
+            <strong>Bank Name </strong><strong>:</strong><h4> {{dispBody.bnkname}}</h4>
+            <strong>Bank Txn ID</strong><strong>:</strong><h4> {{dispBody.bnkid}}</h4>
+            <strong>Message </strong><strong>:</strong><h4> {{dispBody.message}}</h4>
+        </div><br><br><br>
+        {{#if sucmssg}}
+        <a href="{{sucmssg}}" class="redlink">Go to home page</a>
+        {{/if}}
+        {{#if mssg}}
+        <a href="{{mssg}}" class="redlink">Retry payment</a>
+        {{/if}}
+        </div>
     </section>
 
 

@@ -8,7 +8,7 @@
 </head>
 <body>
     <section class="header">
-        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="#" class="pricing">Pricing</a></strong>
+        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="/home/pricing" class="pricing">Pricing</a></strong>
         <strong class = "authentication">
             <form action="/home" method="post">
                 <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
@@ -16,6 +16,7 @@
                     <option value="2"><a href="/register">Stock Data</a></option>
                     {{#if user.admin}}
                         <option value="3">Data Input</option>
+                        <option value="6">Pricing</option>
                     {{/if}}
                     <option value="4">Account Details</option>
                     <option value="5"><strong class="logout">Logout<strong></option>

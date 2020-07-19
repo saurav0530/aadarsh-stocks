@@ -1,0 +1,3 @@
+[submodule "pay"]
+	path = pay
+	url = https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_NodeJs.git
