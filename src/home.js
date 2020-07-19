@@ -64,7 +64,8 @@ router.post('/stockData',checkAuthenticated,(req,res)=>{
                 res.render('stockData',{stockData,user})
             }else{
                 res.render('stockData',{
-                    message : "No stocks available for this date."
+                    message : "No stocks available for this date.",
+                    user
                 })
             }
         })

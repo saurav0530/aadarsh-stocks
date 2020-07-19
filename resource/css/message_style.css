@@ -4,6 +4,7 @@
     grid-auto-rows: minmax(30px,auto);
     grid-template-columns: 270px 40px calc((100% - 310px));
     margin-left : calc((105% - 700px)/2);
+    word-break: break-all;
  }
  .txnmssg h4,.txnmssg strong{
      color: black;
