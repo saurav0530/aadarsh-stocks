@@ -36,7 +36,7 @@ router.post('/',checkAuthenticated,(req,res)=>{
     }
     else if(req.body.loginChoice == 4)
     {
-        res.redirect('/home/accountDetails')
+        res.redirect('/home/profile')
     }
     else if(req.body.loginChoice == 5)
     {
@@ -233,9 +233,9 @@ router.post('/paymentStatus',checkAdmin,async (req,res)=>{
 
 ///////////////////////////////////////    Account-Details    //////////////////////////////////////////
 
-router.get('/accountDetails',checkAuthenticated,(req,res) =>{
+router.get('/profile',checkAuthenticated,(req,res) =>{
     var user = req.user
-    res.render('accountDetails',{user,message : "",color:"red"})
+    res.render('profile',{user,message : "",color:"red"})
 })
 
 ////////////////////////////////////////////// Change Password /////////////////////////////////////////
