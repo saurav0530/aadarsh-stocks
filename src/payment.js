@@ -4,33 +4,32 @@ const checksum = require('../pay/checksum/checksum')
 
 const paytmPay = (res,amount,mobile,email) =>{
     var today = new Date()
-    // var paytmParams = {
-    //     "MID" : "NlRATJ20037763203941",
-    //     "WEBSITE" : "WEBSTAGING",
-    //     "INDUSTRY_TYPE_ID" : "Retail",
-    //     "CHANNEL_ID" : "WEB",
-    //     "ORDER_ID" : 'ORD'+today.getDate()+today.getSeconds()+today.getMinutes(),
-    //     "CUST_ID" : 'CUS'+today.getDate()+today.getSeconds()+today.getMinutes(),
-    //     "MOBILE_NO" : "7631539113",
-    //     "EMAIL" : "sauravkumar0530@gmail.com",
-    //     "TXN_AMOUNT" : amount,
-    //     "CALLBACK_URL" : "http://localhost:4000/home/paymentStatus",
-    // };
     var paytmParams = {
         "MID" : "xOoeDK18938964067707",
         "WEBSITE" : "DEFAULT",
         "INDUSTRY_TYPE_ID" : "Retail",
         "CHANNEL_ID" : "WEB",
-        "ORDER_ID" : 'ORD'+today.getDate()+today.getUTCMilliseconds() +today.getMinutes(),
-        "CUST_ID" : 'CUS'+today.getDate()+today.getUTCMilliseconds()+today.getMinutes(),
-        "MOBILE_NO" : mobile,
-        "EMAIL" : email,
+        "ORDER_ID" : 'ORD'+today.getDate()+today.getSeconds()+today.getMinutes(),
+        "CUST_ID" : 'CUS'+today.getDate()+today.getSeconds()+today.getMinutes(),
+        "MOBILE_NO" : "7631539113",
+        "EMAIL" : "sauravkumar0530@gmail.com",
         "TXN_AMOUNT" : amount,
-        "CALLBACK_URL" : "http://aadarsh-stocks.herokuapp.com/home/paymentStatus",
-        //"CALLBACK_URL" : "http://localhost:4000/home/paymentStatus",
+        "CALLBACK_URL" : "http://localhost:4000/home/paymentStatus",
     };
+    // var paytmParams = {
+    //     "MID" : "xOoeDK18938964067707",
+    //     "WEBSITE" : "DEFAULT",
+    //     "INDUSTRY_TYPE_ID" : "Retail",
+    //     "CHANNEL_ID" : "WEB",
+    //     "ORDER_ID" : 'ORD'+today.getDate()+today.getUTCMilliseconds() +today.getMinutes(),
+    //     "CUST_ID" : 'CUS'+today.getDate()+today.getUTCMilliseconds()+today.getMinutes(),
+    //     "MOBILE_NO" : mobile,
+    //     "EMAIL" : email,
+    //     "TXN_AMOUNT" : amount,
+    //     "CALLBACK_URL" : "http://aadarsh-stocks.herokuapp.com/home/paymentStatus",
+    //     //"CALLBACK_URL" : "http://localhost:4000/home/paymentStatus",
+    // };
     checksum.genchecksum(paytmParams,'eXi3Aa8J9N#1iibH',(err,checksum)=>{
-        console.log(checksum)
         let url = 'https://securegw.paytm.in/order/process'
         // let formFields = ""
         // for(x in paytmParams){

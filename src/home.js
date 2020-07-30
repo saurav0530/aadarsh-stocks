@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const { ObjectId } = require('mongodb')
 const pay = require('./payment')
 const paytmPay = require('./payment')
+const algo = require('./algo')
 
 
 // parse application/x-www-form-urlencoded
@@ -41,6 +42,10 @@ router.post('/',checkAuthenticated,(req,res)=>{
     {
         req.logOut()
         res.redirect('/')
+    }
+    else if(req.body.loginChoice == 7)
+    {
+        res.redirect('/home')
     } 
 })
 
@@ -255,6 +260,11 @@ router.post('/changePassword',checkAuthenticated,async (req,res) =>{
     else{
         res.render('changePassword',{user,message : "Invalid Old Password",color:"red"})
     }
+})
+
+router.get('/logout',checkAuthenticated,(req,res)=>{
+    req.logOut()
+    res.redirect('/')
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

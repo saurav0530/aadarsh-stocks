@@ -14,10 +14,11 @@
             <form action="/home" method="post">
                 <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
                     <option value="1">Welcome, {{user.firstName}}</option>
-                    <option value="2"><a href="/register">Stock Data</a></option>
+                    <option value="7">Home</option>
+                    <option value="2">Stock Data</option>
                     {{#if user.admin}}
                         <option value="3">Data Input</option>
-                        <option value="6">Pricing</option>
+                        <option value="6" selected>Pricing</option>
                     {{/if}}
                     <option value="4">Account Details</option>
                     <option value="5"><strong class="logout">Logout<strong></option>

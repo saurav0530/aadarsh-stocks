@@ -8,72 +8,38 @@
 </head>
 <body>
     <section class="header">
-        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="/home/pricing" class="pricing">Pricing</a></strong>
-        <strong class = "authentication">
-            <form action="/home" method="post">
-                <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
-                    <option value="1">Welcome, {{user.firstName}}</option>
-                    <option value="2"><a href="/register">Stock Data</a></option>
-                    {{#if user.admin}}
-                        <option value="3">Data Input</option>
-                        <option value="6">Pricing</option>
-                    {{/if}}
-                    <option value="4">Account Details</option>
-                    <option value="5"><strong class="logout">Logout<strong></option>
-                </select>
-            </form>
-        </strong>
+        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a></strong>
     </section>
     
     <section class="main-content">
         <br><br>
-        <div class = 'stock-view-date'>
-            <form action="/home/stockData" method="post">
-                <h4>Select date for viewing past stock suggestions : </h4>
-                <input type="date" name="stockViewDate" id="stock-view-date" onchange="this.form.submit()">
-            </form>
-            <br><strong class="errorMessage">{{message}}</strong>
-        </div>
-        
-        {{#if stockData}}
-                <strong></strong><br><br>
-                <p class="stockViewDate">Date : {{stockData.date}}</p>
-            <div class = "stock-display-para">
-                <strong style="text-decoration: underline;font-size : 24px;text-shadow: 0.1vw 0.1vh 01vh white;">EDITOR'S NOTE :</strong>
-                <br><br><p class = "para1" style="text-align: justify;">1. {{stockData.para1}} </p><br><br>
-                <p class = "para1" style="text-align: justify;">2. {{stockData.para2}}<p><br><br>
-            </div>
-            <br><br>
-            {{#if stockData.link}}
-                {{#each stockData.link}}
-                <strong class="link"><a href="{{this}}"> Link{{@index}}</a></strong>
-                {{/each}}
-                <br><br>
-            {{/if}}
-            <div class="stockDisplayBox">
-            <div class = "stock-display">
-                <strong class = "stock-display-headers">Stock Name</strong>
-                <strong class = "stock-display-headers">Buy above</strong>
-                <strong class = "stock-display-headers">Target</strong>
-                <strong class = "stock-display-headers">Stop Loss</strong>
-                <strong class = "stock-display-headers">Recent High</strong>
-                <strong class = "stock-display-headers">Recent Low</strong>
-                <strong class = "stock-display-headers">Remarks</strong>
-                {{#if stockData.data}}
-                    {{#each stockData.data}}
-                        <h8 class = "stock-display-items">{{this.stockName}}</h8>
-                        <h8 class = "stock-display-items">{{this.buyAbove}}</h8>
-                        <h8 class = "stock-display-items">{{this.target}}</h8>
-                        <h8 class = "stock-display-items">{{this.stopLoss}}</h8>
-                        <h8 class = "stock-display-items">{{this.recentHigh}}</h8>
-                        <h8 class = "stock-display-items">{{this.recentLow}}</h8>
-                        <h8 class = "stock-display-items">{{this.remarks}}</h8>        
-                    {{/each}}  
-                {{/if}}
-            </div>
-            </div>
-        {{/if}}
+        <center>
+            <strong class="homeUser">Welcome {{user.firstName}}</strong>
+            <div class="homepallette"><br><br><br>
+                <center>
+                    <div class="palletteDuo">
+                        <a href="/home"><div class="palletteElements"><img src="/icons/home.png" alt="Home"><br><br><strong class="homeLink"> Home</strong></div></a>
+                        <a href="/home/stockData"><div class="palletteElements pair"><img src="/icons/stockdata.png" alt="Stock-Data"><br><br><strong class="homeLink"> Stock-Data</strong></div></a>
+                    </div><br><br><br>
+                    {{#if user.admin}}
+                        <div class="palletteDuo">
+                            <a href="/home/dataInput"><div class="palletteElements"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
+                            <a href="/home/pricing"><div class="palletteElements pair"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
+                        </div><br><br><br>
+                    {{else}}
+                        <div class="palletteDuo">
+                            <a href="/home/dataInput" aria-disabled="true" ><div class="palletteElements" style="background-color: rgb(143, 113, 73);"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
+                            <a href="/home/pricing" aria-disabled="true" ><div class="palletteElements pair" style="background-color: rgb(143, 113, 73);"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
+                        </div><br><br><br>
+                    {{/if}}
 
+                    <div class="palletteDuo">
+                        <a href="/home/accountDetails"><div class="palletteElements"><img src="/icons/accountdetails.png" alt="Account-Details"><br><br><strong class="homeLink"> Account-Details</strong></div></a>
+                        <a href="/home/logout"><div class="palletteElements pair"><img src="/icons/logout.png" alt="Logout"><br><br><strong class="homeLink"> Logout</strong></div></a>
+                    </div><br><br><br>
+                </center>
+            </div>
+        </center>
     </section>
 
 

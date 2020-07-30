@@ -279,3 +279,26 @@ input::invalid{
     outline : none;
     padding-left : 40px;
 }
+.homeLink{
+    font-size : 20px;
+}
+.palletteElements{
+    display : inline-block;
+    padding : 15px 10px;
+    width : 150px;
+    border : 3px solid green;
+    border-radius : 15px;
+}
+.homepallette{
+    width : 550px;
+}
+.pair{
+    margin-left: 70px;
+}
+a{
+    text-decoration : none;
+}
+.homeUser{
+    font-size : 30px;
+    color : saddlebrown;
+}
