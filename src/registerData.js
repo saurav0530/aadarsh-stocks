@@ -60,7 +60,7 @@ router.post('/',( req,res ) =>{
     to: email,
     from: 'aadarshstock@gmail.com',
     subject: 'Welcome to Aadarsh Stocks Family !!',
-    ext: 'and easy to do anywhere, even with Node.js',
+    text: 'and easy to do anywhere, even with Node.js',
     html: '<strong>Hi Dear <br> A warm welcome from Aadarsh Stocks family. Wish we have a great ahead. </strong>',
     };
     sgMail.send(msg);
