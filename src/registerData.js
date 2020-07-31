@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs')
 const path = require('path')
 const mongodbData = require('./mongo')
 const bodyParser = require('body-parser')
+const sgMail = require('@sendgrid/mail')
+const {mailapikey}=require('./keys')
 
 
 // parse application/x-www-form-urlencoded
@@ -48,8 +50,24 @@ router.post('/',( req,res ) =>{
             message : "! E-mail already taken !",
             color : "red",
             link : " "
-        })
+        })  
     }
+
+    //---------------------MAIL Function--------------------------------------
+    var sendmail= function(email){
+    sgMail.setApiKey(mailapikey);
+    const msg = {
+    to: email,
+    from: 'aadarshstock@gmail.com',
+    subject: 'Welcome to Aadarsh Stocks Family !!',
+    ext: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>Hi Dear <br> A warm welcome from Aadarsh Stocks family. Wish we have a great ahead. </strong>',
+    };
+    sgMail.send(msg);
+    }
+
+
+
     if(newUser.password == req.body.registerPassword2){
         mongodbData.mongoConnect().then((client)=>{
             var db = client.db('aadarshDatabase')
@@ -58,6 +76,7 @@ router.post('/',( req,res ) =>{
                     testFunc2()
                 }else{
                     testFunc1(newUser)
+                    sendmail(newUser.email)
                 }
             }).catch((err) => console.log(err))
         }).catch((err) => console.log(err,"connection error"))
