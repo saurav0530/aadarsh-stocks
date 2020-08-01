@@ -22,7 +22,11 @@ router.get('/',checkAuthenticated,(req,res)=>{
 })
 
 router.post('/',checkAuthenticated,(req,res)=>{
-    if(req.body.loginChoice == 2)
+    if(req.body.loginChoice == 1)
+    {
+        res.redirect('/home')
+    }
+    else if(req.body.loginChoice == 2)
     {
         res.redirect('/home/stockData')
     }
