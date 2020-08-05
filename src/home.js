@@ -128,23 +128,13 @@ router.post('/dataInput/date',checkAuthenticated,(req,res)=>{
     }).catch(err => console.log(err))
 })
 
-router.post('/dataInput/link',checkAuthenticated,(req,res)=>{
-    var user = req.user
-    if(res.app.locals.stock.link){
-        res.app.locals.stock.link.push(req.body.link)
-        res.render('dataInput',{user})
-    }else{
-        res.render('dataInput',{user})
-    }
-})
-
 router.post('/dataInput/data',checkAuthenticated,(req,res)=>{
     if(req.files)
     {
 		fs.unlink('./uploads/test.xlsx',(err)=>{
             if(err)
               return console.log(err)    
-            console.log('Deleted')
+            //console.log('Deleted')
           })
 	  var file = req.files.xlsx
       file.mv('./uploads/test.xlsx',(err)=>{
@@ -152,12 +142,12 @@ router.post('/dataInput/data',checkAuthenticated,(req,res)=>{
           console.log(err)
         else
         {
-          console.log('Done!')
+          //console.log('Done!')
           var test = new excel.Workbook()
                    
           test.xlsx.readFile('./uploads/test.xlsx').then(()=>{
 			var sh = test.getWorksheet("Sheet1")
-			var stock = new Array()
+            var stock = new Array(),link = new Array(),para1,para2
 			for (i = 2; i <= sh.rowCount; i++) { 
 				if(sh.getRow(i).getCell(1).value == null)
 					break
@@ -170,30 +160,40 @@ router.post('/dataInput/data',checkAuthenticated,(req,res)=>{
 					recentLow : sh.getRow(i).getCell(6).value
 				}
 				stock.push(data)
-			}
+            }
+            for (i = 2; i <= sh.rowCount; i++) { 
+				if(sh.getRow(i).getCell(7).value == null)
+					break
+				link.push(sh.getRow(i).getCell(7).value)
+            }
+            para1 = sh.getRow(2).getCell(8).value
+            para2 = sh.getRow(2).getCell(9).value
 			res.app.locals.stock.data = stock
+            res.app.locals.stock.link = link
+            res.app.locals.stock.para1 = para1
+            res.app.locals.stock.para2 = para2 
           }).catch((err)=> console.log(err))
 		}
       })
     }
-    console.log(res.app.locals.stock)
+    //console.log(res.app.locals.stock)
     res.render('dataInput',{user})
 })
 router.post('/dataInput/stockData',(req,res)=>{
-    res.app.locals.stock.para1 = req.body.para1Stock
-    res.app.locals.stock.para2 = req.body.para2Stock
 
     var data = res.app.locals.stock
     res.app.locals.stock = null
     if(res.app.locals.update){
         mongodbData.mongoConnect().then(client =>{
             var db = client.db('aadarshDatabase')
+            console.log('Update')
             db.collection('stock').updateOne({date : data.date},{$set : data})
         }).catch(err => console.log(err))
     }
     else{
         mongodbData.mongoConnect().then(client =>{
             var db = client.db('aadarshDatabase')
+            console.log('New')
             db.collection('stock').insertOne(data)
         }).catch(err => console.log(err))
     }  

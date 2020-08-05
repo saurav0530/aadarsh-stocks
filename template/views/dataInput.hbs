@@ -44,70 +44,50 @@
                     <button type="submit" class = "add-row" onchange="this.form.submit()">Add Stocks</button>
                 </center><br><br>
             </form>
-            <div class="stockDisplayBox">
-            <div class = "stock-display">               
-                <strong class = "stock-display-headers">Stock Name</strong>
-                <strong class = "stock-display-headers">Buy above</strong>
-                <strong class = "stock-display-headers">Target</strong>
-                <strong class = "stock-display-headers">Stop Loss</strong>
-                <strong class = "stock-display-headers">Recent High</strong>
-                <strong class = "stock-display-headers">Recent Low</strong>
-                {{#if stock.data}}
-                    {{#each stock.data}}
-                        <h8 class = "stock-display-items row${length}">{{this.stockName}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.buyAbove}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.target}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.stopLoss}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.recentHigh}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.recentLow}}</h8>
-                    {{/each}}
-                {{/if}}
-            </div>
-            </div><br><br>
-            <form action="/home/dataInput/link" method="post">
-                <input type="url" name="link" id="link" placeholder="Link">
-                <button type="submit" id="submitLink">Add Link</button>
-            </form><br>
-            <div class="linkDisplay">
-                {{#if stock.link}}
-                    {{#each stock.link}}
-                        <strong class="linkDis">Link{{@index}} : <a href="{{this}}"></a>{{this}}</strong><br>
-                    {{/each}}
-                {{/if}}
-            </div>
-            <br><br>
-            <form action="/home/dataInput/stockData" method="post">
-                <input type = "text" name = "para1Stock"class = "para1-stock" placeholder="Para 1(required)" value="{{stock.para1}}">
-                <input type = "text" name = "para2Stock"class = "para2-stock" placeholder="Para 2(required)" value="{{stock.para2}}">
-                <br><br><button class = "add-to-database" >Add to Database</button><br><br>
-            </form>
-            
+            {{#if stock.data}}
+                <div class="stockDisplayBox">
+                <div class = "stock-display">               
+                    <strong class = "stock-display-headers">Stock Name</strong>
+                    <strong class = "stock-display-headers">Buy above</strong>
+                    <strong class = "stock-display-headers">Target</strong>
+                    <strong class = "stock-display-headers">Stop Loss</strong>
+                    <strong class = "stock-display-headers">Recent High</strong>
+                    <strong class = "stock-display-headers">Recent Low</strong>
+                    {{#if stock.data}}
+                        {{#each stock.data}}
+                            <h8 class = "stock-display-items row${length}">{{this.stockName}}</h8>
+                            <h8 class = "stock-display-items row${length}">{{this.buyAbove}}</h8>
+                            <h8 class = "stock-display-items row${length}">{{this.target}}</h8>
+                            <h8 class = "stock-display-items row${length}">{{this.stopLoss}}</h8>
+                            <h8 class = "stock-display-items row${length}">{{this.recentHigh}}</h8>
+                            <h8 class = "stock-display-items row${length}">{{this.recentLow}}</h8>
+                        {{/each}}
+                    {{/if}}
+                </div>
+                </div><br><br>
+                
+                <div class="linkDisplay">
+                    {{#if stock.link}}
+                        {{#each stock.link}}
+                            <strong class="linkDis">Link{{@index}} : <a href="{{this.hyperlink}}"></a>{{this.hyperlink}}</strong><br>
+                        {{/each}}
+                    {{/if}}
+                </div>
+                <br><br>
+                <form action="/home/dataInput/stockData" method="post">
+                    <div class = "stock-display-para">
+                        <strong style="text-decoration: underline;font-size : 24px;text-shadow: 0.1vw 0.1vh 01vh white;">EDITOR'S NOTE :</strong>
+                        <br><br><p class = "para1" style="text-align: justify;">1. {{stock.para1}} </p><br><br>
+                        <p class = "para1" style="text-align: justify;">2. {{stock.para2}}<p><br><br>
+                    </div>
+                    <br><br><center><button class = "add-to-database" >Add to Database</button></center><br><br>
+                </form>
+            {{/if}}
     </section>
 
 
     <section class="footer">
         {{>footer}}
     </section>
-    <script>
-        // Event-listener for clearing input field
-            document.querySelector('.add-row').addEventListener('click',()=>{
-                setTimeout(()=>{
-                        if( document.querySelector('#stock-input-stockName').value != undefined )
-                            document.querySelector('#stock-input-stockName').value = ''
-                        if( document.querySelector('#stock-input-stopLoss').value != undefined )
-                            document.querySelector('#stock-input-stopLoss').value = ''
-                        if( document.querySelector('#stock-input-target').value != undefined )
-                            document.querySelector('#stock-input-target').value = ''
-                        if( document.querySelector('#stock-input-buyAbove').value != undefined )
-                            document.querySelector('#stock-input-buyAbove').value = ''
-                        if( document.querySelector('#stock-input-recentHigh').value != undefined )
-                            document.querySelector('#stock-input-recentHigh').value = ''
-                        if( document.querySelector('#stock-input-recentLow').value != undefined )    
-                            document.querySelector('#stock-input-recentLow').value = ''
-                        if( document.querySelector('#stock-input-remarks').value != undefined )
-                            document.querySelector('#stock-input-remarks').value = ''
-                },1000)
-            })
-    </script>
 </body>
 </html>
