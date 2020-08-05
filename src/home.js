@@ -6,6 +6,9 @@ const { ObjectId } = require('mongodb')
 const pay = require('./payment')
 const paytmPay = require('./payment')
 const algo = require('./algo')
+const fs = require('fs')
+const upload = require('express-fileupload')
+const excel = require('exceljs')
 
 
 // parse application/x-www-form-urlencoded
@@ -13,6 +16,8 @@ router.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 router.use(bodyParser.json())
+
+router.use(upload())
 
 router.get('/',checkAuthenticated,(req,res)=>{
     if( req.user ){
@@ -133,19 +138,45 @@ router.post('/dataInput/link',checkAuthenticated,(req,res)=>{
     }
 })
 
-router.post('/dataInput/data',(req,res)=>{
-    var user = req.user
-    var data = {
-        stockName : req.body.stockName,
-        buyAbove : req.body.buyAbove,
-        target : req.body.target,
-        stopLoss : req.body.stopLoss,
-        recentHigh : req.body.recentHigh,
-        recentLow : req.body.recentLow,
-        remarks : req.body.remarks,
+router.post('/dataInput/data',checkAuthenticated,(req,res)=>{
+    if(req.files)
+    {
+		fs.unlink('./uploads/test.xlsx',(err)=>{
+            if(err)
+              return console.log(err)    
+            console.log('Deleted')
+          })
+	  var file = req.files.xlsx
+      file.mv('./uploads/test.xlsx',(err)=>{
+        if(err)
+          console.log(err)
+        else
+        {
+          console.log('Done!')
+          var test = new excel.Workbook()
+                   
+          test.xlsx.readFile('./uploads/test.xlsx').then(()=>{
+			var sh = test.getWorksheet("Sheet1")
+			var stock = new Array()
+			for (i = 2; i <= sh.rowCount; i++) { 
+				if(sh.getRow(i).getCell(1).value == null)
+					break
+				var data = {
+					stockName : sh.getRow(i).getCell(1).value,
+					buyAbove : sh.getRow(i).getCell(2).value,
+					target : sh.getRow(i).getCell(3).value,
+					stopLoss : sh.getRow(i).getCell(4).value,
+					recentHigh : sh.getRow(i).getCell(5).value,
+					recentLow : sh.getRow(i).getCell(6).value
+				}
+				stock.push(data)
+			}
+			res.app.locals.stock.data = stock
+          }).catch((err)=> console.log(err))
+		}
+      })
     }
-    res.app.locals.stock.data.push(data)
-    //console.log(res.app.locals.stock)
+    console.log(res.app.locals.stock)
     res.render('dataInput',{user})
 })
 router.post('/dataInput/stockData',(req,res)=>{

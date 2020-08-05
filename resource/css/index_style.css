@@ -47,7 +47,7 @@ body{
 }
 .footer a{
     color: blueviolet;
-    padding-left: 32px;
+    padding-right: 2px; 
     text-shadow: 0.1vw 0.1vh 1.8vh white;
     font-size:17px;
     font-weight:bolder;
@@ -123,7 +123,7 @@ body{
 .stock-display{
     display: grid;
     grid-auto-rows: minmax(30px,auto);
-    grid-template-columns: 365px 300px 250px 270px 350px 350px 600px;
+    grid-template-columns: 365px 295px 240px 265px 345px 347px;
     border: 2px solid black;
     word-break : break-word;
     grid-gap : 1px;

@@ -35,19 +35,14 @@
             </div>
             {{#if stock.date}}
                 <strong></strong><br>
-                <strong class="stockViewDate">Date : {{stock.date}}</strong><br><br><br>
+                <center><strong class="stockViewDate">Date : {{stock.date}}</strong></center><br><br><br>
             {{/if}}
-            <form action="/home/dataInput/data" method="post">
-                <div class = "stock-display-input" >
-                    <input type="search" name = "stockName" id="stock-input-stockName" placeholder = " Stock-name " required>
-                    <input type="search" name = "buyAbove" id="stock-input-buyAbove" placeholder = " Buy above " required>
-                    <input type="search" name = "target" id="stock-input-target" placeholder = " Target " required>
-                    <input type="search" name = "stopLoss" id="stock-input-stopLoss" placeholder = " Stop Loss " required>
-                    <input type="search" name = "recentHigh" id="stock-input-recentHigh" placeholder = " Recent High " required>
-                    <input type="search" name = "recentLow" id="stock-input-recentLow" placeholder = " Recent Low " required>
-                    <input type="search" name = "remarks" id="stock-input-remarks" placeholder = " Remarks " required>
-                </div>
-                    <br><button class = "add-row" >Add stock</button><br><br>
+            <form action="/home/dataInput/data" method="post" enctype="multipart/form-data">
+                <center>
+                    <strong class="stocklabel">Choose the Excel sheet for stock data : </strong>
+                    <input type="file" name="xlsx" id="xlsx " class="xlsx"><br><br>
+                    <button type="submit" class = "add-row" onchange="this.form.submit()">Add Stocks</button>
+                </center><br><br>
             </form>
             <div class="stockDisplayBox">
             <div class = "stock-display">               
@@ -57,7 +52,6 @@
                 <strong class = "stock-display-headers">Stop Loss</strong>
                 <strong class = "stock-display-headers">Recent High</strong>
                 <strong class = "stock-display-headers">Recent Low</strong>
-                <strong class = "stock-display-headers">Remarks</strong>
                 {{#if stock.data}}
                     {{#each stock.data}}
                         <h8 class = "stock-display-items row${length}">{{this.stockName}}</h8>
@@ -66,7 +60,6 @@
                         <h8 class = "stock-display-items row${length}">{{this.stopLoss}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.recentHigh}}</h8>
                         <h8 class = "stock-display-items row${length}">{{this.recentLow}}</h8>
-                        <h8 class = "stock-display-items row${length}">{{this.remarks}}<input type="button" value="X" style="margin-right : 0;visibility : visible ;" class = "cut row${length}"></h8>
                     {{/each}}
                 {{/if}}
             </div>

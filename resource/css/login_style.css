@@ -96,12 +96,12 @@ input[placeholder]{
     font-size : 15px;
 }
 .add-row{
-    position: relative;
-    left: 43%;
-    width: 14%;
     background-image: linear-gradient(yellow,red);
     border-radius : 1.5vw;
     font-size : 15px;
+}
+.stocklabel {
+    font-size : 18px;
 }
 .stock-entry-date h4{
     margin-left: calc((100% - 720px)/2);
@@ -214,8 +214,6 @@ input::invalid{
 }
 .stockViewDate{
     font-size : 19px;
-    width : 167px;
-    margin-left : calc((100% - 167px)/2);
     border-bottom : 3px solid brown;
     padding : 0 8px;
     border-radius : 10px;
