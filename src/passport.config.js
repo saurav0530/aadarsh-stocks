@@ -22,7 +22,7 @@ function initialize( passport ){
             
         }
         else{
-            return done(null,false,{message : "Invalid Credentials"})
+            return done(null,false,{message : "Invalid email or password"})
         }
             
     }

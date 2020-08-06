@@ -15,34 +15,6 @@ const writeFunc = function( fileType,data ){
     })
 }
 
-const findUsers = function(userType,username,password){
-    
-    MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true}, (err,client)=>{
-        if(err)
-            return console.log(err)
-
-        const db = client.db( databaseName )
-        if(userType == 1)
-        {
-            db.collection('users').find({email : username, password: password}).toArray((err,data)=>{
-                if(err)
-                    return console.log(err)
-                
-                // Call the login function here
-                console.log(data)
-            })
-        }
-        
-        else if( userType == 2 )
-            db.collection('admin').find({username : username, password: password}).toArray((err,data)=>{
-                if(err)
-                    return console.log(err)
-                 
-                // Call the login function here
-                console.log(data)
-            })
-    } )
-}
 
 const mongoConnect = function(){
         return MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true})
@@ -51,6 +23,12 @@ const mongoConnect = function(){
 
 module.exports = {
     writeFunc : writeFunc,
-    findUsers : findUsers,
     mongoConnect : mongoConnect
 }
+
+
+// mongoConnect().then(async client =>{
+//     const db = client.db('aadarshDatabase')
+//     await db.collection('users').updateMany({}, {$unset: {referral:0}}, false, true)
+//     await db.collection('users').updateMany({}, {$set: {referredTo:[]}}, false, true)
+// }).catch(err => console.log(err))

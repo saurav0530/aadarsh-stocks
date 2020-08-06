@@ -37,6 +37,14 @@
             <strong> Mobile </strong><strong>: {{user.mobile}}</strong>
             <strong> E-mail </strong><strong>: {{user.email}}</strong>
             <strong> User-Type </strong><strong>: {{user.access}}</strong>
+            <strong></strong><strong></strong>
+            {{#if user.referredBy}}
+                <strong> Referred By </strong><strong>: {{user.referredBy}}</strong>
+            {{/if}}
+            <strong> Referral ID </strong><strong>: <strong style="text-decoration: underline;"> {{user._id}}</strong> </strong>
+            {{#if user.referredTo}}
+                <strong> Referred To </strong><strong>{{#each user.referredTo}}: <strong>{{this}}</strong><br> {{/each}}</strong>
+            {{/if}}
             </div><br><br><br><br><br><br>
             <strong class="changePassLink"><a href="/home/changePassword">Change Password</a></strong>
     </section>

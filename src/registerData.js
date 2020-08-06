@@ -6,6 +6,7 @@ const mongodbData = require('./mongo')
 const bodyParser = require('body-parser')
 const sgMail = require('@sendgrid/mail')
 const {mailapikey}=require('./keys')
+const { ObjectId } = require('mongodb')
 
 
 // parse application/x-www-form-urlencoded
@@ -21,13 +22,14 @@ router.use(bodyParser.json())
 router.get('/',(req,res) =>{
     
     res.render('register',{
-        message : " ",
-        danzer : " ",
-        link : " "
+        message : req.flash('message'),
+        danzer : req.flash('danzer'),
+        link : req.flash('link'),
+        color : req.flash('color')
     })
 })
 
-router.post('/',( req,res ) =>{
+router.post('/',async ( req,res ) =>{
     let newUser ={
         firstName : req.body.registerFirstName,
         lastName : req.body.registerLastName,
@@ -35,22 +37,34 @@ router.post('/',( req,res ) =>{
         password : req.body.registerPassword,
         mobile : req.body.registerMobile,
         access : "User",
-        admin : false
+        admin : false,
+        referredTo : []
     }
-    var testFunc1 = function(data){
+    var regSucMssg = function(data){
         mongodbData.writeFunc( 'users', data )
-        res.render('register',{
-            color : "green",
-            message : "Registration Successful!",
-            link : "Go to Login"
-        })
+        req.flash('color' ,'green')
+        req.flash('message' ,'Registration Successful!')
+        req.flash('link' ,'Go to Login')
+        res.redirect('/register')
     }
-    var testFunc2 = function(){
-        res.render('register',{
-            message : "! E-mail already taken !",
-            color : "red",
-            link : " "
-        })  
+    var dupEmailMssg = function(){
+        req.flash('color' ,'red')
+        req.flash('message' ,'! E-mail already taken !')
+        req.flash('link' ,'')
+        res.redirect('/register')
+    }
+    var saveNewUserData = ()=>{
+        mongodbData.mongoConnect().then((client)=>{
+            var db = client.db('aadarshDatabase')
+            db.collection('users').findOne({email : newUser.email}).then((data)=>{
+                if(data){
+                    dupEmailMssg()
+                }else{
+                    regSucMssg(newUser)
+                    sendmail(newUser.email)
+                }
+            }).catch((err) => console.log(err))
+        }).catch((err) => console.log(err,"connection error"))   
     }
 
     //---------------------MAIL Function--------------------------------------
@@ -65,28 +79,52 @@ router.post('/',( req,res ) =>{
     };
     sgMail.send(msg);
     }
-
-
+    console.log(req.body)
 
     if(newUser.password == req.body.registerPassword2){
-        mongodbData.mongoConnect().then((client)=>{
-            var db = client.db('aadarshDatabase')
-            db.collection('users').findOne({email : newUser.email}).then((data)=>{
-                if(data){
-                    testFunc2()
-                }else{
-                    testFunc1(newUser)
-                    sendmail(newUser.email)
+        /////////////////////////////////// Referral Implementation //////////////////////////////////
+        if(req.body.referralCode){
+            if(req.body.referralCode.length == 24){
+                var referee
+                await mongodbData.mongoConnect().then(async (client)=>{
+                    var db = client.db('aadarshDatabase')
+                    await db.collection('users').findOne({_id : ObjectId(req.body.referralCode)}).then((data)=>{
+                        data.referredTo.push(newUser.email)
+                        referee = data
+                        newUser.referredBy = data.firstName + " " + data.lastName
+                        db.collection('users').updateOne({_id : ObjectId(req.body.referralCode)},{$set : data})
+                    }).catch(err =>{
+                        console.log(err)
+                    })
+                })
+                console.log(referee)
+                if(referee){
+                     saveNewUserData()
                 }
-            }).catch((err) => console.log(err))
-        }).catch((err) => console.log(err,"connection error"))
+                else
+                {
+                    req.flash('color' ,'red')
+                    req.flash('message' ,'Invalid Referral Code')
+                    req.flash('link' ,'')
+                    res.redirect('/register')
+                }
+            }
+            else{
+                req.flash('color' ,'red')
+                req.flash('message' ,'Invalid Referral Code')
+                req.flash('link' ,'')
+                res.redirect('/register')
+            }
+        }
+        else{
+            saveNewUserData()
+        }
+        //////////////////////////////////////////////////////////////////////////////////////////////     
     }else{
-        console.log(newUser.registerPassword ,req.body.registerPassword2)
-        res.render('register',{
-            message : "Password didn't match...",
-            color : "red",
-            link : " "
-        })
+        req.flash('color' ,'red')
+        req.flash('message' ,"Password didn't match...")
+        req.flash('link' ,'')
+        res.redirect('/register')
     }
         
 })

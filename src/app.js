@@ -11,13 +11,13 @@ const app = express()
 // Express Session Middleware
 /////////////////////////////////////////////
 //Experimental middleware
+
 app.use(flash()) 
-// app.set('trust proxy', 1)
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true
-    // cookie: { secure: true }
+    saveUninitialized: true,
+    cookie: { maxAge: 300000 }
 }));
 app.use(passport.initialize())
 app.use(passport.session())

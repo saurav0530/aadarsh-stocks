@@ -20,7 +20,7 @@ router.use(bodyParser.json())
 
 router.get('/',checkNotAuthenticated,(req,res) =>{
     res.render('login',{
-        message : " "
+        message : req.flash('error')
     })
 })
 // router.post('/',(req,res)=>{
@@ -43,7 +43,7 @@ router.get('/',checkNotAuthenticated,(req,res) =>{
 // })
 router.post('/',passport.authenticate('local',{
     successRedirect : '/home',
-    failureRedirect : '/register',
+    failureRedirect : '/login',
     failureFlash : true
 }))
 

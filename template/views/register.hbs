@@ -14,31 +14,27 @@
     </section>
     <section class = "main-content">
        <br><br><br><br><br><br>
-       <div class = "form">
-           <h4>SignUp Portal</h4>
-           <form action="/register" method="post">
-                <br><br><br><input type="text" class = "registerFirstName" name = "registerFirstName" placeholder = "First Name" required> 
-                <br><input type="text" class = "registerLastName" name = "registerLastName" placeholder = "Last-Name" required>
-                <br><input type="tel" class = "registerMobile" name = "registerMobile" placeholder="Mobile"required>
-                <br><input type="email" class = "registerEmail" name = "registerEmail" placeholder="Email"required>
-                <br><input type="password" class = "registerPassword" name = "registerPassword" placeholder="Password" required> 
-                <br><input type="password" class = "registerPassword2" name = "registerPassword2" placeholder="Confirm Password"required>
-                <br><button type="submit" class = "register-submit">Create Account</button>
-           </form>
-            <br>
-       <strong class="message" style = "color :{{color}};">{{message}}</strong><br>
-       <strong class="messageLink" style = "color : blue;"><a href="/login">{{link}}</a></strong>
-
-       
-       </div>
-       <br><br><br><br>
-        
+       <center>
+            <div class = "form">
+                <h4>SignUp Portal</h4>
+                <form action="/register" method="post">
+                        <br><br><br><input type="text" class = "registerFirstName" name = "registerFirstName" placeholder = "First Name" required> 
+                        <br><input type="text" class = "registerLastName" name = "registerLastName" placeholder = "Last-Name" required>
+                        <br><input type="tel" class = "registerMobile" name = "registerMobile" placeholder="Mobile"required>
+                        <br><input type="email" class = "registerEmail" name = "registerEmail" placeholder="Email"required>
+                        <br><input type="password" class = "registerPassword" name = "registerPassword" placeholder="Password" required> 
+                        <br><input type="password" class = "registerPassword2" name = "registerPassword2" placeholder="Confirm Password"required>
+                        <br><input type="text" class = "referralCode" name = "referralCode" placeholder="Referral Code(Optional)">
+                        <br><button type="submit" class = "register-submit">Create Account</button>
+                </form><br>
+            <strong class="message" style = "color :{{color}};font-size : 20px;">{{message}}</strong><br>
+            <strong class="messageLink" style = "color : blue;font-size : 17px;"><a href="/login">{{link}}</a></strong>
+            </div>
+       </center>
+       <br><br><br><br> 
     </section>
     <section class = "footer">
         {{>footer}}
     </section>
-
-
-    <script type="module" src='/js/main.mjs'></script>
 </body>
 </html>
