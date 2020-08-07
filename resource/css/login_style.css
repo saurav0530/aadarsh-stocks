@@ -126,10 +126,10 @@ input[placeholder]{
     margin-left: calc((100% - 830px)/2);
 }
 .account-details{
-    width : fit-content;
+    width : max-content;
     margin : auto;
     display: grid;
-    grid-template-columns:1fr 2fr;
+    grid-template-columns:0.6fr 2fr;
     grid-auto-rows: minmax(36px,auto);
     align-items: center;
 }

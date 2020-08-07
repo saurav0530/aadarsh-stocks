@@ -19,7 +19,7 @@ router.use(bodyParser.json())
 
 
 
-router.get('/',(req,res) =>{
+router.get('/',checkNotAuthenticated,(req,res) =>{
     
     res.render('register',{
         message : req.flash('message'),
@@ -28,8 +28,14 @@ router.get('/',(req,res) =>{
         color : req.flash('color')
     })
 })
-router.get('/:id',(req,res)=>{
-    res.render('register',{referralCode : req.params.id})
+router.get('/:id',checkNotAuthenticated,(req,res)=>{
+    res.render('register',{
+        referralCode : req.params.id,
+        message : req.flash('message'),
+        danzer : req.flash('danzer'),
+        link : req.flash('link'),
+        color : req.flash('color')
+    })
 })
 router.post('/',async ( req,res ) =>{
     let newUser ={
@@ -45,15 +51,18 @@ router.post('/',async ( req,res ) =>{
     var regSucMssg = async function(data){
         await mongodbData.writeFunc( 'users', data )
         req.flash('color' ,'green')
-        req.flash('message' ,'Registration Successful!')
+        req.flash('message' ,'Registration Successful')
         req.flash('link' ,'Go to Login')
         res.redirect('/register')
     }
     var dupEmailMssg = function(){
         req.flash('color' ,'red')
-        req.flash('message' ,'! E-mail already taken !')
+        req.flash('message' ,'E-mail already taken')
         req.flash('link' ,'')
+        if(req.body.referralCode)
+            return res.redirect(`${req.originalUrl}/${req.body.referralCode}`)
         res.redirect('/register')
+
     }
     var saveNewUserData = ()=>{
         mongodbData.mongoConnect().then((client)=>{
@@ -92,17 +101,19 @@ router.post('/',async ( req,res ) =>{
                             }
                             else
                             {
+                                //console.log(req)
                                 req.flash('color' ,'red')
                                 req.flash('message' ,'Invalid Referral Code')
                                 req.flash('link' ,'')
-                                res.redirect('/register')
+                                res.redirect(`/register`)
                             }
                         }
                         else{
+                            //console.log(req)
                             req.flash('color' ,'red')
                             req.flash('message' ,'Invalid Referral Code')
                             req.flash('link' ,'')
-                            res.redirect('/register')
+                            res.redirect(`/register`)
                         }
                     }
                     else{
@@ -125,12 +136,15 @@ router.post('/',async ( req,res ) =>{
     //---------------------MAIL Function--------------------------------------
     var sendmail= function(email){
     sgMail.setApiKey(mailapikey);
+    var htmlDoc = `
+        <strong>Hi Dear <br> A warm welcome from Aadarsh Stocks family. Wish we have a great ahead. </strong>
+    `
     const msg = {
     to: email,
     from: 'aadarshstock@gmail.com',
     subject: 'Welcome to Aadarsh Stocks Family !!',
     text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>Hi Dear <br> A warm welcome from Aadarsh Stocks family. Wish we have a great ahead. </strong>',
+    html: htmlDoc,
     };
     sgMail.send(msg);
     }
@@ -141,9 +155,19 @@ router.post('/',async ( req,res ) =>{
         req.flash('color' ,'red')
         req.flash('message' ,"Password didn't match...")
         req.flash('link' ,'')
-        res.redirect('/register')
+        if(req.body.referralCode)
+            res.redirect(`${req.originalUrl}/${req.body.referralCode}`)
+        else
+            res.redirect('/register')
     }
         
 })
+
+function checkNotAuthenticated( req,res,next ){
+    if( req.isAuthenticated() ){
+        return res.redirect('/home')
+    }
+    next()
+}
 
 module.exports = router

@@ -66,7 +66,7 @@ body{
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 60px;
-    /* background-image: url('../img/WhatsApp\ Image\ 2020-06-28\ at\ 9.12.48\ PM.jpeg');
+    /*background-image: url('../img/WhatsApp\ Image\ 2020-06-28\ at\ 9.12.48\ PM.jpeg');
     background-repeat: repeat-y;
     background-size: 100vw 100vh; */
     background-image: linear-gradient(skyblue,white,skyblue);
@@ -227,19 +227,20 @@ select option{
     height: 50px;
     width : 100%;
 }
- .covidText{
+.covidText{
+    display : inline;
     color : blue;
     font-size: 20px;
     padding : 12px 0;
     font-weight : bold;
-    width : 229px;
     font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     position: relative;
-    animation : mymove 20s infinite;
+    animation : mymove 15s infinite;
+    animation-timing-function: linear;
 }
 @keyframes mymove{
     0% { left : 0}
-    50% { left : calc((100% - 229px));}
+    50% { left : calc((100% - 322px));}
     100% {left : 0px}    
 }
 .covidText:hover{
