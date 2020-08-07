@@ -2,6 +2,7 @@ input[placeholder]{
     font-size: 20px;
     font-weight: bolder;
     padding-left: 30px;
+    padding-right: 30px;
 }
 .header select{
     border : 2px solid rgb(255, 225, 50);
@@ -125,19 +126,18 @@ input[placeholder]{
     margin-left: calc((100% - 830px)/2);
 }
 .account-details{
-    width : max-content;
+    width : fit-content;
     margin : auto;
     display: grid;
-    grid-template-columns:repeat(2,1fr);
-    grid-auto-rows: minmax(4vh,auto);
+    grid-template-columns:1fr 2fr;
+    grid-auto-rows: minmax(36px,auto);
+    align-items: center;
 }
 .account-details strong{
     font-size: 20px;
     color : brown;
 }
 .account-details-header{
-    width : 340px;
-    margin-left : calc((100% - 340px)/2);
     font-size: 35px;
     color : brown;
     text-decoration: underline;
@@ -156,21 +156,11 @@ input[placeholder]{
     word-wrap: break-word;
 }
 /*/////////////////////////////// Change Password ///////////////////////////////*/
-.changePassword{
-    width : 530px;
-    padding-left : calc((100% - 420px)/2);
-}
 .changePassword h4{
-    margin-left : -15px;
     font-size: 40px;
     color: rgba(97, 5, 105, 1);;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-shadow: 0.1vw 0.1vh 01vh aqua;
-}
-.changePassLink{
-    font-weight: bold;
-    font-size : 18px;
-    margin-left : calc((96% - 138px)/2)
 }
 #password1,#password2,#password3{
     border : 3px solid green;
@@ -189,7 +179,6 @@ input[placeholder]{
     font-weight: bolder;
     font-size: 1.2rem;
     color: black;
-    margin-left: 104px;
 }
 /*///////////////////////////////////////////////////////////////////////////////*/
 input[placeholder]:focus,select:focus,button:focus{
@@ -216,10 +205,14 @@ input::invalid{
     font-weight : bold;
 }
 /* Change Password */
-.changePassLink{
+.changePassLink a{
     font-weight: bold;
-    font-size : 18px;
-    margin-left : calc((96% - 138px)/2)
+    font-size : 20px;
+    border-top : 3px solid;
+    border-bottom : 3px solid;
+    border-radius : 8px;
+    padding : 3px 10px;
+    background-color : orange;
 }
 
 #cpmessage{
@@ -294,4 +287,18 @@ a{
 .homeUser{
     font-size : 30px;
     color : saddlebrown;
+}
+.copyReferralLink{
+    margin-left : 15px;
+    border-radius : 8px;
+    background-color : beige;
+    padding : 3px 3px;
+}
+#referralLink{
+    border : none;
+    background-color : inherit;
+    width : 400px;
+    font-weight : bold;
+    color : blue;
+    font-size : 18px;
 }

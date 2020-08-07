@@ -19,7 +19,7 @@
                         <option value="3">Data Input</option>
                         <option value="6">Pricing</option>
                     {{/if}}
-                    <option value="4" selected>Account Details</option>
+                    <option value="4" selected>Profile</option>
                     <option value="5"><strong class="logout">Logout<strong></option>
                 </select>
             </form>
@@ -29,30 +29,59 @@
     
     <section class="main-content">
             <br><br><br><br><br>
-            <h6 class ="account-details-header">Account Details<h6>
-            <br><br><br><br><br><br><br><br>
-            <div class = "account-details">
-            <strong> First name </strong><strong>: {{user.firstName}} </strong>
-            <strong> Last name </strong><strong>: {{user.lastName}} </strong>
-            <strong> Mobile </strong><strong>: {{user.mobile}}</strong>
-            <strong> E-mail </strong><strong>: {{user.email}}</strong>
-            <strong> User-Type </strong><strong>: {{user.access}}</strong>
-            <strong></strong><strong></strong>
-            {{#if user.referredBy}}
-                <strong> Referred By </strong><strong>: {{user.referredBy}}</strong>
-            {{/if}}
-            <strong> Referral ID </strong><strong>: <strong style="text-decoration: underline;"> {{user._id}}</strong> </strong>
-            {{#if user.referredTo}}
-                <strong> Referred To </strong><strong>{{#each user.referredTo}}: <strong>{{this}}</strong><br> {{/each}}</strong>
-            {{/if}}
-            </div><br><br><br><br><br><br>
-            <strong class="changePassLink"><a href="/home/changePassword">Change Password</a></strong>
+            
+            
+            <br><br><br><br><br>
+            <div style="width : fit-content;margin: auto;">
+                <h6 class ="account-details-header">Profile</h6><br><br><br>
+                <div class = "account-details">
+                <strong> First name </strong><strong>: {{user.firstName}} </strong>
+                <strong> Last name </strong><strong>: {{user.lastName}} </strong>
+                <strong> Mobile </strong><strong>: {{user.mobile}}</strong>
+                <strong> E-mail </strong><strong>: {{user.email}}</strong>
+                <strong> User-Type </strong><strong>: {{user.access}}</strong>
+                {{#if user.referredTo}}
+                    <strong> Referred To </strong><strong>{{#each user.referredTo}}: <strong>{{this}}</strong> <br>{{/each}}</strong>
+                {{/if}}
+                <strong></strong><strong></strong>
+                {{#if user.referredBy}}
+                    <strong> Referred By </strong><strong>: {{user.referredBy}}</strong>
+                {{/if}}
+                <strong> Referral ID </strong><strong>: 
+                    <strong style="text-decoration: underline;color:rgb(42, 42, 119);"> {{user.referralID}}</strong>
+                    <input style="width : 0.1px;border:none;" id="referralID" value="{{user.referralID}}"> 
+                    <button title="Copy Referral ID" class="copyReferralLink" onclick="clickFunction('referralID')"><img src="/icons/copy.png" alt="Copy"></button>    
+                </strong>
+                <strong>Referral Link  </strong>
+                <strong >: 
+                    <strong style="text-decoration: underline;">
+                        <a class="referralLink" href="http://aadarsh-stocks.herokuapp.com/register/{{user.referralID}}">
+                                http://aadarsh-stocks.herokuapp.com/register/{{user.referralID}}
+                        </a>
+                        <input style="border:none;width : 0.1px;" id="referralLink" value="http://aadarsh-stocks.herokuapp.com/register/{{user.referralID}}" readonly> 
+                    </strong>
+                    <button title="Copy Referral Link" class="copyReferralLink" onclick="clickFunction('referralLink')"><img src="/icons/copy.png" alt="Copy"></button>
+                </strong>
+                </div><br><br><br><br>
+                <strong class="changePassLink"><a href="/home/changePassword">Change Password</a></strong>
+            </div><br><br><br>
+            
+        
     </section>
 
 
     <section class="footer">
         {{>footer}}
     </section>
-    
+    <script>
+        function clickFunction(clas) {
+            var copyText = document.getElementById(clas)
+            console.log(copyText)
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
 </body>
 </html>

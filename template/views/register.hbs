@@ -24,7 +24,11 @@
                         <br><input type="email" class = "registerEmail" name = "registerEmail" placeholder="Email"required>
                         <br><input type="password" class = "registerPassword" name = "registerPassword" placeholder="Password" required> 
                         <br><input type="password" class = "registerPassword2" name = "registerPassword2" placeholder="Confirm Password"required>
-                        <br><input type="text" class = "referralCode" name = "referralCode" placeholder="Referral Code(Optional)">
+                        {{#if referralCode}}
+                            <br><input type="text" class = "referralCode" name = "referralCode" placeholder="Referral Code(Optional)" value="{{referralCode}}" readonly>
+                        {{else}}
+                            <br><input type="text" class = "referralCode" name = "referralCode" placeholder="Referral Code(Optional)">
+                        {{/if}}
                         <br><button type="submit" class = "register-submit">Create Account</button>
                 </form><br>
             <strong class="message" style = "color :{{color}};font-size : 20px;">{{message}}</strong><br>

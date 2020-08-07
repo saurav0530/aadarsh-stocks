@@ -28,8 +28,8 @@
                         </div><br><br><br>
                     {{else}}
                         <div class="palletteDuo">
-                            <a href="/home/dataInput" aria-disabled="true" ><div class="palletteElements" style="background-color: rgb(143, 113, 73);"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
-                            <a href="/home/pricing" aria-disabled="true" ><div class="palletteElements pair" style="background-color: rgb(143, 113, 73);"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
+                            <a href="/home/dataInput" aria-disabled="true" ><div class="palletteElements" style="background-color: rgb(240, 201, 149);"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
+                            <a href="/home/pricing" aria-disabled="true" ><div class="palletteElements pair" style="background-color: rgb(240, 201, 149);"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
                         </div><br><br><br>
                     {{/if}}
 
@@ -37,6 +37,13 @@
                         <a href="/home/profile"><div class="palletteElements"><img src="/icons/profile.png" alt="Profile"><br><br><strong class="homeLink">Profile</strong></div></a>
                         <a href="/home/logout"><div class="palletteElements pair"><img src="/icons/logout.png" alt="Logout"><br><br><strong class="homeLink"> Logout</strong></div></a>
                     </div><br><br><br>
+                    <strong > Referral Link : 
+                        <a class="referralLink" href="http://aadarsh-stocks.herokuapp.com/register/{{user.referralID}}" style="text-decoration: underline;">
+                                http://aadarsh-stocks.herokuapp.com/register/{{user.referralID}}
+                        </a>
+                        <input style="border : none; width : 0.1px;" id="referralLink" value="http://aadarsh-stocks.herokuapp.com/register/{{user.referralID}}" readonly> 
+                    </strong>
+                    <button title="Copy Referral Link" class="copyReferralLink" onclick="clickFunction('referralLink')"><img src="/icons/copy.png" alt="Copy"></button><br><br>
                 </center>
             </div>
         </center>
@@ -46,6 +53,15 @@
     <section class="footer">
         {{>footer}}
     </section>
-    
+    <script>
+        function clickFunction(clas) {
+            var copyText = document.getElementById(clas)
+            console.log(copyText)
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
 </body>
 </html>

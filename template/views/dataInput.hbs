@@ -17,7 +17,7 @@
                     <option value="2">Stock Data</option>
                     <option value="3" selected>Data Input</option>
                     <option value="6">Pricing</option>
-                    <option value="4">Account Details</option>
+                    <option value="4">Profile</option>
                     <option value="5"><strong class="logout">Logout<strong></option>
                 </select>
             </form>
@@ -30,16 +30,15 @@
             <div class = 'stock-entry-date'>
                 <form action="/home/dataInput/date" method="post">
                     <h4>Select date corresponding to stock data entry : </h4>
-                    <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()"><br><br>
+                    <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()"><br>
                 </form>
             </div>
             {{#if stock.date}}
-                <strong></strong><br>
-                <center><strong class="stockViewDate">Date : {{stock.date}}</strong></center><br><br><br>
+                <center><br><strong class="stockViewDate">Date : {{stock.date}}</strong><br><br></center>
             {{/if}}
             <form action="/home/dataInput/data" method="post" enctype="multipart/form-data">
                 <center>
-                    <strong class="stocklabel">Choose the spreadsheet containing stock-data : </strong>
+                    <br><strong class="stocklabel">Choose the spreadsheet containing stock-data : </strong>
                     <input type="file" name="xlsx" id="xlsx " class="xlsx"><br><br>
                     <button type="submit" class = "add-row" onchange="this.form.submit()">Add Stocks</button>
                 </center><br><br>
