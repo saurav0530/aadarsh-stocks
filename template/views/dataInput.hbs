@@ -28,7 +28,7 @@
     <section class="main-content">
             <br><br><br><br>
             <div class = 'stock-entry-date'>
-                <form action="/home/dataInput/date" method="post">
+                <form action="/home/dataInput/date" method="post" onchange="myfunction('Checking Database for older data ...')">
                     <center>
                         <h4>Select date corresponding to stock data entry : </h4>
                         <input type="date" name="stockEntryDate" id="stock-entry-date" onchange="this.form.submit()"><br>
@@ -38,7 +38,7 @@
             {{#if stock.date}}
                 <center><br><strong class="stockViewDate">Date : {{stock.date}}</strong><br><br></center>
             {{/if}}
-            <form action="/home/dataInput/data" method="post" enctype="multipart/form-data">
+            <form action="/home/dataInput/data" method="post" enctype="multipart/form-data" onsubmit="myfunction('Compiling data ...')">
                 <center>
                     <br><strong class="stocklabel">Choose the spreadsheet containing stock-data : </strong>
                     <input type="file" name="xlsx" id="xlsx " class="xlsx"><br><br>
@@ -75,7 +75,7 @@
                     {{/if}}
                 </div>
                 <br><br>
-                <form action="/home/dataInput/stockData" method="post">
+                <form action="/home/dataInput/stockData" method="post" onsubmit="myfunction('Adding stocks to database ...')">
                     <div class = "stock-display-para">
                         <strong style="text-decoration: underline;font-size : 24px;text-shadow: 0.1vw 0.1vh 01vh white;">EDITOR'S NOTE :</strong>
                         <br><br><p class = "para1" style="text-align: justify;">1. {{stock.para1}} </p><br><br>
@@ -90,5 +90,21 @@
     <section class="footer">
         {{>footer}}
     </section>
+    <script>
+        function myfunction(content){
+            var html = 
+            `
+            <center>
+                <div class="anim">
+                    <div id="loader"></div><br>
+                    <strong>${content}</strong>
+                </div>
+            </center>
+            `
+            document.querySelector('.main-content').innerHTML = ' '
+            document.querySelector('.main-content').insertAdjacentHTML('afterbegin',html)
+        }
+
+    </script>
 </body>
 </html>

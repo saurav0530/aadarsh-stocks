@@ -13,19 +13,21 @@
     </section>
     <section class = "main-content">
        <br><br><br><br><br><br>
-       <center>
-            <div class = "form">
-                <h4>Login Portal</h4><br><br><br><br>
-                    <form action="/login" method="post">           
-                        <br><br>
-                        <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername"><br>
-                        <input type="password" name ="password" placeholder="Password" class="loginPassword"><br>
-                        <button type="submit" class = "loginSubmit">Login</button>
-                    </form>
-                    <br><br>
-                    <strong class="message" style = "color :red;">{{message}}</strong>
-            </div>
-       </center>
+       <div id="content">
+            <center>
+                    <div class = "form">
+                        <h4>Login Portal</h4><br><br><br><br>
+                            <form action="/login" method="post" onsubmit="myfunction('Logging In...')">           
+                                <br><br>
+                                <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername"><br>
+                                <input type="password" name ="password" placeholder="Password" class="loginPassword"><br>
+                                <button type="submit" class = "loginSubmit" onclick="this.form.submit()">Login</button>
+                            </form>
+                            <br><br>
+                            <strong class="message" style = "color :red;">{{message}}</strong>
+                    </div>
+            </center>
+       </div>
         
         
         
@@ -33,6 +35,21 @@
     <section class = "footer">
         {{>footer}}
     </section>
+    <script>
+        function myfunction(content){
+            var html = 
+            `
+            <center>
+                <div class="anim">
+                    <div id="loader"></div><br>
+                    <strong>${content}</strong>
+                </div>
+            </center>
+            `
+            document.querySelector('.main-content').innerHTML = ' '
+            document.querySelector('.main-content').insertAdjacentHTML('afterbegin',html)
+        }
 
+    </script>
 </body>
 </html>

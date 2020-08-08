@@ -51,6 +51,21 @@
     <section class="footer">
         {{>footer}}
     </section>
-    
+    <script>
+        function myfunction(content){
+            var html = 
+            `
+            <center>
+                <div class="anim">
+                    <div id="loader"></div><br>
+                    <strong>${content}</strong>
+                </div>
+            </center>
+            `
+            document.querySelector('.main-content').innerHTML = ' '
+            document.querySelector('.main-content').insertAdjacentHTML('afterbegin',html)
+        }
+
+    </script>
 </body>
 </html>

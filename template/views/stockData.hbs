@@ -29,7 +29,7 @@
     <section class="main-content">
         <br><br>
         <div class = 'stock-view-date'>
-            <form action="/home/stockData" method="post">
+            <form action="/home/stockData" method="post" onchange="myfunction('Checking Stocks for specified date ...')">
                 <center>
                     <h4>Select date for viewing past stock suggestions : </h4>
                     <input type="date" name="stockViewDate" id="stock-view-date" onchange="this.form.submit()">
@@ -80,6 +80,21 @@
     <section class="footer">
         {{>footer}}
     </section>
-    
+    <script>
+        function myfunction(content){
+            var html = 
+            `
+            <center>
+                <div class="anim">
+                    <div id="loader"></div><br>
+                    <strong>${content}</strong>
+                </div>
+            </center>
+            `
+            document.querySelector('.main-content').innerHTML = ' '
+            document.querySelector('.main-content').insertAdjacentHTML('afterbegin',html)
+        }
+
+    </script>
 </body>
 </html>
