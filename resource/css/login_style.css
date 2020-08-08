@@ -134,11 +134,11 @@ input[placeholder]{
     align-items: center;
 }
 .account-details strong{
-    font-size: 20px;
+    font-size: 100%;
     color : brown;
 }
 .account-details-header{
-    font-size: 35px;
+    font-size: 200%;
     color : brown;
     text-decoration: underline;
 }
@@ -207,7 +207,7 @@ input::invalid{
 /* Change Password */
 .changePassLink a{
     font-weight: bold;
-    font-size : 20px;
+    font-size : 100%;
     border-top : 3px solid;
     border-bottom : 3px solid;
     border-radius : 8px;
