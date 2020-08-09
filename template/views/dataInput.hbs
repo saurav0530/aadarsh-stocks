@@ -29,10 +29,10 @@
             <form action="/home/dataInput/data" method="post" enctype="multipart/form-data" onsubmit="myfunction('Compiling data ...')">
                 <center>
                     <br><strong class="stocklabel">Choose the spreadsheet containing stock-data : </strong>
-                    <input type="file" name="xlsx" id="xlsx " class="xlsx"><br><br>
-                    <button type="submit" class = "add-row" onchange="this.form.submit()">Add Stocks</button>
+                    <input type="file" name="xlsx" id="xlsx " class="xlsx" oninput="this.form.submit()"><br><br>
+                    <button type="submit" class = "add-row" onclick="this.form.submit()">Add Stocks</button>
                 </center><br><br>
-            </form>
+            </form><center><strong class="errorMessage">{{message}}</strong></center>
             {{#if stock.data}}
                 <div class="stockDisplayBox">
                 <div class = "stock-display">               
@@ -69,7 +69,7 @@
                         <br><br><p class = "para1" style="text-align: justify;">1. {{stock.para1}} </p><br><br>
                         <p class = "para1" style="text-align: justify;">2. {{stock.para2}}<p><br><br>
                     </div>
-                    <br><br><center><button class = "add-to-database" >Add to Database</button></center><br><br>
+                    <br><br><center><button class = "add-to-database" onclick="this.form.submit()">Add to Database</button></center><br><br>
                 </form>
             {{/if}}
     </section>

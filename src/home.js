@@ -90,8 +90,10 @@ router.post('/stockData',checkAuthenticated,(req,res)=>{
 
 router.get('/dataInput',checkAuthenticated,(req,res) =>{
     if(req.user.admin){
-        var user = req.user
-        res.render('dataInput',{user})
+        res.render('dataInput',{
+            user : req.user,
+            message : req.flash('message')
+        })
     }else{
         res.redirect('/home')
     }
@@ -193,10 +195,11 @@ router.post('/dataInput/stockData',(req,res)=>{
     else{
         mongodbData.mongoConnect().then(client =>{
             var db = client.db('aadarshDatabase')
-            console.log('New')
+            //console.log('New')
             db.collection('stock').insertOne(data)
         }).catch(err => console.log(err))
-    }  
+    }
+    req.flash('message' ,'Stocks added successfully...')  
     res.redirect('/home/dataInput')
 })
 

@@ -194,7 +194,7 @@ input::invalid{
 .errorMessage{
     font-size : 18px;
     color : red;
-    margin-left : calc((100% - 250px)/2)
+    width: fit-content;
 }
 .stockViewDate{
     font-size : 1vw;
