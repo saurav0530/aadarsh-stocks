@@ -8,7 +8,7 @@
 </head>
 <body>
     <section class="header">
-        <strong class="title"><a href="/" class="headerTitle" onclick="myfunction('Loading ...')">AADARSH-STOCKS</a></strong>
+        <strong class="title"><a href="/" class="headerTitle" onclick="myfunction('Going to Home ...')">AADARSH-STOCKS</a></strong>
     </section>
     
     <section class="main-content">
@@ -18,13 +18,13 @@
             <div class="homepallette"><br><br><br>
                 <center>
                     <div class="palletteDuo">
-                        <a href="/home" onclick="myfunction('Loading ...')"><div class="palletteElements"><img src="/icons/home.png" alt="Home"><br><br><strong class="homeLink"> Home</strong></div></a>
+                        <a href="/home" onclick="myfunction('Loading user home page...')"><div class="palletteElements"><img src="/icons/home.png" alt="Home"><br><br><strong class="homeLink"> Home</strong></div></a>
                         <a href="/home/stockData" onclick="myfunction('Loading stocks page...')"><div class="palletteElements pair"><img src="/icons/stockdata.png" alt="Stock-Data"><br><br><strong class="homeLink"> Stock-Data</strong></div></a>
                     </div><br><br><br>
                     {{#if user.admin}}
                         <div class="palletteDuo">
-                            <a href="/home/dataInput" onclick="myfunction('Loading ...')"><div class="palletteElements"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
-                            <a href="/home/pricing" onclick="myfunction('Loading ...')"><div class="palletteElements pair"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
+                            <a href="/home/dataInput" onclick="myfunction('Loading stocks entry page ...')"><div class="palletteElements"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
+                            <a href="/home/pricing" onclick="myfunction('Loading subscription page...')"><div class="palletteElements pair"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
                         </div><br><br><br>
                         
                     {{/if}}
@@ -32,7 +32,7 @@
                             <a href="/home/changePassword" onclick="myfunction('Loading ...')" ><div class="palletteElements" style="background-color: rgb(240, 201, 149);"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
                         </div><br><br><br>
                     <div class="palletteDuo">-->
-                        <a href="/home/profile" onclick="myfunction('Loading ...')"><div class="palletteElements"><img src="/icons/profile.png" alt="Profile"><br><br><strong class="homeLink">Profile</strong></div></a>
+                        <a href="/home/profile" onclick="myfunction('Loading profile...')"><div class="palletteElements"><img src="/icons/profile.png" alt="Profile"><br><br><strong class="homeLink">Profile</strong></div></a>
                         <a href="/home/logout" onclick="myfunction('Logging Out ...')"><div class="palletteElements pair"><img src="/icons/logout.png" alt="Logout"><br><br><strong class="homeLink"> Logout</strong></div></a>
                     </div><br><br><br>
                 </center>
