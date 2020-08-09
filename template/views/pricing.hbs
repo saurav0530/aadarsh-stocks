@@ -9,22 +9,8 @@
 </head>
 <body>
     <section class="header">
-        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a></strong>
-        <strong class = "authentication">
-            <form action="/home" method="post">
-                <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
-                    <option value="1">Welcome, {{user.firstName}}</option>
-                    <option value="7">Home</option>
-                    <option value="2">Stock Data</option>
-                    {{#if user.admin}}
-                        <option value="3">Data Input</option>
-                        <option value="6" selected>Pricing</option>
-                    {{/if}}
-                    <option value="4">Profile</option>
-                    <option value="5"><strong class="logout">Logout<strong></option>
-                </select>
-            </form>
-        </strong>
+        <strong class="title"><a href="/" class="headerTitle" onclick="myfunction('Loading ...')">AADARSH-STOCKS</a></strong>
+        {{>authenticatedHeader}}
     </section>
     
     <section class="main-content">
@@ -37,11 +23,11 @@
                 <strong class = "serialNumber-items">1.</strong>
                 <strong class = "planName-items">Monthly</strong>
                 <strong class = "pricingPlans-items">Rs. 300</strong>
-                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="/home/payment/300" >Subscribe</a></strong>
+                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="/home/payment/300" onclick="myfunction('Rendering payment portal ...')">Subscribe</a></strong>
                 <strong class = "serialNumber-items">2.</strong>
                 <strong class= "planName-items">Bi-monthly</strong>
                 <strong class = "pricingPlans-items">Rs. 550</strong>
-                <strong class = "Subscribe-items"><a href="/home/payment/550">Subscribe</a></strong>
+                <strong class = "Subscribe-items"><a href="/home/payment/550" onclick="myfunction('Rendering payment portal ...')">Subscribe</a></strong>
 
             </div>
         </form>

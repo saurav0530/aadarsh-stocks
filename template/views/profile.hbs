@@ -8,22 +8,8 @@
 </head>
 <body>
     <section class="header">
-        <strong class="title"><a href="/" class="headerTitle">AADARSH-STOCKS</a><a href="/home/pricing" class="pricing">Pricing</a></strong>
-        <strong class = "authentication">
-            <form action="/home" method="post">
-                <select name="loginChoice" id="loginChoice" onchange="this.form.submit()">
-                    <option value="1">Welcome, {{user.firstName}}</option>
-                    <option value="7">Home</option>
-                    <option value="2">Stock Data</option>
-                    {{#if user.admin}}
-                        <option value="3">Data Input</option>
-                        <option value="6">Pricing</option>
-                    {{/if}}
-                    <option value="4" selected>Profile</option>
-                    <option value="5"><strong class="logout">Logout<strong></option>
-                </select>
-            </form>
-        </strong>
+        <strong class="title"><a href="/" class="headerTitle" onclick="myfunction('Loading ...')">AADARSH-STOCKS</a><a href="/home/pricing" class="pricing" onclick="myfunction('Loading ...')">Pricing</a></strong>
+        {{>authenticatedHeader}}
     </section>
     
     
@@ -63,7 +49,7 @@
                     <button title="Copy Referral Link" class="copyReferralLink" onclick="clickFunction('referralLink')"><img src="/icons/copy.png" alt="Copy"></button>
                 </strong>
                 </div><br><br><br><br>
-                <strong class="changePassLink"><a href="/home/changePassword">Change Password</a></strong>
+                <strong class="changePassLink"><a href="/home/changePassword" onclick="myfunction('Loading ...')">Change Password</a></strong>
             </div><br><br><br><br>
             
         
