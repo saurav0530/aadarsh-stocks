@@ -6,10 +6,10 @@
     word-break : break-word;
     grid-gap : 1px;
     background-color: black;
-    width : 709px;
+    width : fit-content;
     border : 3px solid black;
-    margin-left : calc((100% - 702px)/2);
-    margin-top : 20%;
+    margin : auto;
+    margin-top : 15%;
 }
 .serialNumber,.planName,.pricingPlans,.Subscribe{
     background-color: teal;

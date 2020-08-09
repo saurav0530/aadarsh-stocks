@@ -13,7 +13,11 @@
         {{>authenticatedHeader}}
     </section>
     
-    <section class="main-content">
+    <section class="main-content"><br><br>
+        <div class="subscriptionDetails">
+            <strong class="subscription">Subscription : {{user.planName}}</strong>
+            <strong class="planExpiry">Expiry : {{user.planExpiry}}</strong>
+        </div><br><br>  
         <form action="/home/pricing" method="post">
             <div class="pricingTable">
                 <strong class = "serialNumber">S.No.</strong>

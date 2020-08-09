@@ -286,6 +286,9 @@ a{
 .homeUser{
     font-size : 30px;
     color : saddlebrown;
+    content : ' ';
+    clear : both;
+    display : table;
 }
 .copyReferralLink{
     margin-left : 15px;
@@ -300,4 +303,29 @@ a{
     font-weight : bold;
     color : blue;
     font-size : 18px;
+}
+.planExpiry{
+    float : right;
+    margin-right : 4%;
+}
+.subscription{
+    margin-left : 4%;
+}
+.subscription,.planExpiry{
+    font-size : 110%;
+    color : brown;
+    border : 2px solid;
+    padding : 4px 15px;
+    border-radius : 8px;
+    background-color : bisque
+}
+.forgotSummary{
+    font-size : 130%;
+    font-weight : bold;
+    color : brown;
+}
+.forgotBody{
+    font-size : 115%;
+    font-weight:600;
+    color : chocolate;
 }

@@ -3,8 +3,8 @@ const MongoClient = mongodb.MongoClient
 const { ObjectId } = require('mongodb')
 
 
-const connectionURL = 'mongodb+srv://sauravadmin:Saurav9113@aadarshstocksdatabase.kdbyg.mongodb.net/<dbname>?retryWrites=true&w=majority'
-//const connectionURL ='mongodb://localhost:27017'
+//const connectionURL = 'mongodb+srv://sauravadmin:Saurav9113@aadarshstocksdatabase.kdbyg.mongodb.net/<dbname>?retryWrites=true&w=majority'
+const connectionURL ='mongodb://localhost:27017'
 const databaseName = 'aadarshDatabase'
 
 const writeFunc = function( fileType,data ){
@@ -54,11 +54,11 @@ module.exports = {
 
 ////////////////////////////// To add/drop fields ///////////////////////////////////////
 
-// mongoConnect().then(async client =>{
-//     const db = client.db('aadarshDatabase')
-//     await db.collection('users').updateMany({}, {$unset: {referral:0}}, false, true)
-//     await db.collection('users').updateMany({}, {$set: {referredTo:[]}}, false, true)
-// }).catch(err => console.log(err))
+mongoConnect().then(async client =>{
+    const db = client.db('aadarshDatabase')
+    //await db.collection('users').updateMany({}, {$unset: {referral:0}}, false, true)
+    await db.collection('users').updateMany({}, {$set: {planName : "Free-trial"}}, false, true)
+}).catch(err => console.log(err))
 
 /////////////////////////////// Algorithm for Referral Code //////////////////////////////
 

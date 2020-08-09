@@ -17,16 +17,21 @@
             <center>
                     <div class = "form">
                         <h4>Login Portal</h4><br><br><br><br>
-                            <form action="/login" method="post" onsubmit="myfunction('Logging In...')">           
-                                <br><br>
-                                <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername"><br>
-                                <input type="password" name ="password" placeholder="Password" class="loginPassword"><br>
-                                <button type="submit" class = "loginSubmit" onclick="this.form.submit()">Login</button>
-                            </form>
+                        <form action="/login" method="post" onsubmit="myfunction('Logging In...')">           
                             <br><br>
-                            <strong class="message" style = "color :red;">{{message}}</strong>
+                            <input type="email" name = "username" placeholder="Registered Email" class = "loginUsername"><br>
+                            <input type="password" name ="password" placeholder="Password" class="loginPassword"><br>
+                            <button type="submit" class = "loginSubmit" onclick="this.form.submit()">Login</button>
+                        </form>
+                        <br><br>
+                        <strong class="message" style = "color :red;">{{message}}</strong>
+                        <details class="forgotPasswordMail">
+                            <summary class="forgotSummary">Forgot password</summary>
+                            <p class="forgotBody">In case you forget password, mail us from your registered email to <i><b>developer.aadarsh.stocks@gmail.com</b></i></p>
+                        </details>
                     </div>
             </center>
+            
        </div>
         
         

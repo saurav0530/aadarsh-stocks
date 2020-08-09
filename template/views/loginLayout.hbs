@@ -13,9 +13,14 @@
     
     <section class="main-content">
         <br><br>
+        <div class="subscriptionDetails">
+            <strong class="subscription">Subscription : {{user.planName}}</strong>
+            <strong class="planExpiry">Expiry : {{user.planExpiry}}</strong>
+        </div>
         <center>
             <strong class="homeUser" style="text-decoration: underline;">DASHBOARD</strong>
-            <div class="homepallette"><br><br><br>
+            <div class="homepallette"><br><br>
+                
                 <center>
                     <div class="palletteDuo">
                         <a href="/home" onclick="myfunction('Loading user home page...')"><div class="palletteElements"><img src="/icons/home.png" alt="Home"><br><br><strong class="homeLink"> Home</strong></div></a>
