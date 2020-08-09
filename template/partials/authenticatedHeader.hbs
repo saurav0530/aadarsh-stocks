@@ -2,14 +2,14 @@
     <form action="/home" method="post">
         <select name="loginChoice" id="loginChoice" onchange="this.form.submit()" onchange="myfunction('Loading ...')" >
             <option value="1" >Welcome, {{user.firstName}}</option>
-            <option value="7" onselect="myfunction('Loading user home page...')" >Home</option>
-            <option value="2" onselect="myfunction('Loading stocks page...')">Stock Data</option>
+            <option value="7" onclick="myfunction('Loading user home page...')" >Home</option>
+            <option value="2" onclick="myfunction('Loading stocks page...')">Stock Data</option>
             {{#if user.admin}}
-                <option value="3" onselect="myfunction('Loading stocks entry page...')">Data Input</option>
-                <option value="6" onselect="myfunction('Loading subscription page...')">Pricing</option>
+                <option value="3" onclick="myfunction('Loading stocks entry page...')">Data Input</option>
+                <option value="6" onclick="myfunction('Loading subscription page...')">Pricing</option>
             {{/if}}
-            <option value="4" onselect="myfunction('Loading Profile...')">Profile</option>
-            <option value="5" onselect="myfunction('Logging Out...')"><strong class="logout">Logout<strong></option>
+            <option value="4" onclick="myfunction('Loading Profile...')">Profile</option>
+            <option value="5" onclick="myfunction('Logging Out...')"><strong class="logout">Logout<strong></option>
         </select>
     </form>
 </strong>

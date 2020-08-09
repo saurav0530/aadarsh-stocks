@@ -229,7 +229,7 @@ select option{
     border: 10px solid rgb(147, 158, 154);
     border-top: 10px solid brown;
     border-radius: 50%;
-    animation: spin 2s infinite;
+    animation: spin 4s infinite;
 }
 .anim{
     transform: translateY(22vw);
@@ -239,6 +239,7 @@ select option{
     font-size : 140%;
 }
 @keyframes spin{
-    from { transform: rotateZ(0deg); }
-    to { transform: rotateZ(360deg); }
+    0% { transform: rotateZ(0deg); }
+    50% { transform: rotateZ(360deg); }
+    100% { transform: rotateZ(0deg); }
 }
