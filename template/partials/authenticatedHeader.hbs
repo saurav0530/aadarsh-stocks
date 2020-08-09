@@ -1,15 +1,15 @@
 <strong class = "authentication">
-    <form action="/home" method="post">
-        <select name="loginChoice" id="loginChoice" onchange="this.form.submit()" onchange="myfunction('Loading ...')" >
+    <form action="/home" method="post" onchange="myfunction('loginChoice')">
+        <select name="loginChoice" id="loginChoice" onchange="this.form.submit()"  >
             <option value="1" >Welcome, {{user.firstName}}</option>
-            <option value="7" onclick="myfunction('Loading user home page...')" >Home</option>
-            <option value="2" onclick="myfunction('Loading stocks page...')">Stock Data</option>
+            <option value="7"  >Home</option>
+            <option value="2" >Stock Data</option>
             {{#if user.admin}}
-                <option value="3" onclick="myfunction('Loading stocks entry page...')">Data Input</option>
-                <option value="6" onclick="myfunction('Loading subscription page...')">Pricing</option>
+                <option value="3" >Data Input</option>
+                <option value="6" >Pricing</option>
             {{/if}}
-            <option value="4" onclick="myfunction('Loading Profile...')">Profile</option>
-            <option value="5" onclick="myfunction('Logging Out...')"><strong class="logout">Logout<strong></option>
+            <option value="4" >Profile</option>
+            <option value="5" ><strong class="logout">Logout<strong></option>
         </select>
     </form>
 </strong>

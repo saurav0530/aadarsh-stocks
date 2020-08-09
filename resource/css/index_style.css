@@ -217,7 +217,7 @@ select option{
 }
 @keyframes mymove{
     0% { left : 0}
-    50% { left : calc((100% - 322px));}
+    50% { left : calc((100% - 370px));}
     100% {left : 0px}    
 }
 .covidText:hover{

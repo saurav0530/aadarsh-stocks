@@ -209,11 +209,11 @@ router.get('/pricing',checkAdmin,(req,res)=>{
 
 router.get('/payment/:id',checkAdmin,(req,res)=>{
     var user = req.user
-    console.log(req.params.id)
+    //console.log(req.params.id)
     paytmPay(res,req.params.id,req.user.mobile,req.user.email)
 })
 router.post('/paymentStatus',checkAdmin,async (req,res)=>{
-    console.log(req.body)
+    //console.log(req.body)
     if(req.body.RESPMSG == 'Txn Success'){
         var dispBody ={
             orderid : req.body.ORDERID,
