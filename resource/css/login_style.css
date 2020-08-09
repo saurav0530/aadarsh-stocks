@@ -216,9 +216,9 @@ input::invalid{
 
 #cpmessage{
     width : fit-content;
-    margin-left : calc((100% - 175px)/2);
-    font-size : 18px;
+    font-size : 120%;
 }
+
 
 .stock-display1{ 
     background-color : silver;
