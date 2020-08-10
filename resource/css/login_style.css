@@ -317,7 +317,18 @@ a{
     border : 2px solid;
     padding : 4px 15px;
     border-radius : 8px;
-    background-color : bisque
+    background-color : bisque;
+    animation: blink .5s infinite;
+}
+@keyframes blink{
+    0% {background-color: bisque;}
+    70% {
+        background-color: orange;
+        color : black;
+    }
+    100% {
+        background-color: bisque;
+    }
 }
 .forgotSummary{
     font-size : 130%;

@@ -1,4 +1,5 @@
 node_modules
+a.js
 // To remove last commit from git repo
 // git reset --hard HEAD^
 //git push origin -f
