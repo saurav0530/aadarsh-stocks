@@ -50,7 +50,7 @@ function initialize( passport ){
                         newUser.planExpiry = new Date(newUser.planExpiry)
                         var date2 = new Date()
                         newUser.planExpiry = algo.timeDiff(newUser.planExpiry, date2)
-                        if(newUser.planExpiry < 0){
+                        if(newUser.planExpiry <= 0){
                             newUser.status = false
                             newUser.planExpiry = "Plan expired"
                             await db.collection('users').updateOne({_id : ObjectId(id)},{$set:{status : false}})

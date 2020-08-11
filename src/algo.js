@@ -38,7 +38,7 @@ var timeDiff = function (a,b){
     var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate())
     var diff = utc1 - utc2
     var days = diff/(24*3600*1000)
-    return days 
+    return (days+1) 
 }
 
 module.exports = {
