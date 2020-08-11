@@ -340,3 +340,8 @@ a{
     font-weight:600;
     color : chocolate;
 }
+.subscriptionWarning{
+    font-size : 120%;
+    color : red;
+    text-decoration :underline;
+}

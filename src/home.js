@@ -60,12 +60,12 @@ router.post('/',checkAuthenticated,(req,res)=>{
 
 /////////////////////////////////////    Stock-Display    /////////////////////////////////////////
 
-router.get('/stockData',checkAuthenticated,(req,res) =>{
+router.get('/stockData',checkSubscribed,checkAuthenticated,(req,res) =>{
     var user = req.user
     res.render('stockData',{user})
 })
 
-router.post('/stockData',checkAuthenticated,(req,res)=>{
+router.post('/stockData',checkSubscribed,checkAuthenticated,(req,res)=>{
     var user = req.user
     mongodbData.mongoConnect().then(client =>{
         var db = client.db('aadarshDatabase')
@@ -207,7 +207,12 @@ router.post('/dataInput/stockData',(req,res)=>{
 ///////////////////////////////////////        Pricing        //////////////////////////////////////////
 router.get('/pricing',checkAdmin,(req,res)=>{
     var user = req.user
-    res.render('pricing',{user})
+    var warning = req.flash('subscriptionWarning')
+    if(warning)
+        res.render('pricing',{user,warning})
+    else
+        res.render('pricing',{user})
+    
 })
 
 router.get('/payment/:id',checkAdmin,(req,res)=>{
@@ -327,6 +332,17 @@ function checkAdmin( req,res,next ){
     }else{
         res.redirect('/login')
     }
+}
+function checkSubscribed(req,res,next){
+    var user = req.user
+    if(user.status)
+        next()
+    else
+    {
+        req.flash('subscriptionWarning','Your existing plan expired. Please subscribe to continue!')
+        res.redirect('/home/pricing')
+    }
+        
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

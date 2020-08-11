@@ -13,10 +13,13 @@
     
     <section class="main-content">
         <br><br>
+        {{#if user.admin}}
+        {{else}}
         <div class="subscriptionDetails">
             <strong class="subscription">Subscription : {{user.planName}}</strong>
             <strong class="planExpiry">Expiry : {{user.planExpiry}}</strong>
         </div>
+        {{/if}}
         <center>
             <strong class="homeUser" style="text-decoration: underline;">DASHBOARD</strong>
             <div class="homepallette"><br><br>

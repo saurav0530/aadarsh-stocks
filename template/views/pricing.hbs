@@ -14,10 +14,16 @@
     </section>
     
     <section class="main-content"><br><br>
+        {{#if user.admin}}
+        {{else}}
         <div class="subscriptionDetails">
             <strong class="subscription">Subscription : {{user.planName}}</strong>
             <strong class="planExpiry">Expiry : {{user.planExpiry}}</strong>
-        </div><br><br>  
+        </div>
+        {{/if}}
+        <br>
+        <center><strong class="subscriptionWarning">{{warning}}</strong></center>
+        <br>  
         <form action="/home/pricing" method="post">
             <div class="pricingTable">
                 <strong class = "serialNumber">S.No.</strong>
@@ -27,11 +33,11 @@
                 <strong class = "serialNumber-items">1.</strong>
                 <strong class = "planName-items">Monthly</strong>
                 <strong class = "pricingPlans-items">Rs. 300</strong>
-                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="/home/payment/300" onclick="myfunction('Rendering payment portal ...')">Subscribe</a></strong>
+                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="#" onclick="alert('Already subscribed :)')">Subscribe</a></strong>
                 <strong class = "serialNumber-items">2.</strong>
                 <strong class= "planName-items">Bi-monthly</strong>
                 <strong class = "pricingPlans-items">Rs. 550</strong>
-                <strong class = "Subscribe-items"><a href="/home/payment/550" onclick="myfunction('Rendering payment portal ...')">Subscribe</a></strong>
+                <strong class = "Subscribe-items"><a href="#" onclick="alert('Already subscribed :)')">Subscribe</a></strong>
 
             </div>
         </form>

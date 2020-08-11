@@ -33,6 +33,15 @@ function timeInt(req){
     }}).catch(err => console.log(err))
 }
 
+var timeDiff = function (a,b){
+    var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate())
+    var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate())
+    var diff = utc1 - utc2
+    var days = diff/(24*3600*1000)
+    return days 
+}
+
 module.exports = {
-    timeInt : timeInt
+    timeInt : timeInt,
+    timeDiff : timeDiff
 }

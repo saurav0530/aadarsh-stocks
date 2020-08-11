@@ -13,7 +13,9 @@ const writeFunc = function( fileType,data ){
             return console.log(err)
         
         const db = client.db( databaseName )
-        db.collection( fileType ).insertOne( data )
+        db.collection( fileType ).insertOne( data ).then(dt => {
+            referralIDassign(dt.insertedId)
+        })
     })
 }
 
@@ -21,7 +23,7 @@ const writeFunc = function( fileType,data ){
 const mongoConnect = function(){
         return MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true})
 }
-
+/////////////////////////////// Algorithm for Referral Code //////////////////////////////
 var referralIDassign = function( userID )
 {
     mongoConnect().then(async client =>{
@@ -54,11 +56,18 @@ module.exports = {
 
 ////////////////////////////// To add/drop fields ///////////////////////////////////////
 
-mongoConnect().then(async client =>{
-    const db = client.db('aadarshDatabase')
-    //await db.collection('users').updateMany({}, {$unset: {referral:0}}, false, true)
-    await db.collection('users').updateMany({}, {$set: {planName : "Free-trial"}}, false, true)
-}).catch(err => console.log(err))
+// mongoConnect().then(async client =>{
+//     const db = client.db('aadarshDatabase')
+//     var date = new Date()
+//     date.setDate(date.getDate()+8)
+//     date = date.toISOString()
+//     //await db.collection('users').updateMany({}, {$unset: {referral:0}}, false, true)
+//     await db.collection('users').updateOne({email:'sm@grr.la'}, {$set: {
+//         status : true,
+//         payment : []
 
-/////////////////////////////// Algorithm for Referral Code //////////////////////////////
+//     }}, false, true)
+// }).catch(err => console.log(err))
+
+
 

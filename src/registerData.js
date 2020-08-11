@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const sgMail = require('@sendgrid/mail')
 const {mailapikey}=require('./keys')
 const { ObjectId } = require('mongodb')
+const algo = require('./algo')
 
 
 // parse application/x-www-form-urlencoded
@@ -38,6 +39,9 @@ router.get('/:id',checkNotAuthenticated,(req,res)=>{
     })
 })
 router.post('/',async ( req,res ) =>{
+    var date = new Date()
+    date.setDate(date.getDate()+13)
+    date = date.toISOString()
     let newUser ={
         firstName : req.body.registerFirstName,
         lastName : req.body.registerLastName,
@@ -46,7 +50,11 @@ router.post('/',async ( req,res ) =>{
         mobile : req.body.registerMobile,
         access : "User",
         admin : false,
-        referredTo : []
+        referredTo : [],
+        payment : [],
+        planExpiry : date,
+        planName : "Free-trial",
+        status : true
     }
     var regSucMssg = async function(data){
         await mongodbData.writeFunc( 'users', data )
@@ -79,25 +87,20 @@ router.post('/',async ( req,res ) =>{
                             await mongodbData.mongoConnect().then(async (client)=>{
                                 var db = client.db('aadarshDatabase')
                                 await db.collection('users').findOne({referralID : req.body.referralCode}).then((data)=>{
-                                    data.referredTo.push(newUser.email)
-                                    referee = data
-                                    newUser.referredBy = data.email
-                                    db.collection('users').updateOne({referralID : req.body.referralCode},{$set : data})
+                                    if(data){
+                                        data.referredTo.push(newUser.email)
+                                        referee = data
+                                        newUser.referredBy = data.email
+                                        db.collection('users').updateOne({referralID : req.body.referralCode},{$set : data})
+                                    }
                                 }).catch(err =>{
                                     console.log(err)
                                 })
                             })
                             //console.log(referee)
                             if(referee){
-                                regSucMssg(newUser)
+                                await regSucMssg(newUser)
                                 sendmail(newUser.email)
-                                mongodbData.mongoConnect().then(client =>{
-                                    var db = client.db('aadarshDatabase')
-                                    db.collection('users').findOne({email : newUser.email}).then(data1 =>{
-                                        //console.log(data1)
-                                        mongodbData.referralIDassign(data1._id)
-                                    })
-                                })
                             }
                             else
                             {
@@ -119,12 +122,6 @@ router.post('/',async ( req,res ) =>{
                     else{
                         regSucMssg(newUser)
                         sendmail(newUser.email)
-                        mongodbData.mongoConnect().then(client =>{
-                            var db = client.db('aadarshDatabase')
-                            db.collection('users').findOne({email : newUser.email}).then(data1 =>{
-                                mongodbData.referralIDassign(data1._id)
-                            })
-                        })
                     }
                 
                 ////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -150,7 +147,7 @@ router.post('/',async ( req,res ) =>{
     }
 
     if(newUser.password == req.body.registerPassword2){
-        saveNewUserData()   
+        await saveNewUserData()           
     }else{
         req.flash('color' ,'red')
         req.flash('message' ,"Password didn't match...")
@@ -160,7 +157,7 @@ router.post('/',async ( req,res ) =>{
         else
             res.redirect('/register')
     }
-        
+         
 })
 
 function checkNotAuthenticated( req,res,next ){
