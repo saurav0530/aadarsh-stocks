@@ -220,7 +220,6 @@ select option{
     animation-timing-function: linear;
     animation-direction : alternate-reverse; 
     animation-fill-mode : both;
-    width :fit-content;
 }
 @keyframes mymove{
     0% { left : calc((0% - 368px));}
