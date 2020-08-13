@@ -345,3 +345,12 @@ a{
     color : red;
     text-decoration :underline;
 }
+.prevPayDetails{
+    width : fit-content;
+    margin : auto;
+}
+.palletteElements:hover{
+    background-color : skyblue;
+    color : red;
+    filter : invert(1%)
+}

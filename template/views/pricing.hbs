@@ -32,13 +32,20 @@
                 <strong class = "Subscribe">Links</strong>
                 <strong class = "serialNumber-items">1.</strong>
                 <strong class = "planName-items">Monthly</strong>
-                <strong class = "pricingPlans-items">Rs. 300</strong>
-                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="#" onclick="alert('Already subscribed :)')">Subscribe</a></strong>
+                <strong class = "pricingPlans-items">Rs. 300 <span style="text-decoration: line-through; font-size : 70%;"> 350 </span></strong>
+                {{#if user.status}}
+                    <strong class = "Subscribe-items" name = "Subscribe-items"><a href="#" onclick="alert('Already Subscribed...')">Subscribe</a></strong>
+                {{else}}
+                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="/home/payment/300" onclick="myfunction('Rendering payment portal ...')">Subscribe</a></strong>
+                {{/if}}
                 <strong class = "serialNumber-items">2.</strong>
                 <strong class= "planName-items">Bi-monthly</strong>
-                <strong class = "pricingPlans-items">Rs. 550</strong>
-                <strong class = "Subscribe-items"><a href="#" onclick="alert('Already subscribed :)')">Subscribe</a></strong>
-
+                <strong class = "pricingPlans-items">Rs. 550 <span style="text-decoration: line-through; font-size : 70%;">700</span></strong>
+                {{#if user.status}}
+                    <strong class = "Subscribe-items" name = "Subscribe-items"><a href="#" onclick="alert('Already Subscribed...')">Subscribe</a></strong>
+                {{else}}
+                <strong class = "Subscribe-items" name = "Subscribe-items"><a href="/home/payment/550" onclick="myfunction('Rendering payment portal ...')">Subscribe</a></strong>
+                {{/if}}
             </div>
         </form>
     </section>

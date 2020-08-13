@@ -33,39 +33,57 @@ router.post('/',checkAuthenticated,(req,res)=>{
     }
     else if(req.body.loginChoice == 2)
     {
-        res.redirect('/home/stockData')
+        res.redirect('/home')
     }
     else if(req.body.loginChoice == 3)
     {
-        res.redirect('/home/dataInput')    
+        res.redirect('/home/stockData')    
+    }
+    else if(req.body.loginChoice == 4)
+    {
+        res.redirect('/home/dataInput')
+    }
+    else if(req.body.loginChoice == 5)
+    {
+        var dispBody = user.payment[user.payment.length - 1]
+        if(dispBody){
+            res.render('message',{
+                user : req.user,
+                dispBody
+            })
+        }
+        else{
+            req.flash('subscriptionWarning','No transaction history...')
+            res.redirect('/home/pricing')
+        }
     }
     else if(req.body.loginChoice == 6)
     {
         res.redirect('/home/pricing')
     }
-    else if(req.body.loginChoice == 4)
+    else if(req.body.loginChoice == 7)
     {
         res.redirect('/home/profile')
     }
-    else if(req.body.loginChoice == 5)
+    else if(req.body.loginChoice == 8)
+    {
+        res.redirect('/home/changePassword')
+    }
+    else if(req.body.loginChoice == 9)
     {
         req.logOut()
-        res.redirect('/')
-    }
-    else if(req.body.loginChoice == 7)
-    {
-        res.redirect('/home')
+        res.redirect('/')        
     } 
 })
 
 /////////////////////////////////////    Stock-Display    /////////////////////////////////////////
 
-router.get('/stockData',checkSubscribed,checkAuthenticated,(req,res) =>{
+router.get('/stockData',checkAuthenticated,checkSubscribed,(req,res) =>{
     var user = req.user
     res.render('stockData',{user})
 })
 
-router.post('/stockData',checkSubscribed,checkAuthenticated,(req,res)=>{
+router.post('/stockData',checkAuthenticated,checkSubscribed,(req,res)=>{
     var user = req.user
     mongodbData.mongoConnect().then(client =>{
         var db = client.db('aadarshDatabase')
@@ -88,7 +106,7 @@ router.post('/stockData',checkSubscribed,checkAuthenticated,(req,res)=>{
 
 ///////////////////////////////////////    Data Input    //////////////////////////////////////////
 
-router.get('/dataInput',checkAuthenticated,(req,res) =>{
+router.get('/dataInput',checkAuthenticated,checkAdmin,(req,res) =>{
     if(req.user.admin){
         res.render('dataInput',{
             user : req.user,
@@ -99,7 +117,7 @@ router.get('/dataInput',checkAuthenticated,(req,res) =>{
     }
     
 })
-router.post('/dataInput/date',checkAuthenticated,(req,res)=>{
+router.post('/dataInput/date',checkAuthenticated,checkAdmin,(req,res)=>{
     var user = req.user
     res.app.locals.stock = undefined
     res.app.locals.update = undefined
@@ -130,7 +148,7 @@ router.post('/dataInput/date',checkAuthenticated,(req,res)=>{
     }).catch(err => console.log(err))
 })
 
-router.post('/dataInput/data',checkAuthenticated,(req,res)=>{
+router.post('/dataInput/data',checkAuthenticated,checkAdmin,(req,res)=>{
     if(req.files)
     {
 		fs.unlink('./uploads/test.xlsx',(err)=>{
@@ -181,7 +199,7 @@ router.post('/dataInput/data',checkAuthenticated,(req,res)=>{
     //console.log(res.app.locals.stock)
     res.render('dataInput',{user})
 })
-router.post('/dataInput/stockData',(req,res)=>{
+router.post('/dataInput/stockData',checkAuthenticated,checkAdmin,(req,res)=>{
 
     var data = res.app.locals.stock
     res.app.locals.stock = null
@@ -205,22 +223,34 @@ router.post('/dataInput/stockData',(req,res)=>{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////        Pricing        //////////////////////////////////////////
-router.get('/pricing',checkAdmin,(req,res)=>{
+router.get('/pricing',checkAuthenticated,(req,res)=>{
     var user = req.user
-    var warning = req.flash('subscriptionWarning')
-    if(warning)
-        res.render('pricing',{user,warning})
-    else
+    if(user.status)
+    {
         res.render('pricing',{user})
+    }
+    else
+    {
+        res.render('pricing',{
+            user,
+            warning : 'Your existing plan expired. Please subscribe to continue!'
+        })
+    }       
     
 })
 
-router.get('/payment/:id',checkAdmin,(req,res)=>{
+router.get('/payment/:id',checkAuthenticated,(req,res)=>{
     var user = req.user
     //console.log(req.params.id)
-    paytmPay(res,req.params.id,req.user.mobile,req.user.email)
+    if(req.params.id == 300 || req.params.id == 550)
+        paytmPay(res,req.params.id,req.user.mobile,req.user.email)
+    else
+    {
+        req.flash('subscriptionWarning','Invalid amount')
+        res.redirect('/home/pricing')
+    }
 })
-router.post('/paymentStatus',checkAdmin,async (req,res)=>{
+router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
     //console.log(req.body)
     if(req.body.RESPMSG == 'Txn Success'){
         var dispBody ={
@@ -230,27 +260,52 @@ router.post('/paymentStatus',checkAdmin,async (req,res)=>{
             bnkid : req.body.BANKTXNID,
             bnkname : req.body.GATEWAYNAME,
             status : req.body.STATUS,
-            message : req.body.RESPMSG
+            message : req.body.RESPMSG,
+            amount : req.body.TXNAMOUNT
         }
         var user = req.user
-        res.render('message',{
-            user,
-            dispBody,
-            sucmssg : "/home"
-        })
-        mongodbData.mongoConnect().then(async client =>{
+        console.log(dispBody)
+        if(dispBody.amount == '300.00')
+        {
+            var planName = "Monthly"
+        }
+        else if(dispBody.amount == '550.00')
+        {
+            var planName = "Bi-monthly"
+        }
+        await mongodbData.mongoConnect().then(async client =>{
             var db = client.db('aadarshDatabase')
-            await db.collection('users').findOne({_id : ObjectId(req.user._id)}).then( async user =>{
-                if(user)
+            await db.collection('users').findOne({_id : ObjectId(user._id)}).then( async user1 =>{
+                if(user1)
                 {
-                    console.log(user.payment)
-                    user.payment.push(req.body)
-                    await db.collection('users').updateOne({_id : ObjectId(req.user._id)},{$set : {
-                        payment : user.payment
+                    user1.payment.push(dispBody)
+                    user1.status = true
+                    if(planName=='Bi-monthly'){
+                        var date2 = new Date()
+                        date2.setDate(date2.getDate()+55)
+                        date2.toISOString()
+                    }else{
+                        var date2 = new Date()
+                        date2.setDate(date2.getDate()+27)
+                        date2.toISOString()
+                    }
+                    await db.collection('users').updateOne({_id : ObjectId(user._id)},{$set : {
+                        payment : user1.payment,
+                        status : true,
+                        planName : planName,
+                        planExpiry : date2
                     }
                 })
             }
             }).catch(error => console.log(error))
+            db.collection('payment').insertOne(req.body).then(()=>{
+                console.log(req.body)
+            })
+        })
+        res.render('message',{
+            user,
+            dispBody,
+            sucmssg : "/home"
         })
     }
     else{
@@ -264,6 +319,7 @@ router.post('/paymentStatus',checkAdmin,async (req,res)=>{
 
         }
         var user = req.user
+        console.log(dispBody)
         res.render('message',{
             user,
             dispBody,
@@ -278,7 +334,8 @@ router.post('/paymentStatus',checkAdmin,async (req,res)=>{
 
 router.get('/profile',checkAuthenticated,(req,res) =>{
     var user = req.user
-    res.render('profile',{user,message : "",color:"red"})
+    var dispBody = user.payment[user.payment.length - 1]
+    res.render('profile',{user,message : "",color:"red",dispBody})
 })
 
 ////////////////////////////////////////////// Change Password /////////////////////////////////////////
@@ -338,11 +395,7 @@ function checkSubscribed(req,res,next){
     if(user.status)
         next()
     else
-    {
-        req.flash('subscriptionWarning','Your existing plan expired. Please subscribe to continue!')
-        res.redirect('/home/pricing')
-    }
-        
+        res.redirect('/home/pricing')        
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

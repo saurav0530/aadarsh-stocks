@@ -217,19 +217,31 @@ select option{
     font-weight : bold;
     font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     position: relative;
+<<<<<<< HEAD
     animation : mymove 12s infinite;
+=======
+    animation : mymove 14s infinite;
+>>>>>>> 4bdaad8c39b386aa5fd7274372119ff4ef0fa6d9
     animation-timing-function: linear;
     animation-direction : alternate-reverse; 
     animation-fill-mode : both;
 }
 @keyframes mymove{
     0% { left : calc((0% ));}
+<<<<<<< HEAD
     100% {left : calc((100% - 368px));;}    
+=======
+    100% {left : calc((100% - 368px));}    
+>>>>>>> 4bdaad8c39b386aa5fd7274372119ff4ef0fa6d9
 }
 .covidText1{
     display : inline;
     color : blue;
+<<<<<<< HEAD
     font-size: 100%;
+=======
+    font-size: 20px;
+>>>>>>> 4bdaad8c39b386aa5fd7274372119ff4ef0fa6d9
     padding : 12px 0;
     font-weight : bold;
     font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -241,7 +253,11 @@ select option{
 }
 @keyframes mymove1{
     0% { left : calc((0% ));}
+<<<<<<< HEAD
     100% {left : calc((100% - 385px));;}    
+=======
+    100% {left : calc((100% - 385px));}    
+>>>>>>> 4bdaad8c39b386aa5fd7274372119ff4ef0fa6d9
 }
 .covidText:hover{
     animation-play-state : paused;

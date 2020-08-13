@@ -23,24 +23,6 @@ router.get('/',checkNotAuthenticated,(req,res) =>{
         message : req.flash('error')
     })
 })
-// router.post('/',(req,res)=>{
-//     const {choice,username,password} = req.body
-//     var userType = ( choice == 1 )?'users':'admin'
-//     mongodbData.mongoConnect().then(client =>{
-//         var db = client.db('aadarshDatabase')
-//         db.collection(userType).findOne({email : username,password:password}).then( user =>{
-//             if(user){
-//                 res.app.locals.user = user
-//                 //console.log(res.locals)
-//                 res.redirect('/login/home')
-//             }else{
-//                 res.render('login',{
-//                     message : "Invalid Credentials"
-//                 })
-//             }
-//         })
-//     })
-// })
 router.post('/',passport.authenticate('local',{
     successRedirect : '/home',
     failureRedirect : '/login',
