@@ -2,18 +2,20 @@
 function myfunction(content){
     if(content == 'loginChoice'){
         var val = document.getElementById(content).value
-        if(val == 7)
+        if(val == 1 || val ==2)
             content = 'Loading user home page...'
-        else if(val == 6)
-            content = 'Loading subscription page...'
-        else if(val == 5)
-            content = 'Logging Out...'
-        else if(val == 4)
-            content = 'Loading Profile...'
         else if(val == 3)
-            content = 'Loading stocks entry page...'
-        else if(val == 2)
             content = 'Loading stocks page...'
+        else if(val == 4)
+            content = 'Loading stocks entry page...'
+        else if(val == 5)
+            content = 'Loading subscription page...'
+        else if(val == 6)
+            content = 'Loading Profile...'
+        else if(val == 7)
+            content = 'Loading password reset portal...'
+        else if(val == 8)
+            content = 'Logging Out...'
     }
     var html = 
     `

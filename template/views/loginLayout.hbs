@@ -32,15 +32,16 @@
                     {{#if user.admin}}
                         <div class="palletteDuo">
                             <a href="/home/dataInput" onclick="myfunction('Loading stocks entry page ...')"><div class="palletteElements"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
-                            <a href="/home/pricing" onclick="myfunction('Loading subscription page...')"><div class="palletteElements pair"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
+                            <a href="/home/profile" onclick="myfunction('Loading profile...')"><div class="palletteElements pair"><img src="/icons/profile.png" alt="Profile"><br><br><strong class="homeLink">Profile</strong></div></a>
                         </div><br><br><br>
-                        
+                    {{else}}
+                    <div class="palletteDuo">
+                            <a href="/home/pricing" onclick="myfunction('Loading subscription page...')"><div class="palletteElements"><img src="/icons/pricing.png" alt="Pricing"><br><br><strong class="homeLink"> Pricing</strong></div></a>
+                            <a href="/home/profile" onclick="myfunction('Loading profile...')"><div class="palletteElements pair"><img src="/icons/profile.png" alt="Profile"><br><br><strong class="homeLink">Profile</strong></div></a>
+                    </div><br><br><br>
                     {{/if}}
-                    <!--<div class="palletteDuo">
-                            <a href="/home/changePassword" onclick="myfunction('Loading ...')" ><div class="palletteElements" style="background-color: rgb(240, 201, 149);"><img src="/icons/datainput.png" alt="Data-Input"><br><br><strong class="homeLink"> Data-Input</strong></div></a>
-                        </div><br><br><br>
-                    <div class="palletteDuo">-->
-                        <a href="/home/profile" onclick="myfunction('Loading profile...')"><div class="palletteElements"><img src="/icons/profile.png" alt="Profile"><br><br><strong class="homeLink">Profile</strong></div></a>
+                    <div class="palletteDuo"> 
+                        <a href="/home/changePassword" onclick="myfunction('Loading password reset portal...')" ><div class="palletteElements" ><img src="/icons/passwordReset.png" alt="Data-Input"><br><br><strong class="homeLink">Password</strong></div></a>
                         <a href="/home/logout" onclick="myfunction('Logging Out ...')"><div class="palletteElements pair"><img src="/icons/logout.png" alt="Logout"><br><br><strong class="homeLink"> Logout</strong></div></a>
                     </div><br><br><br>
                 </center>

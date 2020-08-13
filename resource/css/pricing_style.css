@@ -4,7 +4,7 @@
     grid-template-columns: 65px 300px 100px 240px;
     border: 2px solid black;
     word-break : break-word;
-    grid-gap : 1px;
+    grid-gap : 3px;
     background-color: black;
     width : fit-content;
     border : 3px solid black;
@@ -12,12 +12,18 @@
     margin-top : 15%;
 }
 .serialNumber,.planName,.pricingPlans,.Subscribe{
-    background-color: teal;
+    background-color: orangered;
     padding : 5px 10px;
     font-size : 18px;
+    text-align: center;
 }
 .serialNumber-items,.planName-items,.pricingPlans-items,.Subscribe-items{
-    background-color: rgb(23, 202, 202);
+    background-color: antiquewhite;
     padding : 5px 10px;
     font-size : 17px;
+    text-align: center;
+}
+.Subscribe-items a{
+    color : blue;
+    text-decoration : underline;
 }
