@@ -73,9 +73,9 @@ router.post('/',async ( req,res ) =>{
 
     }
     var saveNewUserData = ()=>{
-        mongodbData.mongoConnect().then((client)=>{
+        mongodbData.mongoConnect().then(async (client)=>{
             var db = client.db('aadarshDatabase')
-            db.collection('users').findOne({email : newUser.email}).then(async (data)=>{
+            await db.collection('users').findOne({email : newUser.email}).then(async (data)=>{
                 if(data){
                     dupEmailMssg()
                 }else{
@@ -127,6 +127,7 @@ router.post('/',async ( req,res ) =>{
                 ////////////////////////////////////////////////////////////////////////////////////////////// 
                 }
             }).catch((err) => console.log(err))
+            client.close()
         }).catch((err) => console.log(err,"connection error"))   
     }
 

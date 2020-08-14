@@ -18,19 +18,21 @@ function timeInt(req){
     loggedDate.setFullYear(loggedYear)  
     var nowDate = new Date()
     console.log(nowDate , loggedDate)
-    mongo.mongoConnect().then(client =>{
+    mongo.mongoConnect().then(async client =>{
         var db = client.db('aadarshDatabase')
         var id = user._id
         if((nowDate <= loggedDate) && (nowDate >= payDate)){
             user.status = true
-            db.collection('users').updateOne({_id : ObjectId(id)},{$set : {status : true}})
+            await db.collection('users').updateOne({_id : ObjectId(id)},{$set : {status : true}})
             console.log('true')
         }
         else{ 
             user.status = false
             console.log('false')
-            db.collection('users').updateOne({_id : ObjectId(id)},{$set : {status : false}})
-    }}).catch(err => console.log(err))
+            await db.collection('users').updateOne({_id : ObjectId(id)},{$set : {status : false}})
+        }
+        client.close()
+    }).catch(err => console.log(err))
 }
 
 var timeDiff = function (a,b){
