@@ -28,7 +28,7 @@ app.use(passport.session())
 ////////////////////////////////////////////
 
 //PORT FOR SERVER
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3000
 
 // PATH FOR DIFFERENT RESOURCES
 const resourcePath = path.join(__dirname,'../resource')
