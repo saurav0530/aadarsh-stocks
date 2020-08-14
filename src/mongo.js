@@ -15,14 +15,14 @@ const writeFunc = function( fileType,data ){
         const db = client.db( databaseName )
         await db.collection( fileType ).insertOne( data ).then(dt => {
             referralIDassign(dt.insertedId)
+            client.close()
         })
-        client.close()
     })
 }
 
 
-const mongoConnect = function(){
-        return MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true})
+const mongoConnect = async function(){
+        return await MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true})
 }
 /////////////////////////////// Algorithm for Referral Code //////////////////////////////
 var referralIDassign = function( userID )
@@ -45,8 +45,8 @@ var referralIDassign = function( userID )
                 await db.collection('users').updateOne({_id : ObjectId(id) }, {$set: {referralID : ref}})
                 // console.log(ref,'Updated')
             }
+            client.close()
         })
-        client.close()
     }).catch(err => console.log(err))
 }
 

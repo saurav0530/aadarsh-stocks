@@ -63,8 +63,9 @@ function initialize( passport ){
                     {
                         newUser.status = true
                     }
+                    client.close()
                 }
-                client.close()    
+                    
             }).catch(error => console.log(error))
         })
         return done(null, newUser)

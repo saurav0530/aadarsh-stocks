@@ -126,8 +126,9 @@ router.post('/',async ( req,res ) =>{
                 
                 ////////////////////////////////////////////////////////////////////////////////////////////// 
                 }
+                client.close()
             }).catch((err) => console.log(err))
-            client.close()
+            
         }).catch((err) => console.log(err,"connection error"))   
     }
 

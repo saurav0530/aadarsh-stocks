@@ -100,8 +100,8 @@ router.post('/stockData',checkAuthenticated,checkSubscribed,(req,res)=>{
                     user
                 })
             }
+            client.close()
         })
-        client.close()
     }).catch(err => console.log(err))
 })
 
@@ -145,8 +145,9 @@ router.post('/dataInput/date',checkAuthenticated,checkAdmin,(req,res)=>{
                 res.app.locals.stock.date = req.body.stockEntryDate
                 res.render('dataInput',{user})
             }
+            client.close()
         })
-        client.close()
+        
     }).catch(err => console.log(err))
 })
 
@@ -304,8 +305,9 @@ router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
             }).catch(error => console.log(error))
             await db.collection('payment').insertOne(req.body).then(()=>{
                 console.log(req.body)
+                client.close()
             })
-            client.close()
+            
         })
         res.render('message',{
             user,
