@@ -1,12 +1,12 @@
 .pricingTable{
     display: grid;
     grid-auto-rows: minmax(30px,auto);
-    grid-template-columns: 65px 300px 100px 240px;
+    grid-template-columns: 15% 30% 25% calc((100% - 70% - 9px));
     border: 2px solid black;
     word-break : break-word;
     grid-gap : 3px;
     background-color: black;
-    width : fit-content;
+    width :60%;
     border : 3px solid black;
     margin : auto;
     margin-top : 15%;

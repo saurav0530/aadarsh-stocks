@@ -8,27 +8,28 @@ const connectionURL = 'mongodb+srv://sauravadmin:Saurav9113@aadarshstocksdatabas
 const databaseName = 'aadarshDatabase'
 
 const writeFunc = function( fileType,data ){
-    MongoClient.connect( connectionURL, {useNewUrlParser : true, useUnifiedTopology : true}, (err,client) => {
+    MongoClient.connect( connectionURL, {useNewUrlParser : true, useUnifiedTopology : true},async (err,client) => {
         if( err )
             return console.log(err)
         
         const db = client.db( databaseName )
-        db.collection( fileType ).insertOne( data ).then(dt => {
+        await db.collection( fileType ).insertOne( data ).then(dt => {
             referralIDassign(dt.insertedId)
+            client.close()
         })
     })
 }
 
 
-const mongoConnect = function(){
-        return MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true})
+const mongoConnect = async function(){
+        return await MongoClient.connect( connectionURL, {useUnifiedTopology : true, useNewUrlParser : true})
 }
 /////////////////////////////// Algorithm for Referral Code //////////////////////////////
 var referralIDassign = function( userID )
 {
     mongoConnect().then(async client =>{
         const db = client.db('aadarshDatabase')
-        db.collection('users').find({_id : ObjectId(userID)}).toArray( async (err,users)=>{
+        await db.collection('users').find({_id : ObjectId(userID)}).toArray( async (err,users)=>{
             console.log(users.length)
             for(var i = 0; i<users.length ;i++){
                 var id = users[i]._id
@@ -44,6 +45,7 @@ var referralIDassign = function( userID )
                 await db.collection('users').updateOne({_id : ObjectId(id) }, {$set: {referralID : ref}})
                 // console.log(ref,'Updated')
             }
+            client.close()
         })
     }).catch(err => console.log(err))
 }

@@ -85,9 +85,9 @@ router.get('/stockData',checkAuthenticated,checkSubscribed,(req,res) =>{
 
 router.post('/stockData',checkAuthenticated,checkSubscribed,(req,res)=>{
     var user = req.user
-    mongodbData.mongoConnect().then(client =>{
+    mongodbData.mongoConnect().then(async client =>{
         var db = client.db('aadarshDatabase')
-        db.collection('stock').findOne({date : req.body.stockViewDate},(err,stock)=>{
+        await db.collection('stock').findOne({date : req.body.stockViewDate},(err,stock)=>{
             if(err)
                 return console.log(err)
             
@@ -100,6 +100,7 @@ router.post('/stockData',checkAuthenticated,checkSubscribed,(req,res)=>{
                     user
                 })
             }
+            client.close()
         })
     }).catch(err => console.log(err))
 })
@@ -122,7 +123,7 @@ router.post('/dataInput/date',checkAuthenticated,checkAdmin,(req,res)=>{
     res.app.locals.stock = undefined
     res.app.locals.update = undefined
 
-    mongodbData.mongoConnect().then(client =>{
+    mongodbData.mongoConnect().then(async client =>{
         var db = client.db('aadarshDatabase')
         db.collection('stock').findOne({date : req.body.stockEntryDate},(err,stock)=>{
             if(err)
@@ -144,7 +145,9 @@ router.post('/dataInput/date',checkAuthenticated,checkAdmin,(req,res)=>{
                 res.app.locals.stock.date = req.body.stockEntryDate
                 res.render('dataInput',{user})
             }
+            client.close()
         })
+        
     }).catch(err => console.log(err))
 })
 
@@ -204,17 +207,19 @@ router.post('/dataInput/stockData',checkAuthenticated,checkAdmin,(req,res)=>{
     var data = res.app.locals.stock
     res.app.locals.stock = null
     if(res.app.locals.update){
-        mongodbData.mongoConnect().then(client =>{
+        mongodbData.mongoConnect().then(async client =>{
             var db = client.db('aadarshDatabase')
             console.log('Update')
-            db.collection('stock').updateOne({date : data.date},{$set : data})
+            await db.collection('stock').updateOne({date : data.date},{$set : data})
+            client.close()
         }).catch(err => console.log(err))
     }
     else{
-        mongodbData.mongoConnect().then(client =>{
+        mongodbData.mongoConnect().then(async client =>{
             var db = client.db('aadarshDatabase')
             //console.log('New')
-            db.collection('stock').insertOne(data)
+            await db.collection('stock').insertOne(data)
+            client.close()
         }).catch(err => console.log(err))
     }
     req.flash('message' ,'Stocks added successfully...')  
@@ -294,13 +299,15 @@ router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
                         status : true,
                         planName : planName,
                         planExpiry : date2
-                    }
-                })
-            }
+                        }
+                    })
+                }
             }).catch(error => console.log(error))
-            db.collection('payment').insertOne(req.body).then(()=>{
+            await db.collection('payment').insertOne(req.body).then(()=>{
                 console.log(req.body)
+                client.close()
             })
+            
         })
         res.render('message',{
             user,
@@ -351,6 +358,7 @@ router.post('/changePassword',checkAuthenticated,async (req,res) =>{
                 var db = client.db('aadarshDatabase')
                 await db.collection('users').updateOne({_id :ObjectId(req.user._id)},{$set : {password : req.body.password2}})
                 res.render('changePassword',{user,message : "Changed successfully",color:"green"})
+                client.close()
             }).catch(err => console.log(err))
         }
         else{

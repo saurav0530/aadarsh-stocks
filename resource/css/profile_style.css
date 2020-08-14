@@ -1,0 +1,40 @@
+.account-details{
+    width : max-content;
+    margin : auto;
+    display: grid;
+    grid-template-columns:0.6fr 2fr;
+    grid-auto-rows: minmax(36px,auto);
+    align-items: center;
+}
+.account-details strong{
+    font-size: 100%;
+    color : brown;
+}
+.account-details-header{
+    font-size: 230%;
+    color : rgba(97, 5, 105, 1);
+    text-shadow: 0.1vw 0.1vh 01vh aqua;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.changePassLink a{
+    font-weight: bold;
+    font-size : 105%;
+    border : 3px solid;
+    border-radius : 8px;
+    padding : 3px 10px;
+    background-color : orange;
+}
+.copyReferralLink{
+    margin-left : 15px;
+    border-radius : 8px;
+    background-color : beige;
+    padding : 3px 3px;
+}
+#referralLink{
+    border : none;
+    background-color : inherit;
+    width : 400px;
+    font-weight : bold;
+    color : blue;
+    font-size : 18px;
+}

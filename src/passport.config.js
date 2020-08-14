@@ -16,7 +16,7 @@ function initialize( passport ){
             }).catch(err =>{
                 console.log(err)
             })
-            
+            client.close()
         })
                 
         if(newUser){
@@ -63,6 +63,7 @@ function initialize( passport ){
                     {
                         newUser.status = true
                     }
+                    client.close()
                 }
                     
             }).catch(error => console.log(error))
