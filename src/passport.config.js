@@ -22,7 +22,7 @@ function initialize( passport ){
         if(newUser){
             if(!newUser.referralID)
             {
-                algo.referralIDassign(newUser._id) 
+                mongo.referralIDassign(newUser._id) 
             }
             return done(null, newUser)
             

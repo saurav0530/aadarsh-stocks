@@ -341,8 +341,7 @@ router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
 
 router.get('/profile',checkAuthenticated,(req,res) =>{
     var user = req.user
-    var dispBody = user.payment[user.payment.length - 1]
-    res.render('profile',{user,message : "",color:"red",dispBody})
+    res.render('profile',{user,message : "",color:"red"})
 })
 
 ////////////////////////////////////////////// Change Password /////////////////////////////////////////
