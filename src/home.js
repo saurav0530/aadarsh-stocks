@@ -303,7 +303,11 @@ router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
                     })
                 }
             }).catch(error => console.log(error))
-            await db.collection('payment').insertOne(req.body).then(()=>{
+            var msg ={
+                stats : req.body,
+                name : req.user
+            }
+            await db.collection('payment').insertOne(msg).then(()=>{
                 console.log(req.body)
                 client.close()
             })
