@@ -330,6 +330,14 @@ router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
 
         }
         var user = req.user
+        var failedMessage = {
+            txnMssg : req.body,
+            user : user
+        }
+        await mongodbData.mongoConnect().then(async client =>{
+            var db = client.db('aadarshDatabase')
+            await db.collection('failedPayment').insertOne(failedMessage)
+        })
         console.log(dispBody)
         res.render('message',{
             user,
