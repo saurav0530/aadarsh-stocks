@@ -255,8 +255,8 @@ router.get('/payment/:id',checkAuthenticated,(req,res)=>{
         res.redirect('/home/pricing')
     }
 })
-router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
-    //console.log(req.body)
+router.post('/paymentStatus',async (req,res)=>{
+    //console.log(req.body,req.user)
     if(req.body.RESPMSG == 'Txn Success'){
         var dispBody ={
             orderid : req.body.ORDERID,
@@ -345,7 +345,10 @@ router.post('/paymentStatus',checkAuthenticated,async (req,res)=>{
             mssg : "/home/pricing"
         })
     }
-    
+    await mongodbData.mongoConnect().then(async client =>{
+        var db = client.db('aadarshDatabase')
+        await db.collection('allPayment').insertOne(req.body)
+    })
 })
 
 

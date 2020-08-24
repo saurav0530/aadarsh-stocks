@@ -31,6 +31,7 @@ const paytmPay = (res,amount,mobile,email) =>{
         //"CALLBACK_URL" : "http://localhost:4000/home/paymentStatus",
     };
     checksum.genchecksum(paytmParams,devmkey,(err,checksum)=>{
+        //let url = "https://securegw-stage.paytm.in/order/process"
         let url = 'https://securegw.paytm.in/order/process'
         res.writeHead(200, {'Content-Type': 'text/html'});
 		res.write('<html>');
