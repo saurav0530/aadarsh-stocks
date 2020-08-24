@@ -6,18 +6,6 @@ const devmkey = 'eXi3Aa8J9N#1iibH'
 const paytmPay = (res,amount,mobile,email) =>{
     var today = new Date()
     // var paytmParams = {
-    //     "MID" : "xOoeDK18938964067707",
-    //     "WEBSITE" : "DEFAULT",
-    //     "INDUSTRY_TYPE_ID" : "Retail",
-    //     "CHANNEL_ID" : "WEB",
-    //     "ORDER_ID" : 'ORD'+today.getDate()+today.getSeconds()+today.getMinutes(),
-    //     "CUST_ID" : 'CUS'+today.getDate()+today.getSeconds()+today.getMinutes(),
-    //     "MOBILE_NO" : "7631539113",
-    //     "EMAIL" : "sauravkumar0530@gmail.com",
-    //     "TXN_AMOUNT" : amount,
-    //     "CALLBACK_URL" : "http://localhost:4000/home/paymentStatus",
-    // };
-    // var paytmParams = {
     //     "MID" : "NlRATJ20037763203941",
     //     "WEBSITE" : "WEBSTAGING",
     //     "INDUSTRY_TYPE_ID" : "Retail",
@@ -44,15 +32,6 @@ const paytmPay = (res,amount,mobile,email) =>{
     };
     checksum.genchecksum(paytmParams,devmkey,(err,checksum)=>{
         let url = 'https://securegw.paytm.in/order/process'
-        // let formFields = ""
-        // for(x in paytmParams){
-        //     formFields += "<input type='hidden' name = '"+ x +"' value ='"+ paytmParams[x] +"'>"
-        // }
-        // formFields += "<input type='hidden' name = 'CHECKSUMHASH' value ='"+ checksum +"'>"
-        // var html = "<html><body><center>Please wait! Do not refresh the page.</center><form method='post' action='"+txn_url+"' name = 'paymentForm'>"+formFields+"</form><script type='text/javascript'>document.paymentForm.submit()</script></body></html>"
-        // res.writeHead(200,{'Content-type' : 'text/html'})
-        // res.write(html)
-        // res.end()
         res.writeHead(200, {'Content-Type': 'text/html'});
 		res.write('<html>');
 		res.write('<head>');
