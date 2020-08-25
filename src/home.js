@@ -9,7 +9,9 @@ const algo = require('./algo')
 const fs = require('fs')
 const upload = require('express-fileupload')
 const excel = require('exceljs')
+const cookieParser = require('cookie-parser')
 
+router.use(cookieParser())
 
 // parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -245,8 +247,8 @@ router.get('/pricing',checkAuthenticated,(req,res)=>{
 })
 
 router.get('/payment/:id',checkAuthenticated,(req,res)=>{
+    res.cookie('skey',req.user._id,{maxAge : 600000})
     var user = req.user
-    //console.log(req.params.id)
     if(req.params.id == 300 || req.params.id == 550)
         paytmPay(res,req.params.id,req.user.mobile,req.user.email)
     else
@@ -256,7 +258,8 @@ router.get('/payment/:id',checkAuthenticated,(req,res)=>{
     }
 })
 router.post('/paymentStatus',async (req,res)=>{
-    //console.log(req.body,req.user)
+    //console.log(req.cookies)
+    var ID = req.cookies.skey
     if(req.body.RESPMSG == 'Txn Success'){
         var dispBody ={
             orderid : req.body.ORDERID,
@@ -268,8 +271,7 @@ router.post('/paymentStatus',async (req,res)=>{
             message : req.body.RESPMSG,
             amount : req.body.TXNAMOUNT
         }
-        var user = req.user
-        console.log(dispBody)
+        //console.log(dispBody)
         if(dispBody.amount == '300.00')
         {
             var planName = "Monthly"
@@ -278,9 +280,10 @@ router.post('/paymentStatus',async (req,res)=>{
         {
             var planName = "Bi-monthly"
         }
+        var user
         await mongodbData.mongoConnect().then(async client =>{
             var db = client.db('aadarshDatabase')
-            await db.collection('users').findOne({_id : ObjectId(user._id)}).then( async user1 =>{
+            await db.collection('users').findOne({_id : ObjectId(ID)}).then( async user1 =>{
                 if(user1)
                 {
                     user1.payment.push(dispBody)
@@ -289,26 +292,29 @@ router.post('/paymentStatus',async (req,res)=>{
                         var date2 = new Date()
                         date2.setDate(date2.getDate()+55)
                         date2.toISOString()
+                        planName = "56 days"
                     }else{
                         var date2 = new Date()
                         date2.setDate(date2.getDate()+27)
                         date2.toISOString()
+                        planName = "28 days"
                     }
-                    await db.collection('users').updateOne({_id : ObjectId(user._id)},{$set : {
+                    await db.collection('users').updateOne({_id : ObjectId(ID)},{$set : {
                         payment : user1.payment,
                         status : true,
                         planName : planName,
                         planExpiry : date2
                         }
                     })
+                    user = user1
                 }
             }).catch(error => console.log(error))
             var msg ={
                 stats : req.body,
-                name : req.user
+                user : user
             }
             await db.collection('payment').insertOne(msg).then(()=>{
-                console.log(req.body)
+                //console.log(req.body)
                 client.close()
             })
             
@@ -318,6 +324,10 @@ router.post('/paymentStatus',async (req,res)=>{
             dispBody,
             sucmssg : "/home"
         })
+        res.clearCookie('skey')
+        if(req.user){
+            req.logOut()
+        }
     }
     else{
         var dispBody ={
@@ -329,26 +339,28 @@ router.post('/paymentStatus',async (req,res)=>{
             message : req.body.RESPMSG
 
         }
-        var user = req.user
         var failedMessage = {
             txnMssg : req.body,
-            user : user
+            user : {}
         }
         await mongodbData.mongoConnect().then(async client =>{
             var db = client.db('aadarshDatabase')
+            await db.collection('users').findOne({_id : ObjectId(ID)}).then( async user =>{
+                failedMessage.user = user
+            })
             await db.collection('failedPayment').insertOne(failedMessage)
         })
-        console.log(dispBody)
+        res.clearCookie('skey')
+        if(req.user){
+            req.logOut()
+        }
+        var user = failedMessage.user
         res.render('message',{
             user,
             dispBody,
             mssg : "/home/pricing"
         })
     }
-    await mongodbData.mongoConnect().then(async client =>{
-        var db = client.db('aadarshDatabase')
-        await db.collection('allPayment').insertOne(req.body)
-    })
 })
 
 
@@ -409,6 +421,13 @@ function checkAdmin( req,res,next ){
     else if( req.user ){
         return res.redirect('/home')
     }else{
+        res.redirect('/login')
+    }
+}
+function checkCookie( req,res,next ){
+    if( req.cookies.skey )
+        return next()
+    else{
         res.redirect('/login')
     }
 }
