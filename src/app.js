@@ -4,6 +4,8 @@ const hbs = require('hbs')
 const flash = require('express-flash')
 const session = require('express-session')
 const passport = require('passport')
+const mongo = require('./mongo')
+const { ObjectId } = require('mongodb')
 
 
 const app = express()
@@ -53,10 +55,27 @@ app.use( express.static(resourcePath))
 // });
 
 
-app.get('',checkNotAuthenticated, (req,res) => {
-    res.render('index',{
-        appName : "AADARSH STOCK"
+app.get('',checkNotAuthenticated,async (req,res) => {
+    var carousel,notice
+    await mongo.mongoConnect().then(async client=>{
+        var db = client.db('aadarshDatabase')
+        await db.collection('carousel').findOne({_id : ObjectId('5f5211f675f631ef29f09728')}).then(async data =>{
+            carousel = data.image
+            //console.log(carousel)
+            await db.collection('carousel').findOne({_id : ObjectId('5f535acb4e99191b65b66381')}).then(async data1 =>{
+                notice = data1
+            })
+            res.render('index',{
+                appName : "AADARSH STOCK",
+                carousel : carousel,
+                first : carousel.length,
+                firstImg : carousel[0].name,
+                notice : notice
+            })
+            client.close()
+        })
     })
+    
 })
 
 app.get('/disclaimer', (req,res) => {
@@ -66,6 +85,17 @@ app.get('/disclaimer', (req,res) => {
 app.get('/contacts', (req,res) => {
     var user = req.user
     res.render('contacts',{user})
+})
+app.get('/faqs', async (req,res) => {
+    var faqs
+    await mongo.mongoConnect().then(async client =>{
+        var db = client.db('aadarshDatabase')
+        await db.collection('faqs').findOne({_id : ObjectId('5f4b7bd1c136e92dd8b793ca')}).then(data=>{
+            faqs = data.data
+            client.close()
+        })
+    })
+    res.render('faqs',{faqs})
 })
 ///////// Exported server side javascript codes /////////
 
@@ -77,6 +107,10 @@ app.use('/login', login)
 
 const home = require('../src/home')
 app.use('/home', home)
+
+const customize = require('../src/customize')
+const { ObjectID } = require('mongodb')
+app.use('/customize',customize)
 
 /////////////////////////////////////////////////////////
 

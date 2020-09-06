@@ -10,6 +10,7 @@ const fs = require('fs')
 const upload = require('express-fileupload')
 const excel = require('exceljs')
 const cookieParser = require('cookie-parser')
+const mongo = require('./mongo')
 
 router.use(cookieParser())
 
@@ -47,17 +48,7 @@ router.post('/',checkAuthenticated,(req,res)=>{
     }
     else if(req.body.loginChoice == 5)
     {
-        var dispBody = user.payment[user.payment.length - 1]
-        if(dispBody){
-            res.render('message',{
-                user : req.user,
-                dispBody
-            })
-        }
-        else{
-            req.flash('subscriptionWarning','No transaction history...')
-            res.redirect('/home/pricing')
-        }
+        res.redirect('/home/referAndEarn')
     }
     else if(req.body.loginChoice == 6)
     {
@@ -75,6 +66,10 @@ router.post('/',checkAuthenticated,(req,res)=>{
     {
         req.logOut()
         res.redirect('/')        
+    }
+    else if(req.body.loginChoice == 10)
+    {
+        res.redirect('/customize')        
     } 
 })
 
@@ -394,6 +389,10 @@ router.post('/changePassword',checkAuthenticated,async (req,res) =>{
     else{
         res.render('changePassword',{user,message : "Invalid Old Password",color:"red"})
     }
+})
+router.get('/referAndEarn',checkAuthenticated,async (req,res)=>{
+    var user = req.user
+    res.render('referAndEarn',{user})
 })
 
 router.get('/logout',checkAuthenticated,(req,res)=>{

@@ -8,6 +8,8 @@ function myfunction(content){
             content = 'Loading stocks page...'
         else if(val == 4)
             content = 'Loading stocks entry page...'
+        else if(val == 5)
+            content = 'Loading Refer n Earn...'
         else if(val == 6)
             content = 'Loading subscription page...'
         else if(val == 7)
@@ -16,6 +18,8 @@ function myfunction(content){
             content = 'Loading password reset portal...'
         else if(val == 9)
             content = 'Logging Out...'
+        else if(val == 10)
+            content = 'Loading customize home...'
     }
     var html = 
     `

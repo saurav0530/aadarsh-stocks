@@ -1,0 +1,17 @@
+<div class="customize">
+    <center>
+        <form action="/customize/removeCarouselImage" method="post">
+            <h4>Edit carousel image</h4>
+            {{#if carousel}}
+                {{#each carousel}}
+                    <strong class="text {{this.name}}">{{this.name}}</strong>
+                {{/each}}
+            {{/if}}
+            <br><input type="text" name="filename" class = "removeFile" placeholder="Removable filename"><br>
+            <button type="submit">Remove</button>
+        </form>
+        <div class="editCarousel">
+            
+        </div>
+    </center>
+</div>

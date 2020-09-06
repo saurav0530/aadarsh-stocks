@@ -1,0 +1,18 @@
+<div class="covidUpdate" style="background-color: {{notice.bgcolor}};">
+    <div class="covidText" style="animation : mymove {{notice.time}} linear infinite;"><a href="{{notice.link}}" style="color: {{notice.color}};text-decoration : none;">{{notice.text}}</a></div>
+</div><br>
+<div class="customize">
+    <center>
+        <form action="/customize/addNotice" method="post">
+            <h4>Add Notice</h4>
+            <input type="text" class="addNoticeInput" name="text" placeholder="Text" value="{{notice.text}}"><br>
+            <input type="text" class="addNoticeInput" name="link" placeholder="Link" value="{{notice.link}}"><br>
+            <input type="text" class="addNoticeInput" name="color" placeholder="Color" value="{{notice.color}}"><br>
+            <input type="text" class="addNoticeInput" name="bgcolor" placeholder="Background-color" value="{{notice.bgcolor}}"><br>
+            <input type="text" class="addNoticeInput" name="width" placeholder="Width(%)" value="{{notice.width}}"><br>
+            <input type="text" class="addNoticeInput" name="time" placeholder="Time(s)" value="{{notice.time}}"><br>
+            <button type="submit">Add notice</button>
+        </form>
+    </center>
+</div><br>
+

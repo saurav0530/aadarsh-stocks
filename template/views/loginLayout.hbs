@@ -42,7 +42,11 @@
                     </div><br><br><br>
                     {{/if}}
                     <div class="palletteDuo"> 
-                        <a href="/home/changePassword" onclick="myfunction('Loading password reset portal...')" ><div class="palletteElements" ><img src="/icons/passwordReset.png" alt="Data-Input"><br><br><strong class="homeLink">Password</strong></div></a>
+                        {{#if user.admin}}
+                            <a href="/customize" onclick="myfunction('Loading customize home...')" ><div class="palletteElements" ><img src="/icons/passwordReset.png" alt="Customize"><br><br><strong class="homeLink">Customize</strong></div></a>
+                        {{else}}
+                            <a href="/home/referAndEarn" onclick="myfunction('Loading Refer n Earn...')" ><div class="palletteElements refernearn" ><img src="/icons/earn.png" alt="Referral"><br><br><strong class="homeLink">Refer n earn</strong></div></a>
+                        {{/if}}
                         <a href="/home/logout" onclick="myfunction('Logging Out ...')"><div class="palletteElements pair"><img src="/icons/logout.png" alt="Logout"><br><br><strong class="homeLink"> Logout</strong></div></a>
                     </div><br><br><br>
                 </center>

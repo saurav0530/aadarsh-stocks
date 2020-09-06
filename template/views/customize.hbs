@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/css/login_style.css">
+    <link rel="stylesheet" href="/css/customize_style.css">
+    <link rel="icon" href="/img/web.png" type="image/icon type">
+    <title>Aadarsh-Stocks</title>
+</head>
+<body>
+    
+    <section class = 'header'>
+        <strong class="title"><a href="/" class="headerTitle" onclick="Going to Home...">AADARSH-STOCKS</a></strong>
+        {{>authenticatedHeader}}
+    </section>
+    <section class = "main-content" >
+        <div class="customizeOptions">
+            <ul>
+                <li><a href="/customize/adminfaqsentry">FAQs Entry</a></li>
+                <li><a href="/customize/adminAddCarousel">Add carousel image</a></li>
+                <li><a href="/customize/adminEditCarousel">Remove carousel image</a></li>
+                <li><a href="/customize/adminAddNotice">Add Notice</a></li>
+            </ul>
+        </div>
+    </section>
+    <section class = "footer">
+        {{>footer}}
+    </section>
+</body>
+</html>

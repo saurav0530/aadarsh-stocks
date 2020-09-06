@@ -312,3 +312,25 @@ a{
     color : red;
     filter : invert(1%)
 }
+.refernearn{
+    animation : blink2 2s infinite;
+}@keyframes blink2{
+    0% {background-color: inherit;}
+    70% {
+        background-color: beige;
+        color : black;
+    }
+    100% {
+        background-color: inherit;
+    }
+}
+@keyframes blink{
+    0% {background-color: bisque;}
+    70% {
+        background-color: orange;
+        color : black;
+    }
+    100% {
+        background-color: bisque;
+    }
+}
