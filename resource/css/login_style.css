@@ -267,6 +267,7 @@ a{
     margin-right : 4%;
 }
 .subscription{
+    float: left;
     margin-left : 4%;
 }
 .subscription,.planExpiry{
