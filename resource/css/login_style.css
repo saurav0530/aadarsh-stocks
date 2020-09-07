@@ -17,7 +17,7 @@ input[placeholder]{
     position:relative;
     top : 6.5rem;
 }
-.form [type=email],.form [type=password]{
+.form [type=email],.loginPassword{
     border : 3px solid green;
     height : 42px;
     width : 394px;
