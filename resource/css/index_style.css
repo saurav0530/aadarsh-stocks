@@ -171,15 +171,20 @@ body{
 .login:hover,.register:hover{
     box-shadow: none;
 }
-.disclaimer-content-index{
-    font-size : 110%;
+.disclaimerHeader{
+    font-size : 140%;
     font-weight : bold;
     font-family : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+.disclaimerList{
+    font-weight : 600;
+    font-size : 120%;
+}
 .disclaimer-index{
-    width: fit-content;
+    max-width: 850px;
     margin : auto;
     margin-top : 83px;
+    padding : 0px 10px;
 }
 button:hover,select:hover{
     cursor: pointer;
