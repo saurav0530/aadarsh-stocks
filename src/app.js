@@ -62,7 +62,7 @@ app.get('',checkNotAuthenticated,async (req,res) => {
         await db.collection('carousel').findOne({_id : ObjectId('5f5211f675f631ef29f09728')}).then(async data =>{
             carousel = data.image
             //console.log(carousel)
-            await db.collection('carousel').findOne({_id : ObjectId('5f535acb4e99191b65b66381')}).then(async data1 =>{
+            await db.collection('carousel').findOne({_id : ObjectId('5f5ecb13ed34ea1283305534')}).then(async data1 =>{
                 notice = data1
             })
             res.render('index',{

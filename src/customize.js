@@ -165,7 +165,7 @@ router.post('/addNotice',checkAuthenticated,async (req,res)=>{
     //console.log(req.body.filename)
     await mongo.mongoConnect().then(async client=>{
         var db = client.db('aadarshDatabase')
-        await db.collection('carousel').updateOne({_id : ObjectID('5f535acb4e99191b65b66381')},{
+        await db.collection('carousel').updateOne({_id : ObjectID('5f5ecb13ed34ea1283305534')},{
             $set:
             {
                 text : req.body.text,
