@@ -62,7 +62,7 @@ router.get('/:id',checkAuthenticated,async (req,res)=>{
         await db.collection('carousel').findOne({_id : ObjectID('5f5211f675f631ef29f09728')}).then(async data =>{
             carousel = data.image
         })
-        await db.collection('carousel').findOne({_id : ObjectID('5f535acb4e99191b65b66381')}).then(async data=>{
+        await db.collection('carousel').findOne({_id : ObjectID('5f5ecb13ed34ea1283305534')}).then(async data=>{
             notice = data
         })
     })
